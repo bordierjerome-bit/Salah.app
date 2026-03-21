@@ -395,10 +395,11 @@ const RECITERS = [
   {id:"MaherAlMuaiqly128kbps",        name:"Maher Al-Muaiqly"},
 ];
 
-// EveryAyah.com — récitations humaines haute qualité, format : SSSAAA.mp3
+// The Quran Project (GitHub Pages) — miroir EveryAyah, CORS ouvert, haute qualité
+// Format : https://the-quran-project.github.io/Quran-Audio/Data/{surah}/{surah}_{ayah}.mp3
 function getUrls(rec, n, ayat) {
   return Array.from({length:ayat}, (_,i) =>
-    `https://everyayah.com/data/${rec}/${String(n).padStart(3,"0")}${String(i+1).padStart(3,"0")}.mp3`
+    `https://the-quran-project.github.io/Quran-Audio/Data/${n}/${n}_${i+1}.mp3`
   );
 }
 
