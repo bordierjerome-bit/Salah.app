@@ -387,19 +387,22 @@ function buildSeq(pid) {
 
 // ── RECITERS & AUDIO ─────────────────────────────────
 const RECITERS = [
-  {id:"Alafasy_128kbps",              name:"Mishary Al-Afasy"},
-  {id:"Abdul_Basit_Murattal_192kbps", name:"Abdul Basit Murattal"},
-  {id:"Husary_128kbps",               name:"Mahmoud Khalil Al-Husary"},
-  {id:"Minshawy_Murattal_128kbps",    name:"Mohamed Siddiq Al-Minshawi"},
-  {id:"Hani_Rifai_192kbps",           name:"Hani Rifai"},
-  {id:"MaherAlMuaiqly128kbps",        name:"Maher Al-Muaiqly"},
+  {id:"ar.alafasy",             name:"Mishary Al-Afasy"},
+  {id:"ar.abdulbasitmurattal",  name:"Abdul Basit Murattal"},
+  {id:"ar.husary",              name:"Mahmoud Khalil Al-Husary"},
+  {id:"ar.minshawi",            name:"Mohamed Siddiq Al-Minshawi"},
+  {id:"ar.hanirifai",           name:"Hani Rifai"},
+  {id:"ar.mahermuaiqly",        name:"Maher Al-Muaiqly"},
 ];
 
-// The Quran Project (GitHub Pages) — miroir EveryAyah, CORS ouvert, haute qualité
-// Format : https://the-quran-project.github.io/Quran-Audio/Data/{surah}/{surah}_{ayah}.mp3
+// Numéros absolus d'ayah dans le Coran (position de la 1ère ayah de chaque sourate)
+const AYAH_OFFSET = {1:1, 109:6236, 112:6272, 113:6277, 114:6283};
+
+// cdn.islamic.network — CDN officiel Quran.com, CORS ouvert
 function getUrls(rec, n, ayat) {
+  const offset = AYAH_OFFSET[n];
   return Array.from({length:ayat}, (_,i) =>
-    `https://the-quran-project.github.io/Quran-Audio/Data/${n}/${n}_${i+1}.mp3`
+    `https://cdn.islamic.network/quran/audio/128/${rec}/${offset + i}.mp3`
   );
 }
 
