@@ -6,28 +6,16 @@
   <meta name="theme-color" content="#0a0806"/>
   <title>Guide de Prière — Ṣalāh</title>
   <meta name="description" content="Guide complet de la prière islamique avec postures, textes arabes, phonétique et sources authentifiées."/>
-
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
-
-  <!-- React + Babel (CDN) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js" crossorigin></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js" crossorigin></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
-
   <style>
     @keyframes postureIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{
-      --gold:#c9a84c;--gold-l:#e8c97a;--gold-d:#8a6e32;--gold-g:rgba(201,168,76,.12);
-      --bg:#0a0806;--bg2:#110e09;--bg3:#1a1510;--sf:#1e1912;--sf2:#252018;
-      --bo:rgba(201,168,76,.18);--bo2:rgba(201,168,76,.45);
-      --tx:#e8d9b5;--tx2:#9e8a68;--tx3:#5c4e38;
-      --vl:#8ab09a;--r:4px;
-      --fard:#e07070;--wajib:#e09a50;--sunna:#7ab09a;
-    }
+    :root{--gold:#c9a84c;--gold-l:#e8c97a;--gold-d:#8a6e32;--gold-g:rgba(201,168,76,.12);--bg:#0a0806;--bg2:#110e09;--bg3:#1a1510;--sf:#1e1912;--sf2:#252018;--bo:rgba(201,168,76,.18);--bo2:rgba(201,168,76,.45);--tx:#e8d9b5;--tx2:#9e8a68;--tx3:#5c4e38;--vl:#8ab09a;--r:4px;--fard:#e07070;--wajib:#e09a50;--sunna:#7ab09a;}
     body{background:var(--bg);color:var(--tx);font-family:'Crimson Pro',Georgia,serif;min-height:100vh;line-height:1.6}
     #root{max-width:640px;margin:0 auto;padding:0 15px 80px}
     ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--bg2)}::-webkit-scrollbar-thumb{background:var(--gold-d);border-radius:2px}
@@ -38,6 +26,8 @@
     .ap-sel{flex:1;min-width:130px;background:var(--bg2);border:1px solid var(--bo);color:var(--tx2);font-family:'Crimson Pro',serif;font-size:.82rem;padding:5px 26px 5px 9px;border-radius:var(--r);cursor:pointer;outline:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238a6e32'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 9px center}
     .gender-toggle{display:flex;border:1px solid var(--bo);border-radius:var(--r);overflow:hidden;flex-shrink:0}
     .gb{padding:5px 12px;background:var(--bg2);border:none;cursor:pointer;font-size:.9rem;color:var(--tx3);transition:all .2s;border-right:1px solid var(--bo);touch-action:manipulation}.gb:last-child{border-right:none}.gb.on{background:var(--bg3);color:var(--gold)}
+    .main-tabs{display:flex;border:1px solid var(--bo);border-radius:var(--r);overflow:hidden;margin-bottom:16px}
+    .main-tab{flex:1;padding:10px;background:var(--sf);border:none;cursor:pointer;font-family:'Cinzel Decorative',serif;font-size:.55rem;letter-spacing:.09em;color:var(--tx3);transition:all .2s;border-right:1px solid var(--bo);touch-action:manipulation}.main-tab:last-child{border-right:none}.main-tab.on{background:var(--bg3);color:var(--gold)}
     .pg{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:12px 0}
     .pb{background:var(--sf);border:1px solid var(--bo);border-radius:var(--r);padding:10px 4px;text-align:center;cursor:pointer;transition:all .2s;color:var(--tx2);font-family:inherit;-webkit-tap-highlight-color:transparent;touch-action:manipulation}.pb:active{transform:scale(.97)}.pb.on{border-color:var(--gold);background:var(--bg3);color:var(--gold-l);box-shadow:0 0 12px var(--gold-g),inset 0 0 12px var(--gold-g)}
     .pb-ar{display:block;font-family:'Amiri',serif;font-size:1.15rem;line-height:1.3;margin-bottom:2px}.pb-nm{font-size:.68rem;letter-spacing:.05em}.pb-rk{font-size:.58rem;color:var(--tx3);margin-top:1px}.pb.on .pb-rk{color:var(--gold-d)}
@@ -48,14 +38,13 @@
     .vb{display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border-radius:2px;font-size:.55rem;letter-spacing:.06em;font-family:'Cinzel Decorative',serif}.vh{background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);color:var(--gold)}.vl{background:rgba(90,122,106,.1);border:1px solid rgba(90,122,106,.3);color:var(--vl)}
     .th-i{display:inline-block;padding:2px 7px;font-size:.51rem;letter-spacing:.09em;border-radius:2px;margin-left:5px;font-family:'Cinzel Decorative',serif;background:rgba(100,80,160,.15);border:1px solid rgba(100,80,160,.3);color:#a090e0}.th-f{display:inline-block;padding:2px 7px;font-size:.51rem;letter-spacing:.09em;border-radius:2px;margin-left:5px;font-family:'Cinzel Decorative',serif;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);color:var(--gold)}
     .aub{display:inline-flex;align-items:center;gap:5px;padding:5px 11px;border-radius:2px;border:1px solid var(--bo);background:var(--bg2);color:var(--tx3);font-family:'Cinzel Decorative',serif;font-size:.51rem;letter-spacing:.09em;cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0;touch-action:manipulation;min-height:36px}
-    .aub.ld{border-color:var(--gold-d);color:var(--gold-d)}.aub.pl{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.06);box-shadow:0 0 8px var(--gold-g)}
+    .aub.pl{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.06);box-shadow:0 0 8px var(--gold-g)}
     .pulse{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pu .9s ease-in-out infinite;flex-shrink:0;display:inline-block}@keyframes pu{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
-    .spin{display:inline-block;animation:sp .8s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
     .ss-wrap{margin:10px 0 4px;background:var(--bg3);border:1px solid var(--bo);border-radius:var(--r);padding:10px 12px}.ss-title{font-family:'Cinzel Decorative',serif;font-size:.53rem;letter-spacing:.12em;color:var(--gold-d);margin-bottom:8px}.ss-btns{display:flex;gap:5px;flex-wrap:wrap}
     .ss-btn{padding:6px 10px;border-radius:2px;border:1px solid var(--bo);background:var(--bg2);color:var(--tx3);font-family:'Crimson Pro',serif;font-size:.79rem;cursor:pointer;transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:1px;touch-action:manipulation;min-height:48px;justify-content:center}.ss-btn.on{border-color:var(--gold);background:rgba(201,168,76,.08);color:var(--gold-l)}.ss-btn-ar{font-family:'Amiri',serif;font-size:1.05rem;line-height:1.2}.ss-btn-nm{font-size:.57rem;letter-spacing:.04em}.ss-btn.on .ss-btn-nm{color:var(--gold-d)}.ss-note{font-size:.64rem;color:var(--gold-d);margin-top:7px;font-style:italic}
     .sc{background:var(--sf);border:1px solid var(--bo);border-radius:var(--r);padding:13px 15px;margin-bottom:8px}.sc-hd{display:flex;align-items:flex-start;justify-content:space-between;gap:9px;flex-wrap:wrap;margin-bottom:8px}.sc-hd-l{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.sc-lbl{font-family:'Cinzel Decorative',serif;font-size:.55rem;letter-spacing:.11em;color:var(--gold-d)}.sc-ar{font-family:'Amiri',serif;font-size:1.35rem;line-height:1.9;color:var(--gold-l);text-align:right;direction:rtl;margin-bottom:5px}.sc-ph{font-style:italic;color:var(--tx2);font-size:.82rem;margin-bottom:4px}.sc-tr{font-size:.80rem;color:var(--tx3);border-left:2px solid var(--bo);padding-left:10px;margin-top:4px;line-height:1.65}.sc-nt{font-size:.63rem;color:var(--gold-d);margin-top:4px;font-style:italic}
     .src-toggle{display:flex;align-items:center;gap:6px;margin-top:10px;padding:6px 10px;background:var(--bg3);border:1px solid var(--bo);border-radius:var(--r);cursor:pointer;width:100%;touch-action:manipulation}.src-toggle.open{border-color:var(--gold-d);background:var(--sf2)}.src-ico{font-size:.65rem;color:var(--gold-d);transition:transform .2s;flex-shrink:0}.src-lbl{font-family:'Cinzel Decorative',serif;font-size:.53rem;letter-spacing:.11em;color:var(--gold-d);flex:1}
-    .src-panel{margin-top:7px;display:flex;flex-direction:column;gap:10px}.src-block{background:var(--bg2);border:1px solid var(--bo);border-radius:var(--r);padding:11px 14px}.src-block-t{font-family:'Cinzel Decorative',serif;font-size:.53rem;letter-spacing:.13em;color:var(--gold-d);margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--bo);display:flex;align-items:center;gap:6px}
+    .src-panel{margin-top:7px;display:flex;flex-direction:column;gap:10px}.src-block{background:var(--bg2);border:1px solid var(--bo);border-radius:var(--r);padding:11px 14px}.src-block-t{font-family:'Cinzel Decorative',serif;font-size:.53rem;letter-spacing:.13em;color:var(--gold-d);margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--bo)}
     .qe{margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--bo)}.qe:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}.qe-ref{font-family:'Cinzel Decorative',serif;font-size:.55rem;color:var(--gold);letter-spacing:.06em;margin-bottom:3px}.qe-ar{font-family:'Amiri',serif;font-size:1.05rem;color:var(--gold-l);text-align:right;direction:rtl;line-height:1.65;margin-bottom:3px}.qe-nt{font-size:.74rem;color:var(--tx3);font-style:italic}
     .he{margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--bo)}.he:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}.he-ref{font-family:'Cinzel Decorative',serif;font-size:.55rem;color:var(--sunna);letter-spacing:.06em;margin-bottom:2px}.he-narr{font-size:.68rem;color:var(--tx3);margin-bottom:3px;font-style:italic}.he-txt{font-size:.82rem;color:var(--tx2);line-height:1.6;margin-bottom:3px;border-left:2px solid rgba(122,176,154,.3);padding-left:8px}.he-gr{font-size:.64rem;padding:2px 7px;border-radius:2px;display:inline-block;background:rgba(122,176,154,.1);border:1px solid rgba(122,176,154,.25);color:var(--sunna)}
     .ge-txt{font-size:.84rem;color:var(--tx2);line-height:1.75}.no-quran{font-size:.78rem;color:var(--tx3);font-style:italic}
@@ -70,6 +59,18 @@
     .cn{display:flex;gap:8px;margin-top:14px}.nb{padding:12px 14px;border-radius:var(--r);border:1px solid var(--bo);background:var(--sf);color:var(--tx2);font-family:'Cinzel Decorative',serif;font-size:.57rem;letter-spacing:.11em;cursor:pointer;transition:all .2s;flex:1;text-align:center;touch-action:manipulation;min-height:46px}.nb:disabled{opacity:.3;pointer-events:none}.nb.pr{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.06)}.nb.dn2{border-color:var(--gold);color:var(--gold-l);background:rgba(201,168,76,.1)}
     .done{text-align:center;padding:46px 20px}.done-ar{font-family:'Amiri',serif;font-size:2.2rem;color:var(--gold-l);margin-bottom:9px;text-shadow:0 0 28px rgba(201,168,76,.4)}.done-t{font-family:'Cinzel Decorative',serif;font-size:.80rem;letter-spacing:.2em;color:var(--gold);margin-bottom:7px}.done-s{color:var(--tx3);font-size:.80rem}.orn{text-align:center;color:var(--gold-d);font-size:.85rem;letter-spacing:.3em;margin:8px 0;opacity:.6}
     .rb-btn{margin-top:20px;padding:11px 26px;border:1px solid var(--gold);background:transparent;color:var(--gold);font-family:'Cinzel Decorative',serif;font-size:.62rem;letter-spacing:.15em;cursor:pointer;border-radius:var(--r);touch-action:manipulation;min-height:44px}
+    /* Wudu */
+    .wudu-wrap{padding:4px 0}
+    .wudu-step{background:var(--sf);border:1px solid var(--bo);border-radius:var(--r);padding:14px 16px;margin-bottom:10px}
+    .wudu-num{font-family:'Cinzel Decorative',serif;font-size:.52rem;color:var(--gold-d);letter-spacing:.12em;margin-bottom:4px}
+    .wudu-title{font-family:'Cinzel Decorative',serif;font-size:.72rem;color:var(--gold);letter-spacing:.1em;margin-bottom:6px}
+    .wudu-ar{font-family:'Amiri',serif;font-size:1.2rem;color:var(--gold-l);text-align:right;direction:rtl;margin-bottom:5px;line-height:1.8}
+    .wudu-ph{font-style:italic;color:var(--tx2);font-size:.80rem;margin-bottom:4px}
+    .wudu-txt{font-size:.82rem;color:var(--tx3);line-height:1.7}
+    .wudu-note{font-size:.67rem;color:var(--gold-d);margin-top:6px;font-style:italic;border-left:2px solid var(--bo);padding-left:8px}
+    .wudu-tag{display:inline-block;padding:2px 7px;border-radius:2px;font-family:'Cinzel Decorative',serif;font-size:.49rem;letter-spacing:.08em;margin-bottom:8px}
+    .tag-fard{background:rgba(224,112,112,.12);border:1px solid rgba(224,112,112,.35);color:var(--fard)}
+    .tag-sunna{background:rgba(122,176,154,.12);border:1px solid rgba(122,176,154,.35);color:var(--sunna)}
   </style>
 </head>
 <body>
@@ -86,6 +87,7 @@ const STEP_POSTURE = {
   tashahhud_int:"tashahhud",tashahhud_final:"tashahhud",
   salat_ibr:"tashahhud",salam:"salam",
 };
+
 const POSTURE_LABELS = {
   qiyam:"Debout — Qiyām", takbir:"Takbīr — mains levées",
   ruku:"Inclinaison — Rukūʿ", itidal:"Redressement — Iʿtidāl",
@@ -93,226 +95,249 @@ const POSTURE_LABELS = {
   tashahhud:"Tashahhud — index levé", salam:"Salām — tête tournée",
 };
 
-const CAL_DEFS = (
-  <defs>
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="1.8" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-  </defs>
-);
+// Éléments SVG communs
+function SvgHead({cx,cy,r=10}){return(<g><circle cx={cx} cy={cy} r={r} fill="#d4956a" stroke="#2a1a0a" strokeWidth="1.5"/><ellipse cx={cx} cy={cy-r*.55} rx={r*.8} ry={r*.4} fill="#e8e4d8" stroke="#2a1a0a" strokeWidth="1"/><path d={`M${cx-r*.8} ${cy-r*.55} Q${cx} ${cy-r*1.1} ${cx+r*.8} ${cy-r*.55}`} fill="#e8e4d8" stroke="#2a1a0a" strokeWidth="1"/></g>);}
+function SvgHeadF({cx,cy,r=10}){return(<g><ellipse cx={cx} cy={cy} rx={r*.9} ry={r} fill="#d4956a" stroke="#2a1a0a" strokeWidth="1.2"/><path d={`M${cx-r*1.4} ${cy-r*.4} Q${cx} ${cy-r*1.4} ${cx+r*1.4} ${cy-r*.4} Q${cx+r*1.6} ${cy+r*.6} ${cx+r*1.2} ${cy+r*1.2} Q${cx} ${cy+r*1.5} ${cx-r*1.2} ${cy+r*1.2} Q${cx-r*1.6} ${cy+r*.6} ${cx-r*1.4} ${cy-r*.4}Z`} fill="#d4d0c4" stroke="#2a1a0a" strokeWidth="1.2"/></g>);}
 
-const M = {
-  qiyam:<g filter="url(#glow)">
-    <circle cx="50" cy="15" r="7.5" fill="currentColor" fillOpacity="0.9"/>
-    <path d="M50 23 C49 35 49 50 50 66" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round"/>
-    <path d="M47 30 C42 36 38 44 37 57" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
-    <path d="M53 30 C58 36 62 44 63 57" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
-    <path d="M50 66 C47 73 45 80 43 92" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
-    <path d="M50 66 C53 73 55 80 57 92" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
-    <path d="M43 92 C40 92 38 91 37 90" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <path d="M57 92 C60 92 62 91 63 90" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <line x1="25" y1="94" x2="75" y2="94" stroke="currentColor" strokeWidth="0.8" strokeOpacity="0.2" strokeLinecap="round"/>
-  </g>,
-  takbir:<g filter="url(#glow)">
-    <circle cx="50" cy="15" r="7.5" fill="currentColor" fillOpacity="0.9"/>
-    <path d="M50 23 C49 35 49 50 50 66" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round"/>
-    <path d="M47 30 C40 30 32 32 28 35" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
-    <path d="M28 35 C26 28 25 21 26 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <path d="M26 14 C25 12 26 10 28 11" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-    <path d="M53 30 C60 30 68 32 72 35" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
-    <path d="M72 35 C74 28 75 21 74 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <path d="M74 14 C75 12 74 10 72 11" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-    <path d="M50 66 C47 73 45 80 43 92" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
-    <path d="M50 66 C53 73 55 80 57 92" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
-    <path d="M43 92 C40 92 38 91 37 90" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <path d="M57 92 C60 92 62 91 63 90" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <line x1="25" y1="94" x2="75" y2="94" stroke="currentColor" strokeWidth="0.8" strokeOpacity="0.2" strokeLinecap="round"/>
-  </g>,
-  ruku:<g filter="url(#glow)">
-    <circle cx="18" cy="40" r="7" fill="currentColor" fillOpacity="0.9"/>
-    <path d="M25 40 C38 40 55 40 72 42" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round"/>
-    <path d="M72 42 C74 44 74 48 72 52" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round"/>
-    <path d="M38 40 C38 50 40 58 42 64" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <path d="M56 41 C56 51 58 59 60 65" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <ellipse cx="43" cy="66" rx="5" ry="3.5" fill="currentColor" fillOpacity="0.5"/>
-    <ellipse cx="61" cy="67" rx="5" ry="3.5" fill="currentColor" fillOpacity="0.5"/>
-    <path d="M72 52 C70 62 68 74 66 88" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
-    <path d="M72 52 C74 62 76 74 78 88" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
-    <path d="M66 88 C63 89 61 89 60 88" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <path d="M78 88 C81 89 83 89 84 88" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <line x1="10" y1="92" x2="90" y2="92" stroke="currentColor" strokeWidth="0.8" strokeOpacity="0.2" strokeLinecap="round"/>
-  </g>,
-  itidal:<g filter="url(#glow)">
-    <circle cx="50" cy="15" r="7.5" fill="currentColor" fillOpacity="0.9"/>
-    <path d="M50 23 C49 35 49 50 50 66" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round"/>
-    <path d="M47 30 C40 35 34 42 30 50" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
-    <path d="M30 50 C29 52 30 54 32 53" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-    <path d="M53 30 C60 35 66 42 70 50" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
-    <path d="M70 50 C71 52 70 54 68 53" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-    <path d="M50 66 C47 73 45 80 43 92" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
-    <path d="M50 66 C53 73 55 80 57 92" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
-    <path d="M43 92 C40 92 38 91 37 90" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <path d="M57 92 C60 92 62 91 63 90" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <line x1="25" y1="94" x2="75" y2="94" stroke="currentColor" strokeWidth="0.8" strokeOpacity="0.2" strokeLinecap="round"/>
-  </g>,
-  sujud:<g filter="url(#glow)">
-    <circle cx="15" cy="80" r="6.5" fill="currentColor" fillOpacity="0.9"/>
-    <path d="M15 87 L15 91" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round"/>
-    <path d="M21 78 C34 70 48 62 62 56" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round"/>
-    <path d="M26 76 C24 80 22 85 21 90" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <path d="M40 68 C38 73 36 79 35 84" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <path d="M62 56 C68 60 72 66 74 72" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round"/>
-    <path d="M74 72 C76 78 78 84 80 90" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
-    <path d="M80 90 C83 88 85 87 86 88" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-    <line x1="8" y1="92" x2="92" y2="92" stroke="currentColor" strokeWidth="1" strokeOpacity="0.25" strokeLinecap="round"/>
-  </g>,
-  jalsa:<g filter="url(#glow)">
-    <circle cx="44" cy="32" r="7.5" fill="currentColor" fillOpacity="0.9"/>
-    <path d="M44 40 C44 50 44 58 44 66" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round"/>
-    <path d="M41 48 C36 55 30 62 26 68" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <path d="M47 48 C52 55 58 62 62 68" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <path d="M44 66 C36 70 26 72 18 74" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
-    <path d="M18 74 C16 78 16 83 17 90" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
-    <path d="M44 66 C54 68 64 68 72 72" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
-    <path d="M72 72 C76 78 78 84 76 90" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
-    <line x1="8" y1="92" x2="92" y2="92" stroke="currentColor" strokeWidth="1" strokeOpacity="0.25" strokeLinecap="round"/>
-  </g>,
-  tashahhud:<g filter="url(#glow)">
-    <circle cx="44" cy="30" r="7.5" fill="currentColor" fillOpacity="0.9"/>
-    <path d="M44 38 C44 48 44 56 44 64" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round"/>
-    <path d="M47 46 C54 52 62 58 66 64" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
-    <path d="M66 64 C68 70 68 74 67 78" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <path d="M67 78 C66 72 65 66 64 60" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
-    <path d="M41 46 C34 52 26 58 22 64" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
-    <path d="M44 64 C36 68 24 70 16 74" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
-    <path d="M16 74 C14 79 14 84 15 90" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
-    <path d="M44 64 C54 66 66 68 74 72" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
-    <path d="M74 72 C78 78 78 84 76 90" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
-    <line x1="8" y1="92" x2="92" y2="92" stroke="currentColor" strokeWidth="1" strokeOpacity="0.25" strokeLinecap="round"/>
-  </g>,
-  salam:<g filter="url(#glow)">
-    <circle cx="54" cy="30" r="7.5" fill="currentColor" fillOpacity="0.9"/>
-    <path d="M50 37 C48 42 46 48 44 64" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round"/>
-    <path d="M60 30 C66 29 72 29 77 30" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeOpacity="0.4" strokeDasharray="2.5,2"/>
-    <path d="M47 46 C54 52 62 58 66 64" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
-    <path d="M66 64 C68 70 68 74 67 78" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <path d="M41 46 C34 52 26 58 22 64" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
-    <path d="M44 64 C36 68 24 70 16 74" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
-    <path d="M16 74 C14 79 14 84 15 90" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
-    <path d="M44 64 C54 66 66 68 74 72" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
-    <path d="M74 72 C78 78 78 84 76 90" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
-    <line x1="8" y1="92" x2="92" y2="92" stroke="currentColor" strokeWidth="1" strokeOpacity="0.25" strokeLinecap="round"/>
-  </g>,
+const POSTURES_M = {
+  qiyam:(
+    <g>
+      <rect x="40" y="28" width="20" height="32" rx="4" fill="#f0ede6" stroke="#2a1a0a" strokeWidth="1.5"/>
+      <rect x="41" y="60" width="8" height="28" rx="3" fill="#f0ede6" stroke="#2a1a0a" strokeWidth="1.2"/>
+      <rect x="51" y="60" width="8" height="28" rx="3" fill="#f0ede6" stroke="#2a1a0a" strokeWidth="1.2"/>
+      <rect x="40" y="87" width="10" height="5" rx="2" fill="#b87a52" stroke="#2a1a0a" strokeWidth="1"/>
+      <rect x="50" y="87" width="10" height="5" rx="2" fill="#b87a52" stroke="#2a1a0a" strokeWidth="1"/>
+      <path d="M40 36 Q34 38 30 40" fill="none" stroke="#d4956a" strokeWidth="5" strokeLinecap="round"/>
+      <path d="M30 40 Q38 42 46 42" fill="none" stroke="#d4956a" strokeWidth="5" strokeLinecap="round"/>
+      <path d="M60 36 Q62 38 60 40" fill="none" stroke="#d4956a" strokeWidth="5" strokeLinecap="round"/>
+      <path d="M60 40 Q52 40 44 40" fill="none" stroke="#d4956a" strokeWidth="5" strokeLinecap="round"/>
+      <ellipse cx="44" cy="40" rx="7" ry="4" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1"/>
+      <ellipse cx="36" cy="42" rx="7" ry="3.5" fill="#b87a52" stroke="#2a1a0a" strokeWidth="1" opacity=".8"/>
+      <SvgHead cx={50} cy={17}/>
+    </g>
+  ),
+  takbir:(
+    <g>
+      <rect x="40" y="28" width="20" height="32" rx="4" fill="#f0ede6" stroke="#2a1a0a" strokeWidth="1.5"/>
+      <rect x="41" y="60" width="8" height="28" rx="3" fill="#f0ede6" stroke="#2a1a0a" strokeWidth="1.2"/>
+      <rect x="51" y="60" width="8" height="28" rx="3" fill="#f0ede6" stroke="#2a1a0a" strokeWidth="1.2"/>
+      <rect x="40" y="87" width="10" height="5" rx="2" fill="#b87a52" stroke="#2a1a0a" strokeWidth="1"/>
+      <rect x="50" y="87" width="10" height="5" rx="2" fill="#b87a52" stroke="#2a1a0a" strokeWidth="1"/>
+      <path d="M40 34 Q32 34 28 30" fill="none" stroke="#d4956a" strokeWidth="6" strokeLinecap="round"/>
+      <path d="M28 30 Q26 22 28 16" fill="none" stroke="#d4956a" strokeWidth="5" strokeLinecap="round"/>
+      <ellipse cx="28" cy="14" rx="5" ry="4" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1" transform="rotate(-10,28,14)"/>
+      <path d="M60 34 Q68 34 72 30" fill="none" stroke="#d4956a" strokeWidth="6" strokeLinecap="round"/>
+      <path d="M72 30 Q74 22 72 16" fill="none" stroke="#d4956a" strokeWidth="5" strokeLinecap="round"/>
+      <ellipse cx="72" cy="14" rx="5" ry="4" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1" transform="rotate(10,72,14)"/>
+      <SvgHead cx={50} cy={17}/>
+    </g>
+  ),
+  ruku:(
+    <g>
+      <SvgHead cx={18} cy={44} r={9}/>
+      <rect x="26" y="38" width="40" height="11" rx="4" fill="#f0ede6" stroke="#2a1a0a" strokeWidth="1.5"/>
+      <rect x="64" y="38" width="11" height="34" rx="4" fill="#f0ede6" stroke="#2a1a0a" strokeWidth="1.2"/>
+      <rect x="75" y="38" width="11" height="34" rx="4" fill="#f0ede6" stroke="#2a1a0a" strokeWidth="1.2"/>
+      <rect x="63" y="72" width="12" height="5" rx="2" fill="#b87a52" stroke="#2a1a0a" strokeWidth="1"/>
+      <rect x="75" y="72" width="12" height="5" rx="2" fill="#b87a52" stroke="#2a1a0a" strokeWidth="1"/>
+      <path d="M36 49 Q36 58 64 58" fill="none" stroke="#d4956a" strokeWidth="6" strokeLinecap="round"/>
+      <path d="M54 49 Q54 58 76 58" fill="none" stroke="#d4956a" strokeWidth="6" strokeLinecap="round"/>
+      <ellipse cx="65" cy="56" rx="7" ry="4" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1"/>
+      <ellipse cx="77" cy="56" rx="7" ry="4" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1"/>
+    </g>
+  ),
+  itidal:(
+    <g>
+      <rect x="40" y="28" width="20" height="32" rx="4" fill="#f0ede6" stroke="#2a1a0a" strokeWidth="1.5"/>
+      <rect x="41" y="60" width="8" height="28" rx="3" fill="#f0ede6" stroke="#2a1a0a" strokeWidth="1.2"/>
+      <rect x="51" y="60" width="8" height="28" rx="3" fill="#f0ede6" stroke="#2a1a0a" strokeWidth="1.2"/>
+      <rect x="40" y="87" width="10" height="5" rx="2" fill="#b87a52" stroke="#2a1a0a" strokeWidth="1"/>
+      <rect x="50" y="87" width="10" height="5" rx="2" fill="#b87a52" stroke="#2a1a0a" strokeWidth="1"/>
+      <rect x="33" y="30" width="7" height="22" rx="3" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1.2"/>
+      <rect x="60" y="30" width="7" height="22" rx="3" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1.2"/>
+      <ellipse cx="36" cy="53" rx="5" ry="3" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1"/>
+      <ellipse cx="64" cy="53" rx="5" ry="3" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1"/>
+      <SvgHead cx={50} cy={17}/>
+    </g>
+  ),
+  sujud:(
+    <g>
+      <SvgHead cx={14} cy={76} r={9}/>
+      <path d="M22 74 Q40 62 60 54" fill="none" stroke="#f0ede6" strokeWidth="12" strokeLinecap="round"/>
+      <ellipse cx="66" cy="52" rx="10" ry="8" fill="#f0ede6" stroke="#2a1a0a" strokeWidth="1.5"/>
+      <path d="M72 58 Q78 68 76 78" fill="none" stroke="#f0ede6" strokeWidth="10" strokeLinecap="round"/>
+      <rect x="70" y="78" width="12" height="5" rx="2" fill="#b87a52" stroke="#2a1a0a" strokeWidth="1"/>
+      <path d="M26 70 Q22 76 20 82" fill="none" stroke="#d4956a" strokeWidth="6" strokeLinecap="round"/>
+      <ellipse cx="20" cy="83" rx="6" ry="3.5" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1"/>
+      <path d="M44 60 Q40 68 38 74" fill="none" stroke="#d4956a" strokeWidth="6" strokeLinecap="round"/>
+      <ellipse cx="38" cy="75" rx="6" ry="3.5" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1"/>
+      <line x1="5" y1="87" x2="90" y2="87" stroke="#2a1a0a" strokeWidth="1.5" opacity=".2"/>
+    </g>
+  ),
+  jalsa:(
+    <g>
+      <SvgHead cx={44} cy={22}/>
+      <rect x="34" y="33" width="20" height="26" rx="4" fill="#f0ede6" stroke="#2a1a0a" strokeWidth="1.5"/>
+      <path d="M34 58 Q22 62 12 64" fill="none" stroke="#f0ede6" strokeWidth="10" strokeLinecap="round"/>
+      <path d="M12 64 Q10 70 12 76" fill="none" stroke="#f0ede6" strokeWidth="9" strokeLinecap="round"/>
+      <rect x="7" y="76" width="11" height="5" rx="2" fill="#b87a52" stroke="#2a1a0a" strokeWidth="1"/>
+      <path d="M54 58 Q66 60 76 58" fill="none" stroke="#f0ede6" strokeWidth="10" strokeLinecap="round"/>
+      <path d="M76 58 Q82 64 80 72" fill="none" stroke="#f0ede6" strokeWidth="9" strokeLinecap="round"/>
+      <rect x="75" y="72" width="11" height="5" rx="2" fill="#b87a52" stroke="#2a1a0a" strokeWidth="1"/>
+      <path d="M34 42 Q24 50 18 58" fill="none" stroke="#d4956a" strokeWidth="6" strokeLinecap="round"/>
+      <ellipse cx="18" cy="59" rx="6" ry="3.5" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1"/>
+      <path d="M54 42 Q64 50 68 58" fill="none" stroke="#d4956a" strokeWidth="6" strokeLinecap="round"/>
+      <ellipse cx="68" cy="59" rx="6" ry="3.5" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1"/>
+      <line x1="5" y1="82" x2="92" y2="82" stroke="#2a1a0a" strokeWidth="1.5" opacity=".2"/>
+    </g>
+  ),
+  tashahhud:(
+    <g>
+      <SvgHead cx={44} cy={22}/>
+      <rect x="34" y="33" width="20" height="26" rx="4" fill="#f0ede6" stroke="#2a1a0a" strokeWidth="1.5"/>
+      <path d="M34 58 Q22 62 12 64" fill="none" stroke="#f0ede6" strokeWidth="10" strokeLinecap="round"/>
+      <path d="M12 64 Q10 70 12 76" fill="none" stroke="#f0ede6" strokeWidth="9" strokeLinecap="round"/>
+      <rect x="7" y="76" width="11" height="5" rx="2" fill="#b87a52" stroke="#2a1a0a" strokeWidth="1"/>
+      <path d="M54 58 Q66 60 76 58" fill="none" stroke="#f0ede6" strokeWidth="10" strokeLinecap="round"/>
+      <path d="M76 58 Q82 64 80 72" fill="none" stroke="#f0ede6" strokeWidth="9" strokeLinecap="round"/>
+      <rect x="75" y="72" width="11" height="5" rx="2" fill="#b87a52" stroke="#2a1a0a" strokeWidth="1"/>
+      <path d="M34 42 Q24 50 18 58" fill="none" stroke="#d4956a" strokeWidth="6" strokeLinecap="round"/>
+      <ellipse cx="18" cy="59" rx="6" ry="3.5" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1"/>
+      <path d="M54 42 Q64 48 70 54" fill="none" stroke="#d4956a" strokeWidth="6" strokeLinecap="round"/>
+      <ellipse cx="70" cy="55" rx="6" ry="3.5" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1"/>
+      <rect x="68" y="42" width="4" height="14" rx="2" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1"/>
+      <line x1="5" y1="82" x2="92" y2="82" stroke="#2a1a0a" strokeWidth="1.5" opacity=".2"/>
+    </g>
+  ),
+  salam:(
+    <g>
+      <circle cx="52" cy="22" r="10" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1.5"/>
+      <ellipse cx="52" cy="15" rx="8" ry="4" fill="#e8e4d8" stroke="#2a1a0a" strokeWidth="1"/>
+      <path d="M44 15 Q52 10 60 15" fill="#e8e4d8" stroke="#2a1a0a" strokeWidth="1"/>
+      <path d="M60 22 Q70 21 78 22" fill="none" stroke="#2a1a0a" strokeWidth="1" strokeDasharray="3,2" opacity=".4"/>
+      <rect x="34" y="33" width="20" height="26" rx="4" fill="#f0ede6" stroke="#2a1a0a" strokeWidth="1.5"/>
+      <path d="M34 58 Q22 62 12 64" fill="none" stroke="#f0ede6" strokeWidth="10" strokeLinecap="round"/>
+      <path d="M12 64 Q10 70 12 76" fill="none" stroke="#f0ede6" strokeWidth="9" strokeLinecap="round"/>
+      <rect x="7" y="76" width="11" height="5" rx="2" fill="#b87a52" stroke="#2a1a0a" strokeWidth="1"/>
+      <path d="M54 58 Q66 60 76 58" fill="none" stroke="#f0ede6" strokeWidth="10" strokeLinecap="round"/>
+      <path d="M76 58 Q82 64 80 72" fill="none" stroke="#f0ede6" strokeWidth="9" strokeLinecap="round"/>
+      <rect x="75" y="72" width="11" height="5" rx="2" fill="#b87a52" stroke="#2a1a0a" strokeWidth="1"/>
+      <path d="M34 42 Q24 50 18 58" fill="none" stroke="#d4956a" strokeWidth="6" strokeLinecap="round"/>
+      <ellipse cx="18" cy="59" rx="6" ry="3.5" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1"/>
+      <path d="M54 42 Q64 50 68 58" fill="none" stroke="#d4956a" strokeWidth="6" strokeLinecap="round"/>
+      <ellipse cx="68" cy="59" rx="6" ry="3.5" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1"/>
+      <line x1="5" y1="82" x2="92" y2="82" stroke="#2a1a0a" strokeWidth="1.5" opacity=".2"/>
+    </g>
+  ),
 };
 
-const F = {
-  qiyam:<g filter="url(#glow)">
-    <circle cx="50" cy="14" r="7" fill="currentColor" fillOpacity="0.9"/>
-    <path d="M38 12 C40 4 60 4 62 12 C66 22 64 32 58 36 C54 38 46 38 42 36 C36 32 34 22 38 12Z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeOpacity="0.65" strokeLinejoin="round"/>
-    <path d="M50 36 C50 46 50 54 50 64" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
-    <path d="M42 44 C38 56 34 70 32 88" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <path d="M42 44 C50 60 50 72 50 90" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeOpacity="0.5"/>
-    <path d="M58 44 C62 56 66 70 68 88" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <path d="M32 88 C40 91 60 91 68 88" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeOpacity="0.6"/>
-    <path d="M46 42 C40 50 36 58 35 64" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-    <path d="M54 42 C60 50 64 58 65 64" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-    <line x1="22" y1="92" x2="78" y2="92" stroke="currentColor" strokeWidth="0.8" strokeOpacity="0.2" strokeLinecap="round"/>
-  </g>,
-  takbir:<g filter="url(#glow)">
-    <circle cx="50" cy="14" r="7" fill="currentColor" fillOpacity="0.9"/>
-    <path d="M38 12 C40 4 60 4 62 12 C66 22 64 32 58 36 C54 38 46 38 42 36 C36 32 34 22 38 12Z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeOpacity="0.65" strokeLinejoin="round"/>
-    <path d="M50 36 C50 46 50 54 50 64" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
-    <path d="M42 44 C38 56 34 70 32 88" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <path d="M58 44 C62 56 66 70 68 88" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <path d="M32 88 C40 91 60 91 68 88" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeOpacity="0.6"/>
-    <path d="M44 40 C36 38 28 38 24 40" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-    <path d="M24 40 C22 32 22 24 24 16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-    <path d="M56 40 C64 38 72 38 76 40" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-    <path d="M76 40 C78 32 78 24 76 16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-    <line x1="22" y1="92" x2="78" y2="92" stroke="currentColor" strokeWidth="0.8" strokeOpacity="0.2" strokeLinecap="round"/>
-  </g>,
-  ruku:<g filter="url(#glow)">
-    <circle cx="18" cy="38" r="6.5" fill="currentColor" fillOpacity="0.9"/>
-    <path d="M10 35 C12 27 24 27 26 35 C28 42 24 48 18 48 C12 48 8 42 10 35Z" fill="none" stroke="currentColor" strokeWidth="1.6" strokeOpacity="0.6"/>
-    <path d="M24 40 C38 38 56 38 72 42" fill="none" stroke="currentColor" strokeWidth="3.8" strokeLinecap="round"/>
-    <path d="M36 36 C36 44 36 54 36 64" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeOpacity="0.5"/>
-    <path d="M54 37 C54 45 54 55 54 65" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeOpacity="0.5"/>
-    <ellipse cx="37" cy="66" rx="5" ry="3.5" fill="currentColor" fillOpacity="0.45"/>
-    <ellipse cx="55" cy="67" rx="5" ry="3.5" fill="currentColor" fillOpacity="0.45"/>
-    <path d="M72 42 C70 56 68 70 66 88" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round"/>
-    <path d="M72 42 C74 56 76 70 78 88" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round"/>
-    <path d="M62 88 C66 91 80 91 84 88" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeOpacity="0.6"/>
-    <line x1="10" y1="92" x2="90" y2="92" stroke="currentColor" strokeWidth="0.8" strokeOpacity="0.2" strokeLinecap="round"/>
-  </g>,
-  itidal:<g filter="url(#glow)">
-    <circle cx="50" cy="14" r="7" fill="currentColor" fillOpacity="0.9"/>
-    <path d="M38 12 C40 4 60 4 62 12 C66 22 64 32 58 36 C54 38 46 38 42 36 C36 32 34 22 38 12Z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeOpacity="0.65" strokeLinejoin="round"/>
-    <path d="M50 36 C50 46 50 54 50 64" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
-    <path d="M42 44 C38 56 34 70 32 88" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <path d="M58 44 C62 56 66 70 68 88" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <path d="M32 88 C40 91 60 91 68 88" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeOpacity="0.6"/>
-    <path d="M44 42 C36 48 30 54 28 60" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-    <path d="M56 42 C64 48 70 54 72 60" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-    <line x1="22" y1="92" x2="78" y2="92" stroke="currentColor" strokeWidth="0.8" strokeOpacity="0.2" strokeLinecap="round"/>
-  </g>,
-  sujud:<g filter="url(#glow)">
-    <circle cx="14" cy="78" r="6.5" fill="currentColor" fillOpacity="0.9"/>
-    <path d="M8 74 C10 66 20 66 22 74 C24 80 20 86 14 86 C8 86 4 80 8 74Z" fill="none" stroke="currentColor" strokeWidth="1.6" strokeOpacity="0.6"/>
-    <path d="M14 85 L14 91" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round"/>
-    <path d="M20 76 C32 66 50 60 65 56" fill="none" stroke="currentColor" strokeWidth="3.8" strokeLinecap="round"/>
-    <path d="M20 76 C24 82 20 88 18 91" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-    <path d="M65 56 C72 60 76 66 78 74" fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round"/>
-    <path d="M78 74 C80 80 80 86 78 91" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
-    <path d="M18 91 C38 94 62 94 78 91" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeOpacity="0.55"/>
-    <line x1="8" y1="93" x2="92" y2="93" stroke="currentColor" strokeWidth="0.8" strokeOpacity="0.2" strokeLinecap="round"/>
-  </g>,
-  jalsa:<g filter="url(#glow)">
-    <circle cx="44" cy="28" r="7" fill="currentColor" fillOpacity="0.9"/>
-    <path d="M32 26 C34 18 54 18 56 26 C60 36 56 44 50 46 C46 47 40 46 38 44 C32 40 30 34 32 26Z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeOpacity="0.6"/>
-    <path d="M44 46 C44 54 44 60 44 66" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
-    <path d="M36 50 C28 62 20 74 16 88" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <path d="M52 50 C60 62 68 74 72 88" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <path d="M16 88 C32 93 60 93 72 88" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeOpacity="0.6"/>
-    <path d="M40 52 C34 60 28 66 24 72" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-    <path d="M48 52 C54 60 60 66 64 72" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-    <line x1="8" y1="92" x2="92" y2="92" stroke="currentColor" strokeWidth="0.8" strokeOpacity="0.2" strokeLinecap="round"/>
-  </g>,
-  tashahhud:<g filter="url(#glow)">
-    <circle cx="44" cy="26" r="7" fill="currentColor" fillOpacity="0.9"/>
-    <path d="M32 24 C34 16 54 16 56 24 C60 34 56 42 50 44 C46 45 40 44 38 42 C32 38 30 32 32 24Z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeOpacity="0.6"/>
-    <path d="M44 44 C44 52 44 58 44 64" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
-    <path d="M36 48 C28 60 20 74 16 88" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <path d="M52 48 C60 60 68 74 72 88" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <path d="M16 88 C32 93 60 93 72 88" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeOpacity="0.6"/>
-    <path d="M48 50 C56 56 64 62 68 68" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-    <path d="M68 68 C70 74 70 78 69 82" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-    <path d="M69 82 C68 74 67 66 66 60" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
-    <path d="M40 50 C32 56 24 62 20 68" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-    <line x1="8" y1="92" x2="92" y2="92" stroke="currentColor" strokeWidth="0.8" strokeOpacity="0.2" strokeLinecap="round"/>
-  </g>,
-  salam:<g filter="url(#glow)">
-    <circle cx="54" cy="26" r="7" fill="currentColor" fillOpacity="0.9"/>
-    <path d="M42 24 C44 16 66 16 66 26 C66 36 62 44 56 46 C52 47 46 46 44 44 C38 40 38 32 42 24Z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeOpacity="0.6"/>
-    <path d="M60 26 C66 25 74 25 80 26" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeOpacity="0.38" strokeDasharray="2.5,2"/>
-    <path d="M44 46 C44 54 44 58 44 64" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
-    <path d="M36 50 C28 62 20 74 16 88" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <path d="M52 50 C60 62 68 74 72 88" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <path d="M16 88 C32 93 60 93 72 88" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeOpacity="0.6"/>
-    <path d="M48 50 C56 56 64 62 68 68" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-    <path d="M40 50 C32 56 24 62 20 68" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-    <line x1="8" y1="92" x2="92" y2="92" stroke="currentColor" strokeWidth="0.8" strokeOpacity="0.2" strokeLinecap="round"/>
-  </g>,
+const POSTURES_F = {
+  qiyam:(
+    <g>
+      <path d="M36 32 Q32 60 30 92 L70 92 Q68 60 64 32 Z" fill="#f0ede6" stroke="#2a1a0a" strokeWidth="1.5"/>
+      <rect x="38" y="28" width="24" height="26" rx="4" fill="#f0ede6" stroke="#2a1a0a" strokeWidth="1.2"/>
+      <SvgHeadF cx={50} cy={22}/>
+      <path d="M42 38 Q44 36 50 36" fill="none" stroke="#d4956a" strokeWidth="5" strokeLinecap="round"/>
+      <path d="M58 38 Q56 36 50 36" fill="none" stroke="#d4956a" strokeWidth="5" strokeLinecap="round"/>
+      <ellipse cx="50" cy="36" rx="7" ry="3.5" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1"/>
+      <ellipse cx="44" cy="38" rx="6" ry="3" fill="#b87a52" stroke="#2a1a0a" strokeWidth="1" opacity=".8"/>
+    </g>
+  ),
+  takbir:(
+    <g>
+      <path d="M36 32 Q32 60 30 92 L70 92 Q68 60 64 32 Z" fill="#f0ede6" stroke="#2a1a0a" strokeWidth="1.5"/>
+      <rect x="38" y="28" width="24" height="26" rx="4" fill="#f0ede6" stroke="#2a1a0a" strokeWidth="1.2"/>
+      <SvgHeadF cx={50} cy={22}/>
+      <path d="M40 36 Q32 34 28 30" fill="none" stroke="#d4956a" strokeWidth="5" strokeLinecap="round"/>
+      <path d="M28 30 Q26 22 28 16" fill="none" stroke="#d4956a" strokeWidth="4" strokeLinecap="round"/>
+      <ellipse cx="28" cy="14" rx="5" ry="4" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1" transform="rotate(-10,28,14)"/>
+      <path d="M60 36 Q68 34 72 30" fill="none" stroke="#d4956a" strokeWidth="5" strokeLinecap="round"/>
+      <path d="M72 30 Q74 22 72 16" fill="none" stroke="#d4956a" strokeWidth="4" strokeLinecap="round"/>
+      <ellipse cx="72" cy="14" rx="5" ry="4" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1" transform="rotate(10,72,14)"/>
+    </g>
+  ),
+  ruku:(
+    <g>
+      <SvgHeadF cx={18} cy={44} r={9}/>
+      <path d="M26 42 Q44 38 66 40 Q70 42 70 48 Q66 52 44 52 Q30 52 26 48 Z" fill="#f0ede6" stroke="#2a1a0a" strokeWidth="1.5"/>
+      <path d="M64 48 Q68 60 66 78" fill="none" stroke="#f0ede6" strokeWidth="12" strokeLinecap="round"/>
+      <path d="M74 48 Q78 60 76 78" fill="none" stroke="#f0ede6" strokeWidth="12" strokeLinecap="round"/>
+      <path d="M60 78 Q72 82 82 78" fill="#f0ede6" stroke="#2a1a0a" strokeWidth="1" opacity=".8"/>
+      <path d="M36 52 Q44 56 52 60" fill="none" stroke="#d4956a" strokeWidth="5" strokeLinecap="round"/>
+      <ellipse cx="53" cy="60" rx="7" ry="4" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1"/>
+      <path d="M52 52 Q60 56 68 58" fill="none" stroke="#d4956a" strokeWidth="5" strokeLinecap="round"/>
+      <ellipse cx="69" cy="58" rx="7" ry="4" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1"/>
+    </g>
+  ),
+  itidal:(
+    <g>
+      <path d="M36 32 Q32 60 30 92 L70 92 Q68 60 64 32 Z" fill="#f0ede6" stroke="#2a1a0a" strokeWidth="1.5"/>
+      <rect x="38" y="28" width="24" height="26" rx="4" fill="#f0ede6" stroke="#2a1a0a" strokeWidth="1.2"/>
+      <SvgHeadF cx={50} cy={22}/>
+      <rect x="33" y="32" width="6" height="20" rx="3" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1"/>
+      <rect x="61" y="32" width="6" height="20" rx="3" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1"/>
+      <ellipse cx="36" cy="53" rx="5" ry="3" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1"/>
+      <ellipse cx="64" cy="53" rx="5" ry="3" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1"/>
+    </g>
+  ),
+  sujud:(
+    <g>
+      <SvgHeadF cx={14} cy={72} r={9}/>
+      <path d="M20 72 Q40 60 62 52 Q70 50 74 56 Q76 64 72 72 Q60 78 40 80 Q24 80 20 76 Z" fill="#f0ede6" stroke="#2a1a0a" strokeWidth="1.5"/>
+      <path d="M26 70 Q22 76 20 82" fill="none" stroke="#d4956a" strokeWidth="5" strokeLinecap="round"/>
+      <ellipse cx="20" cy="83" rx="6" ry="3" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1"/>
+      <path d="M44 62 Q40 68 38 74" fill="none" stroke="#d4956a" strokeWidth="5" strokeLinecap="round"/>
+      <ellipse cx="38" cy="75" rx="6" ry="3" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1"/>
+      <line x1="5" y1="87" x2="90" y2="87" stroke="#2a1a0a" strokeWidth="1.5" opacity=".2"/>
+    </g>
+  ),
+  jalsa:(
+    <g>
+      <SvgHeadF cx={44} cy={22}/>
+      <path d="M34 36 Q28 52 16 66 Q24 72 44 72 Q64 72 74 66 Q68 52 58 36 Z" fill="#f0ede6" stroke="#2a1a0a" strokeWidth="1.5"/>
+      <rect x="36" y="32" width="20" height="20" rx="4" fill="#f0ede6" stroke="#2a1a0a" strokeWidth="1"/>
+      <path d="M36 44 Q28 52 22 60" fill="none" stroke="#d4956a" strokeWidth="5" strokeLinecap="round"/>
+      <ellipse cx="22" cy="61" rx="6" ry="3" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1"/>
+      <path d="M56 44 Q62 52 66 60" fill="none" stroke="#d4956a" strokeWidth="5" strokeLinecap="round"/>
+      <ellipse cx="66" cy="61" rx="6" ry="3" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1"/>
+      <line x1="5" y1="74" x2="90" y2="74" stroke="#2a1a0a" strokeWidth="1.5" opacity=".2"/>
+    </g>
+  ),
+  tashahhud:(
+    <g>
+      <SvgHeadF cx={44} cy={22}/>
+      <path d="M34 36 Q28 52 16 66 Q24 72 44 72 Q64 72 74 66 Q68 52 58 36 Z" fill="#f0ede6" stroke="#2a1a0a" strokeWidth="1.5"/>
+      <rect x="36" y="32" width="20" height="20" rx="4" fill="#f0ede6" stroke="#2a1a0a" strokeWidth="1"/>
+      <path d="M36 44 Q28 52 22 60" fill="none" stroke="#d4956a" strokeWidth="5" strokeLinecap="round"/>
+      <ellipse cx="22" cy="61" rx="6" ry="3" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1"/>
+      <path d="M56 44 Q62 50 68 54" fill="none" stroke="#d4956a" strokeWidth="5" strokeLinecap="round"/>
+      <ellipse cx="68" cy="55" rx="6" ry="3" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1"/>
+      <rect x="66" y="42" width="4" height="14" rx="2" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1"/>
+      <line x1="5" y1="74" x2="90" y2="74" stroke="#2a1a0a" strokeWidth="1.5" opacity=".2"/>
+    </g>
+  ),
+  salam:(
+    <g>
+      <SvgHeadF cx={52} cy={22}/>
+      <path d="M60 22 Q70 21 78 22" fill="none" stroke="#2a1a0a" strokeWidth="1" strokeDasharray="3,2" opacity=".4"/>
+      <path d="M34 36 Q28 52 16 66 Q24 72 44 72 Q64 72 74 66 Q68 52 58 36 Z" fill="#f0ede6" stroke="#2a1a0a" strokeWidth="1.5"/>
+      <rect x="36" y="32" width="20" height="20" rx="4" fill="#f0ede6" stroke="#2a1a0a" strokeWidth="1"/>
+      <path d="M36 44 Q28 52 22 60" fill="none" stroke="#d4956a" strokeWidth="5" strokeLinecap="round"/>
+      <ellipse cx="22" cy="61" rx="6" ry="3" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1"/>
+      <path d="M56 44 Q62 52 66 60" fill="none" stroke="#d4956a" strokeWidth="5" strokeLinecap="round"/>
+      <ellipse cx="66" cy="61" rx="6" ry="3" fill="#d4956a" stroke="#2a1a0a" strokeWidth="1"/>
+      <line x1="5" y1="74" x2="90" y2="74" stroke="#2a1a0a" strokeWidth="1.5" opacity=".2"/>
+    </g>
+  ),
 };
 
 function PostureIllustration({postureId, gender}) {
-  const paths = gender === "m" ? M : F;
-  const svg = paths[postureId] || paths["qiyam"];
+  const lib = gender === "m" ? POSTURES_M : POSTURES_F;
+  const svg = lib[postureId] || lib["qiyam"];
   const label = POSTURE_LABELS[postureId] || "";
   return (
     <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:5,padding:"14px 0 8px",animation:"postureIn .35s ease"}}>
-      <svg viewBox="0 0 100 100" width="100" height="100" style={{color:"#c9a84c",filter:"drop-shadow(0 0 10px rgba(201,168,76,.35))"}} aria-label={label}>
-        {CAL_DEFS}
+      <svg viewBox="0 0 100 100" width="100" height="100" style={{filter:"drop-shadow(0 0 6px rgba(201,168,76,.2))"}}>
         {svg}
       </svg>
       <span style={{fontFamily:"'Cinzel Decorative',serif",fontSize:".5rem",letterSpacing:".1em",color:"#8a6e32",textAlign:"center"}}>{label}</span>
@@ -320,12 +345,25 @@ function PostureIllustration({postureId, gender}) {
   );
 }
 
-// ── DONNÉES ───────────────────────────────────────────
+// ── WUDU DATA ─────────────────────────────────────────
+const WUDU_STEPS = [
+  {num:1, titre:"Niyyah — Intention", tag:"fard", ar:"نَوَيْتُ الْوُضُوءَ", ph:"Nawaytu l-wuḍūʾ", txt:"Former l'intention sincère dans son cœur d'accomplir le wuḍūʾ pour la prière. L'intention est une disposition intérieure, elle n'a pas à être prononcée à voix haute.", note:"Bukhārī n°1 — Les actes ne valent que par les intentions."},
+  {num:2, titre:"Basmalah", tag:"sunna", ar:"بِسْمِ اللَّهِ", ph:"Bismi -llāh", txt:"Prononcer le nom d'Allah avant de commencer. Certains savants la considèrent obligatoire (wājib).", note:"Abu Dāwūd n°101 — Pas de prière pour celui qui n'a pas fait le wuḍūʾ, et pas de wuḍūʾ pour celui qui ne mentionne pas le nom d'Allah."},
+  {num:3, titre:"Se laver les mains", tag:"sunna", ar:"", ph:"", txt:"Se laver les deux mains jusqu'aux poignets trois fois, en commençant par la main droite. Passer les doigts entre eux (takhlīl).", note:"Muslim n°233 — La Sunna du Prophète ﷺ."},
+  {num:4, titre:"Se rincer la bouche et le nez", tag:"sunna", ar:"", ph:"", txt:"Prendre de l'eau dans la main droite, se rincer la bouche (madmada) puis aspirer de l'eau dans le nez (istinshāq) et se moucher (istinthār) avec la main gauche. Répéter trois fois.", note:"Bukhārī n°162 — Pratique constante du Prophète ﷺ."},
+  {num:5, titre:"Se laver le visage", tag:"fard", ar:"", ph:"", txt:"Laver entièrement le visage trois fois — du front jusqu'au menton en hauteur, d'une oreille à l'autre en largeur. Pour l'homme barbu : passer les doigts mouillés dans la barbe (takhlīl).", note:"Sourate Al-Māʾidah 5:6 — «…lavez vos visages…»"},
+  {num:6, titre:"Se laver les bras", tag:"fard", ar:"", ph:"", txt:"Laver le bras droit jusqu'au coude inclus trois fois, puis le bras gauche trois fois. Commencer par les doigts, remonter jusqu'au coude.", note:"Sourate Al-Māʾidah 5:6 — «…et vos mains jusqu'aux coudes…»"},
+  {num:7, titre:"Masḥ — Passer sur la tête", tag:"fard", ar:"", ph:"", txt:"Passer les deux mains mouillées sur la tête une seule fois : de la naissance des cheveux vers la nuque, puis retour vers l'avant. Passer ensuite les index dans les oreilles et les pouces derrière.", note:"Sourate Al-Māʾidah 5:6 — «…et passez vos mains sur vos têtes…»"},
+  {num:8, titre:"Se laver les pieds", tag:"fard", ar:"", ph:"", txt:"Laver le pied droit jusqu'à la cheville incluse trois fois, en passant le petit doigt de la main gauche entre les orteils (takhlīl), puis le pied gauche.", note:"Sourate Al-Māʾidah 5:6 — «…et vos pieds jusqu'aux chevilles…»"},
+  {num:9, titre:"Duʿāʾ de clôture", tag:"sunna", ar:"أَشْهَدُ أَن لَّا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ", ph:"Ašhadu an lā ilāha illā -llāhu waḥdahu lā šarīka lahu wa-ašhadu anna Muḥammadan ʿabduhu wa-rasūluh", txt:"Après le wuḍūʾ, lever le regard vers le ciel et prononcer la shahāda.", note:"Muslim n°234 — Les huit portes du Paradis lui sont ouvertes."},
+];
+
+// ── DONNÉES PRIÈRE ────────────────────────────────────
 const SURAHS = {
-  kafirun:{id:"kafirun",num:109,name:"Al-Kāfirūn",arabic:"الكافرون",ayat:6,arabicText:"قُلْ يَا أَيُّهَا الْكَافِرُونَ ۝ لَا أَعْبُدُ مَا تَعْبُدُونَ ۝ وَلَا أَنتُمْ عَابِدُونَ مَا أَعْبُدُ ۝ وَلَا أَنَا عَابِدٌ مَّا عَبَدتُّمْ ۝ وَلَا أَنتُمْ عَابِدُونَ مَا أَعْبُدُ ۝ لَكُمْ دِينُكُمْ وَلِيَ دِينِ",phonetic:"Qul yā ayyuhā l-kāfirūn / Lā aʿbudu mā taʿbudūn / Wa-lā antum ʿābidūna mā aʿbud / Wa-lā anā ʿābidun mā ʿabadtum / Wa-lā antum ʿābidūna mā aʿbud / Lakum dīnukum wa-liya dīn",translation:"Dis : Ô mécréants ! Je n'adore pas ce que vous adorez. Et vous n'adorez pas ce que j'adore. Je ne suis pas non plus adorateur de ce que vous adorez. Et vous n'êtes pas adorateurs de ce que j'adore. À vous votre religion, et à moi la mienne.",sources:{statut:"sunna",statutLabel:"Sunna muʾakkada — Récitation prophétique",quran:[{ref:"Sourate Al-Kāfirūn 109:1–6",texte:"La sourate elle-même.",note:"Révélée en réponse aux polythéistes de La Mecque."}],hadith:[{ref:"Muslim n°884",narrateur:"Abu Hurayra",texte:"Le Prophète ﷺ récitait Al-Kāfirūn et Al-Ikhlāṣ dans les deux raka'āt du Fajr (sunna).",grade:"Sahih"}],geste:"Al-Kāfirūn est appelée Barāʾa. La répétition du refus d'adorer autre qu'Allah est une fortification de l'identité monothéiste."}},
-  ikhlas:{id:"ikhlas",num:112,name:"Al-Ikhlāṣ",arabic:"الإخلاص",ayat:4,arabicText:"قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ",phonetic:"Qul huwa -llāhu aḥad / Allāhu ṣ-ṣamad / Lam yalid wa-lam yūlad / Wa-lam yakun lahu kufuwan aḥad",translation:"Dis : Il est Allah, l'Unique. Allah, l'Impénétrable. Il n'a pas engendré et n'a pas été engendré. Et nul n'est égal à Lui.",sources:{statut:"sunna",statutLabel:"Sunna muʾakkada — Équivaut au tiers du Coran",quran:[{ref:"Sourate Al-Ikhlāṣ 112:1–4",texte:"La sourate elle-même.",note:"Révélée en réponse à ceux qui demandaient au Prophète ﷺ de décrire la nature d'Allah."}],hadith:[{ref:"Bukhārī n°5013 / Muslim n°811",narrateur:"Abu Saʿīd al-Khudrī",texte:"Al-Ikhlāṣ équivaut au tiers du Coran.",grade:"Sahih"}],geste:"Aḥad diffère de Wāḥid — c'est l'unicité ontologique sans équivalent. Ṣamad : Celui dont tout dépend."}},
-  falaq:{id:"falaq",num:113,name:"Al-Falaq",arabic:"الفلق",ayat:5,arabicText:"قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ۝ مِن شَرِّ مَا خَلَقَ ۝ وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ ۝ وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ ۝ وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ",phonetic:"Qul aʿūḏu bi-rabbi l-falaq / Min šarri mā ḫalaq / Wa-min šarri ġāsiqin iḏā waqab / Wa-min šarri n-naffāṯāti fī l-ʿuqad / Wa-min šarri ḥāsidin iḏā ḥasad",translation:"Dis : Je me réfugie auprès du Seigneur de l'aube naissante, contre le mal de ce qu'Il a créé, contre le mal de l'obscurité, contre le mal de celles qui soufflent sur les nœuds, et contre le mal de l'envieux.",sources:{statut:"sunna",statutLabel:"Sunna — Al-Muʿawwidhatayn",quran:[{ref:"Sourate Al-Falaq 113:1–5",texte:"La sourate elle-même."}],hadith:[{ref:"Abu Dāwūd n°1462",narrateur:"ʿUqba ibn ʿĀmir",texte:"Le Prophète ﷺ dit : Récite les Muʿawwidhatayn.",grade:"Sahih selon al-Albānī"}],geste:"La protection demandée est universelle. La réciter est un acte de tawakkul."}},
-  nas:{id:"nas",num:114,name:"An-Nās",arabic:"الناس",ayat:6,arabicText:"قُلْ أَعُوذُ بِرَبِّ النَّاسِ ۝ مَلِكِ النَّاسِ ۝ إِلَٰهِ النَّاسِ ۝ مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ۝ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ۝ مِنَ الْجِنَّةِ وَالنَّاسِ",phonetic:"Qul aʿūḏu bi-rabbi n-nās / Maliki n-nās / Ilāhi n-nās / Min šarri l-waswāsi l-ḫannās / Allaḏī yuwaswisu fī ṣudūri n-nās / Mina l-jinnati wa-n-nās",translation:"Dis : Je me réfugie auprès du Seigneur des hommes, du Roi des hommes, du Dieu des hommes, contre le mal du tentateur furtif, qui souffle le mal dans les cœurs des hommes, qu'il soit djinn ou homme.",sources:{statut:"sunna",statutLabel:"Sunna — Al-Muʿawwidhatayn",quran:[{ref:"Sourate An-Nās 114:1–6",texte:"La sourate elle-même.",note:"Dernière sourate du Coran."}],hadith:[{ref:"Bukhārī n°5016",narrateur:"ʿĀʾisha",texte:"Le Prophète ﷺ, chaque nuit, récitait Al-Ikhlāṣ, Al-Falaq et An-Nās.",grade:"Sahih"}],geste:"Allah y est invoqué sous trois attributs : Rabb, Malik, Ilāh — triple invocation unique dans le Coran."}},
+  kafirun:{id:"kafirun",num:109,name:"Al-Kāfirūn",arabic:"الكافرون",ayat:6,arabicText:"قُلْ يَا أَيُّهَا الْكَافِرُونَ ۝ لَا أَعْبُدُ مَا تَعْبُدُونَ ۝ وَلَا أَنتُمْ عَابِدُونَ مَا أَعْبُدُ ۝ وَلَا أَنَا عَابِدٌ مَّا عَبَدتُّمْ ۝ وَلَا أَنتُمْ عَابِدُونَ مَا أَعْبُدُ ۝ لَكُمْ دِينُكُمْ وَلِيَ دِينِ",phonetic:"Qul yā ayyuhā l-kāfirūn / Lā aʿbudu mā taʿbudūn / Wa-lā antum ʿābidūna mā aʿbud / Wa-lā anā ʿābidun mā ʿabadtum / Wa-lā antum ʿābidūna mā aʿbud / Lakum dīnukum wa-liya dīn",translation:"Dis : Ô mécréants ! Je n'adore pas ce que vous adorez. Et vous n'adorez pas ce que j'adore. Je ne suis pas non plus adorateur de ce que vous adorez. Et vous n'êtes pas adorateurs de ce que j'adore. À vous votre religion, et à moi la mienne.",sources:{statut:"sunna",statutLabel:"Sunna muʾakkada",quran:[{ref:"Sourate Al-Kāfirūn 109:1–6",texte:"La sourate elle-même."}],hadith:[{ref:"Muslim n°884",narrateur:"Abu Hurayra",texte:"Le Prophète ﷺ récitait Al-Kāfirūn et Al-Ikhlāṣ dans les deux raka'āt du Fajr.",grade:"Sahih"}],geste:"Al-Kāfirūn est une déclaration de désengagement du polythéisme."}},
+  ikhlas:{id:"ikhlas",num:112,name:"Al-Ikhlāṣ",arabic:"الإخلاص",ayat:4,arabicText:"قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ",phonetic:"Qul huwa -llāhu aḥad / Allāhu ṣ-ṣamad / Lam yalid wa-lam yūlad / Wa-lam yakun lahu kufuwan aḥad",translation:"Dis : Il est Allah, l'Unique. Allah, l'Impénétrable. Il n'a pas engendré et n'a pas été engendré. Et nul n'est égal à Lui.",sources:{statut:"sunna",statutLabel:"Sunna muʾakkada — équivaut au tiers du Coran",quran:[{ref:"Sourate Al-Ikhlāṣ 112:1–4",texte:"La sourate elle-même."}],hadith:[{ref:"Bukhārī n°5013 / Muslim n°811",narrateur:"Abu Saʿīd al-Khudrī",texte:"Al-Ikhlāṣ équivaut au tiers du Coran.",grade:"Sahih"}],geste:"Aḥad : unicité ontologique absolue sans équivalent."}},
+  falaq:{id:"falaq",num:113,name:"Al-Falaq",arabic:"الفلق",ayat:5,arabicText:"قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ۝ مِن شَرِّ مَا خَلَقَ ۝ وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ ۝ وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ ۝ وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ",phonetic:"Qul aʿūḏu bi-rabbi l-falaq / Min šarri mā ḫalaq / Wa-min šarri ġāsiqin iḏā waqab / Wa-min šarri n-naffāṯāti fī l-ʿuqad / Wa-min šarri ḥāsidin iḏā ḥasad",translation:"Dis : Je me réfugie auprès du Seigneur de l'aube naissante, contre le mal de ce qu'Il a créé, contre le mal de l'obscurité, contre le mal de celles qui soufflent sur les nœuds, et contre le mal de l'envieux.",sources:{statut:"sunna",statutLabel:"Sunna — Al-Muʿawwidhatayn",quran:[{ref:"Sourate Al-Falaq 113:1–5",texte:"La sourate elle-même."}],hadith:[{ref:"Abu Dāwūd n°1462",narrateur:"ʿUqba ibn ʿĀmir",texte:"Le Prophète ﷺ dit : Récite les Muʿawwidhatayn.",grade:"Sahih selon al-Albānī"}],geste:"La protection demandée est universelle — acte de tawakkul."}},
+  nas:{id:"nas",num:114,name:"An-Nās",arabic:"الناس",ayat:6,arabicText:"قُلْ أَعُوذُ بِرَبِّ النَّاسِ ۝ مَلِكِ النَّاسِ ۝ إِلَٰهِ النَّاسِ ۝ مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ۝ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ۝ مِنَ الْجِنَّةِ وَالنَّاسِ",phonetic:"Qul aʿūḏu bi-rabbi n-nās / Maliki n-nās / Ilāhi n-nās / Min šarri l-waswāsi l-ḫannās / Allaḏī yuwaswisu fī ṣudūri n-nās / Mina l-jinnati wa-n-nās",translation:"Dis : Je me réfugie auprès du Seigneur des hommes, du Roi des hommes, du Dieu des hommes, contre le mal du tentateur furtif, qui souffle le mal dans les cœurs des hommes, qu'il soit djinn ou homme.",sources:{statut:"sunna",statutLabel:"Sunna — Al-Muʿawwidhatayn",quran:[{ref:"Sourate An-Nās 114:1–6",texte:"La sourate elle-même.",note:"Dernière sourate du Coran."}],hadith:[{ref:"Bukhārī n°5016",narrateur:"ʿĀʾisha",texte:"Le Prophète ﷺ, chaque nuit, récitait Al-Ikhlāṣ, Al-Falaq et An-Nās.",grade:"Sahih"}],geste:"Allah invoqué sous trois attributs : Rabb, Malik, Ilāh."}},
 };
 const DEFAULT_SURAH = {1:"kafirun",2:"ikhlas"};
 const PRAYERS = [{id:"fajr",name:"Fajr",arabic:"الفجر",rakaat:2},{id:"dhuhr",name:"Dhuhr",arabic:"الظهر",rakaat:4},{id:"asr",name:"Asr",arabic:"العصر",rakaat:4},{id:"maghrib",name:"Maghrib",arabic:"المغرب",rakaat:3},{id:"isha",name:"Isha",arabic:"العشاء",rakaat:4}];
@@ -333,18 +371,18 @@ const VOCAL_RAKAAT = {fajr:[1,2],dhuhr:[],asr:[],maghrib:[1,2],isha:[1,2]};
 const TASHAHHUD_INT = {dhuhr:2,asr:2,isha:2};
 
 const SOURCES = {
-  niyya:{statut:"fard",statutLabel:"Farḍ — Condition (rukn)",quran:[{ref:"Sourate Al-Bayyinah 98:5",texte:"…alors qu'il ne leur avait été commandé que d'adorer Allah, Lui vouant un culte sincère…",note:"L'intention sincère est la condition de validité de tout acte d'adoration."}],hadith:[{ref:"Bukhārī n°1 / Muslim n°1907",narrateur:"ʿUmar ibn al-Khaṭṭāb",texte:"Les actes ne valent que par les intentions.",grade:"Sahih mutawātir"}],geste:"La niyyah est une disposition du cœur, non une formule orale obligatoire."},
-  takbir:{statut:"fard",statutLabel:"Farḍ — Rukn (pilier d'ouverture)",quran:[{ref:"Sourate Al-Muddaththir 74:3",texte:"Et ton Seigneur, magnifie-Le.",note:"Fondement coranique du takbīr."}],hadith:[{ref:"Bukhārī n°723 / Muslim n°392",narrateur:"Abu Hurayra",texte:"Lorsque vous vous levez pour prier, faites le takbīr.",grade:"Sahih"},{ref:"Abu Dāwūd n°730",narrateur:"ʿAlī ibn Abī Ṭālib",texte:"La clef de la prière est la purification, son ḥurma est le takbīr et sa sortie est le salām.",grade:"Sahih selon al-Albānī"}],geste:"Lever les mains symbolise l'abandon du monde. On entre dans un état de sacralité (ḥurma)."},
-  qiyam:{statut:"fard",statutLabel:"Farḍ — Récitation obligatoire (rukn)",quran:[{ref:"Sourate Al-Muzammil 73:20",texte:"…récitez ce qui est facile du Coran…"},{ref:"Sourate Al-Fātiḥah 1:1–7",texte:"La sourate elle-même est la récitation."}],hadith:[{ref:"Bukhārī n°756 / Muslim n°394",narrateur:"ʿUbāda ibn al-Ṣāmit",texte:"Pas de prière valide pour celui qui ne récite pas l'ouverture du Livre.",grade:"Sahih mutawātir"}],geste:"Un hadith qudsī rapporte qu'à chaque verset prononcé, Allah répond."},
-  ruku:{statut:"fard",statutLabel:"Farḍ — Rukn (pilier)",quran:[{ref:"Sourate Al-Baqarah 2:43",texte:"…inclinez-vous avec ceux qui s'inclinent."},{ref:"Sourate Al-Ḥajj 22:77",texte:"O vous qui croyez ! Inclinez-vous, prosternez-vous…"}],hadith:[{ref:"Muslim n°772",narrateur:"ʿUqba ibn ʿĀmir",texte:"Lorsque ce verset fut révélé, le Prophète ﷺ dit : Mettez-la dans votre rukūʿ.",grade:"Sahih"}],geste:"Le dos horizontal symbolise l'égalisation : le roi et le mendiant ont le même dos plat devant Allah."},
-  itidal:{statut:"fard",statutLabel:"Farḍ — Rukn (redressement obligatoire)",quran:[],hadith:[{ref:"Bukhārī n°789 / Muslim n°392",narrateur:"Abu Hurayra",texte:"Le Prophète ﷺ disait en se redressant : Samiʿa -llāhu li-man ḥamidah, puis : Rabbanā wa-laka l-ḥamd.",grade:"Sahih"}],geste:"'Samiʿa -llāhu li-man ḥamidah' : Allah est sujet agissant dans la bouche du croyant."},
-  sujud1:{statut:"fard",statutLabel:"Farḍ — Rukn (deux fois par raka'at)",quran:[{ref:"Sourate Al-ʿAlaq 96:19",texte:"…prosterne-toi et rapproche-toi [d'Allah]."},{ref:"Sourate Al-Ḥajj 22:77",texte:"…inclinez-vous, prosternez-vous…"}],hadith:[{ref:"Muslim n°482",narrateur:"Abu Hurayra",texte:"Le serviteur est le plus proche de son Seigneur en prosternation — multipliez les invocations.",grade:"Sahih"}],geste:"Sept points touchent la terre. C'est la seule posture où le front touche le sol."},
-  jalsa:{statut:"fard",statutLabel:"Farḍ — Rukn (assise intermédiaire)",quran:[],hadith:[{ref:"Bukhārī n°818 / Muslim n°498",narrateur:"Abu Ḥumayd al-Sāʿidī",texte:"Il s'asseyait, posait le pied gauche à plat et s'asseyait dessus.",grade:"Sahih"},{ref:"Abu Dāwūd n°874",narrateur:"Ibn ʿAbbās",texte:"Le Prophète ﷺ disait : Allāhumma -ghfir lī wa -rḥamnī…",grade:"Sahih selon al-Albānī"}],geste:"Une demande de pardon insérée dans le cœur même de l'adoration."},
-  sujud2:{statut:"fard",statutLabel:"Farḍ — Rukn (second sujūd)",quran:[{ref:"Sourate Al-Ḥajj 22:77",texte:"…prosternez-vous…"}],hadith:[{ref:"Muslim n°482",narrateur:"Abu Hurayra",texte:"Le serviteur est le plus proche de son Seigneur en prosternation.",grade:"Sahih"}],geste:"Deux fois par raka'at, l'humain retourne à sa position de proximité maximale."},
-  tashahhud_int:{statut:"wajib",statutLabel:"Wājib — Obligatoire (sujūd al-sahw si omis)",quran:[],hadith:[{ref:"Bukhārī n°831 / Muslim n°402",narrateur:"Ibn Masʿūd",texte:"At-taḥiyyātu li-llāhi… Le Prophète ﷺ nous enseignait ce Tashahhud comme une sourate du Coran.",grade:"Sahih"}],geste:"Une pause de témoignage au cœur de la prière."},
-  tashahhud_final:{statut:"wajib",statutLabel:"Wājib (Hanafites) / Farḍ (Chaféites, Hanbalites)",quran:[],hadith:[{ref:"Bukhārī n°831 / Muslim n°402",narrateur:"Ibn Masʿūd",texte:"At-taḥiyyātu li-llāhi wa-ṣ-ṣalawātu… enseignait ce Tashahhud comme une sourate du Coran.",grade:"Sahih"}],geste:"L'index levé lors de 'lā ilāha illā -llāh' est documenté (Abu Dāwūd n°988)."},
-  salat_ibr:{statut:"sunna",statutLabel:"Sunna muʾakkada — Fortement recommandée",quran:[{ref:"Sourate Al-Aḥzāb 33:56",texte:"Allah et Ses anges prient sur le Prophète. O vous qui croyez, priez sur lui…",note:"Commandement coranique direct."}],hadith:[{ref:"Bukhārī n°3370 / Muslim n°406",narrateur:"Kaʿb ibn ʿUjra",texte:"Comment prier sur toi ? Il répondit : Dites : Allāhumma ṣalli ʿalā Muḥammad…",grade:"Sahih"}],geste:"Prier sur le Prophète reconnaît que la prière est un héritage transmis."},
-  salam:{statut:"fard",statutLabel:"Farḍ — Rukn de sortie",quran:[],hadith:[{ref:"Abu Dāwūd n°730",narrateur:"ʿAlī ibn Abī Ṭālib",texte:"…et la sortie de la prière est le salām.",grade:"Sahih selon al-Albānī"},{ref:"Muslim n°581",narrateur:"Wāʾil ibn Ḥujr",texte:"Le Prophète ﷺ donnait le salām à droite puis à gauche.",grade:"Sahih"}],geste:"La prière, commencée dans l'intention solitaire, se termine par un geste tourné vers les autres."},
+  niyya:{statut:"fard",statutLabel:"Farḍ — Condition (rukn)",quran:[{ref:"Sourate Al-Bayyinah 98:5",texte:"…alors qu'il ne leur avait été commandé que d'adorer Allah, Lui vouant un culte sincère…"}],hadith:[{ref:"Bukhārī n°1 / Muslim n°1907",narrateur:"ʿUmar ibn al-Khaṭṭāb",texte:"Les actes ne valent que par les intentions.",grade:"Sahih mutawātir"}],geste:"La niyyah est une disposition du cœur, non une formule orale obligatoire."},
+  takbir:{statut:"fard",statutLabel:"Farḍ — Rukn (pilier d'ouverture)",quran:[{ref:"Sourate Al-Muddaththir 74:3",texte:"Et ton Seigneur, magnifie-Le."}],hadith:[{ref:"Bukhārī n°723 / Muslim n°392",narrateur:"Abu Hurayra",texte:"Lorsque vous vous levez pour prier, faites le takbīr.",grade:"Sahih"}],geste:"Lever les mains symbolise l'abandon du monde. On entre dans un état de sacralité."},
+  qiyam:{statut:"fard",statutLabel:"Farḍ — Récitation obligatoire (rukn)",quran:[{ref:"Sourate Al-Fātiḥah 1:1–7",texte:"La sourate elle-même est la récitation."}],hadith:[{ref:"Bukhārī n°756 / Muslim n°394",narrateur:"ʿUbāda ibn al-Ṣāmit",texte:"Pas de prière valide pour celui qui ne récite pas l'ouverture du Livre.",grade:"Sahih mutawātir"}],geste:"À chaque verset prononcé, Allah répond — la prière est une conversation."},
+  ruku:{statut:"fard",statutLabel:"Farḍ — Rukn (pilier)",quran:[{ref:"Sourate Al-Ḥajj 22:77",texte:"O vous qui croyez ! Inclinez-vous, prosternez-vous…"}],hadith:[{ref:"Muslim n°772",narrateur:"ʿUqba ibn ʿĀmir",texte:"Le Prophète ﷺ dit : Mettez-la dans votre rukūʿ.",grade:"Sahih"}],geste:"Le dos horizontal : le roi et le mendiant ont le même dos plat devant Allah."},
+  itidal:{statut:"fard",statutLabel:"Farḍ — Rukn (redressement obligatoire)",quran:[],hadith:[{ref:"Bukhārī n°789 / Muslim n°392",narrateur:"Abu Hurayra",texte:"Samiʿa -llāhu li-man ḥamidah, puis Rabbanā wa-laka l-ḥamd.",grade:"Sahih"}],geste:"Allah est sujet agissant dans la bouche du croyant — instant de réception."},
+  sujud1:{statut:"fard",statutLabel:"Farḍ — Rukn (deux fois par raka'at)",quran:[{ref:"Sourate Al-ʿAlaq 96:19",texte:"…prosterne-toi et rapproche-toi [d'Allah]."}],hadith:[{ref:"Muslim n°482",narrateur:"Abu Hurayra",texte:"Le serviteur est le plus proche de son Seigneur en prosternation.",grade:"Sahih"}],geste:"Sept points touchent la terre. Le front — siège de l'intellect — touche le sol."},
+  jalsa:{statut:"fard",statutLabel:"Farḍ — Rukn (assise intermédiaire)",quran:[],hadith:[{ref:"Abu Dāwūd n°874",narrateur:"Ibn ʿAbbās",texte:"Allāhumma -ghfir lī wa -rḥamnī…",grade:"Sahih selon al-Albānī"}],geste:"Une demande de pardon insérée au cœur de l'adoration."},
+  sujud2:{statut:"fard",statutLabel:"Farḍ — Rukn (second sujūd)",quran:[{ref:"Sourate Al-Ḥajj 22:77",texte:"…prosternez-vous…"}],hadith:[{ref:"Muslim n°482",narrateur:"Abu Hurayra",texte:"Le serviteur est le plus proche de son Seigneur en prosternation.",grade:"Sahih"}],geste:"La descente était volontaire — le second sujūd le confirme."},
+  tashahhud_int:{statut:"wajib",statutLabel:"Wājib — sujūd al-sahw si omis",quran:[],hadith:[{ref:"Bukhārī n°831 / Muslim n°402",narrateur:"Ibn Masʿūd",texte:"At-taḥiyyātu li-llāhi… enseigné comme une sourate du Coran.",grade:"Sahih"}],geste:"Pause de témoignage au cœur de la prière."},
+  tashahhud_final:{statut:"wajib",statutLabel:"Wājib (Hanafites) / Farḍ (Chaféites, Hanbalites)",quran:[],hadith:[{ref:"Bukhārī n°831 / Muslim n°402",narrateur:"Ibn Masʿūd",texte:"At-taḥiyyātu li-llāhi wa-ṣ-ṣalawātu…",grade:"Sahih"}],geste:"L'index levé lors de 'lā ilāha illā -llāh' (Abu Dāwūd n°988)."},
+  salat_ibr:{statut:"sunna",statutLabel:"Sunna muʾakkada",quran:[{ref:"Sourate Al-Aḥzāb 33:56",texte:"Allah et Ses anges prient sur le Prophète. O vous qui croyez, priez sur lui…"}],hadith:[{ref:"Bukhārī n°3370 / Muslim n°406",narrateur:"Kaʿb ibn ʿUjra",texte:"Allāhumma ṣalli ʿalā Muḥammad…",grade:"Sahih"}],geste:"Prier sur le Prophète reconnaît que la prière est un héritage transmis."},
+  salam:{statut:"fard",statutLabel:"Farḍ — Rukn de sortie",quran:[],hadith:[{ref:"Abu Dāwūd n°730",narrateur:"ʿAlī ibn Abī Ṭālib",texte:"…la sortie de la prière est le salām.",grade:"Sahih selon al-Albānī"}],geste:"La prière commence en solitaire et se termine tournée vers les autres."},
 };
 
 const STEPS_BASE = [
@@ -385,7 +423,7 @@ function buildSeq(pid) {
   return steps;
 }
 
-// ── RECITERS & AUDIO ─────────────────────────────────
+// ── AUDIO ─────────────────────────────────────────────
 const RECITERS = [
   {id:"ar.alafasy",             name:"Mishary Al-Afasy"},
   {id:"ar.abdulbasitmurattal",  name:"Abdul Basit Murattal"},
@@ -394,11 +432,7 @@ const RECITERS = [
   {id:"ar.hanirifai",           name:"Hani Rifai"},
   {id:"ar.mahermuaiqly",        name:"Maher Al-Muaiqly"},
 ];
-
-// Numéros absolus d'ayah dans le Coran (position de la 1ère ayah de chaque sourate)
 const AYAH_OFFSET = {1:1, 109:6236, 112:6272, 113:6277, 114:6283};
-
-// cdn.islamic.network — CDN officiel Quran.com, CORS ouvert
 function getUrls(rec, n, ayat) {
   const offset = AYAH_OFFSET[n];
   return Array.from({length:ayat}, (_,i) =>
@@ -559,6 +593,25 @@ function Card({step, p, sel, onSel, g}) {
   );
 }
 
+function WuduTab() {
+  return (
+    <div className="wudu-wrap">
+      <div className="edit-warn"><strong>Wuḍūʾ — Purification rituelle</strong> — Condition préalable à la validité de la prière. Sources : Al-Māʾidah 5:6, Bukhārī, Muslim, Abu Dāwūd.</div>
+      {WUDU_STEPS.map((s,i) => (
+        <div key={i} className="wudu-step">
+          <div className="wudu-num">ÉTAPE {s.num}</div>
+          <div className="wudu-title">{s.titre}</div>
+          <span className={`wudu-tag ${s.tag==="fard"?"tag-fard":"tag-sunna"}`}>{s.tag==="fard"?"Farḍ — Obligatoire":"Sunna"}</span>
+          {s.ar && <div className="wudu-ar">{s.ar}</div>}
+          {s.ph && <div className="wudu-ph">{s.ph}</div>}
+          <div className="wudu-txt">{s.txt}</div>
+          {s.note && <div className="wudu-note">{s.note}</div>}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function RefMode({pid, p, sel, onSel, g}) {
   const prayer = PRAYERS.find(x => x.id === pid);
   const seq = buildSeq(pid);
@@ -672,6 +725,7 @@ function CompMode({pid, p, sel, onSel, g}) {
 
 // ── APP ROOT ──────────────────────────────────────────
 function App() {
+  const [mainTab, setMainTab] = useState("salah");
   const [pid,  setPid]  = useState("fajr");
   const [mode, setMode] = useState("reference");
   const [sel,  setSel]  = useState({...DEFAULT_SURAH});
@@ -688,33 +742,42 @@ function App() {
         <div className="hdr-t">Guide de Prière</div>
         <div className="hdr-s">Ṣalāh — صَلَاة</div>
       </div>
-      <div className="toolbar">
-        <span className="ap-lbl">RÉCITATEUR</span>
-        <select className="ap-sel" value={p.reciterId} onChange={e => { p.stop(); p.setReciterId(e.target.value); }}>
-          {RECITERS.map(r => <option key={r.id} value={r.id}>{r.name}</option>)}
-        </select>
-        <div className="gender-toggle">
-          <button className={`gb${g==="m"?" on":""}`} onClick={() => setG("m")}>♂</button>
-          <button className={`gb${g==="f"?" on":""}`} onClick={() => setG("f")}>♀</button>
+
+      {/* Onglets principaux */}
+      <div className="main-tabs">
+        <button className={`main-tab${mainTab==="wudu"?" on":""}`} onClick={() => setMainTab("wudu")}>WUḌŪʾ</button>
+        <button className={`main-tab${mainTab==="salah"?" on":""}`} onClick={() => setMainTab("salah")}>ṢALĀH</button>
+      </div>
+
+      {mainTab === "wudu" ? <WuduTab/> : <>
+        <div className="toolbar">
+          <span className="ap-lbl">RÉCITATEUR</span>
+          <select className="ap-sel" value={p.reciterId} onChange={e => { p.stop(); p.setReciterId(e.target.value); }}>
+            {RECITERS.map(r => <option key={r.id} value={r.id}>{r.name}</option>)}
+          </select>
+          <div className="gender-toggle">
+            <button className={`gb${g==="m"?" on":""}`} onClick={() => setG("m")}>♂</button>
+            <button className={`gb${g==="f"?" on":""}`} onClick={() => setG("f")}>♀</button>
+          </div>
         </div>
-      </div>
-      <div className="pg">
-        {PRAYERS.map(x =>
-          <button key={x.id} className={`pb${pid===x.id?" on":""}`} onClick={() => sp(x.id)}>
-            <span className="pb-ar">{x.arabic}</span>
-            <span className="pb-nm">{x.name}</span>
-            <span className="pb-rk">{x.rakaat} raka'āt</span>
-          </button>
-        )}
-      </div>
-      <div className="mt">
-        <button className={`mb${mode==="reference"?" on":""}`} onClick={() => sw("reference")}>RÉFÉRENCE</button>
-        <button className={`mb${mode==="companion"?" on":""}`} onClick={() => sw("companion")}>COMPAGNON PAS À PAS</button>
-      </div>
-      {mode==="reference"
-        ? <RefMode key={pid} pid={pid} p={p} sel={sel} onSel={os} g={g}/>
-        : <CompMode key={`${pid}-${ck}`} pid={pid} p={p} sel={sel} onSel={os} g={g}/>
-      }
+        <div className="pg">
+          {PRAYERS.map(x =>
+            <button key={x.id} className={`pb${pid===x.id?" on":""}`} onClick={() => sp(x.id)}>
+              <span className="pb-ar">{x.arabic}</span>
+              <span className="pb-nm">{x.name}</span>
+              <span className="pb-rk">{x.rakaat} raka'āt</span>
+            </button>
+          )}
+        </div>
+        <div className="mt">
+          <button className={`mb${mode==="reference"?" on":""}`} onClick={() => sw("reference")}>RÉFÉRENCE</button>
+          <button className={`mb${mode==="companion"?" on":""}`} onClick={() => sw("companion")}>COMPAGNON PAS À PAS</button>
+        </div>
+        {mode==="reference"
+          ? <RefMode key={pid} pid={pid} p={p} sel={sel} onSel={os} g={g}/>
+          : <CompMode key={`${pid}-${ck}`} pid={pid} p={p} sel={sel} onSel={os} g={g}/>
+        }
+      </>}
     </div>
   );
 }
