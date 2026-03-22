@@ -3,7 +3,12 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="theme-color" content="#0a0806"/>
+  <meta name="theme-color" content="#c9a84c"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="Ṣalāh"/>
+  <link rel="manifest" href="manifest.json"/>
+  <link rel="apple-touch-icon" href="images/Takbir.png"/>
   <title>Guide de Prière — Ṣalāh</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -840,6 +845,77 @@ function CompMode({pid,p,sel,onSel}){
   </div>);
 }
 
+// ── PAGE À PROPOS ─────────────────────────────────────
+function AboutTab() {
+  const sections = [
+    {
+      titre:"📖 À PROPOS DE CETTE APPLICATION",
+      contenu:`Cette application a été conçue pour accompagner le musulman dans sa pratique quotidienne de la ṣalāh. Elle couvre l'ensemble du cycle de la prière — de la purification rituelle (wuḍūʾ) jusqu'au salām final — avec des références authentifiées issues des sources primaires de la tradition islamique.`
+    },
+    {
+      titre:"✦ FONCTIONNALITÉS",
+      contenu:`• Boussole Qibla avec gyroscope\n• Horaires de prière par géolocalisation (méthode MWL)\n• Notifications de rappel 5 min avant chaque prière\n• Guide du Wuḍūʾ étape par étape\n• Guide complet de la Ṣalāh — 5 prières\n• Mode Référence et Compagnon pas à pas\n• Illustrations des postures avec descriptions gestuelles\n• Récitation audio par 5 récitateurs (mp3quran.net)\n• Compteur de Tasbīḥ tactile et vocal\n• Mode jour / nuit`
+    },
+    {
+      titre:"📜 SOURCES ISLAMIQUES",
+      contenu:`Les références fiqhiques et hadith utilisées dans cette application sont issues des sources suivantes :\n\n• Ṣaḥīḥ al-Bukhārī\n• Ṣaḥīḥ Muslim\n• Sunan Abu Dāwūd\n• Sunan al-Tirmidhī\n• Sunan al-Nasāʾī\n\nLes positions jurisprudentielles mentionnent les quatre madhabs (Ḥanafite, Mālikite, Chaféite, Ḥanbalite) lorsqu'il y a divergence. Cette application est un outil d'apprentissage — elle ne se substitue pas à l'avis d'un érudit qualifié.`
+    },
+    {
+      titre:"🎵 SOURCES AUDIO",
+      contenu:`Les récitations coraniques sont fournies par mp3quran.net, plateforme de référence pour les récitations islamiques de qualité. Les récitateurs disponibles sont :\n\n• Mishary Rashid Al-Afasy\n• Abdul Basit Murattal\n• Mahmoud Khalil Al-Husary\n• Mohamed Siddiq Al-Minshawi\n• Maher Al-Muaiqly`
+    },
+    {
+      titre:"🕋 CALCUL DE LA QIBLA",
+      contenu:`La direction de la Qibla est calculée selon la formule trigonométrique du grand cercle (Great Circle), en utilisant les coordonnées exactes de la Kaʿba : 21.4225° N, 39.8262° E. Les horaires de prière sont calculés via l'API Aladhan (aladhan.com), méthode Muslim World League (MWL).`
+    },
+    {
+      titre:"⚠ AVERTISSEMENT ÉDITORIAL",
+      contenu:`Les contenus religieux de cette application sont fournis à titre indicatif et éducatif. Ils ont été vérifiés avec soin, mais peuvent contenir des inexactitudes. Pour toute question religieuse importante, consultez un érudit qualifié (ʿālim).`
+    },
+    {
+      titre:"🤝 CRÉDITS",
+      contenu:`Conception et développement : Jérôme Bordier (ArtByJay)\nIllustrations des postures : créations originales\nPolices : Amiri, Cinzel Decorative, Crimson Pro (Google Fonts)\n\nQu'Allah accepte ce travail et le rende bénéfique.`
+    },
+  ];
+
+  return (
+    <div style={{display:"flex",flexDirection:"column",gap:12,padding:"4px 0"}}>
+      {/* Entête -->*/}
+      <div style={{background:"var(--sf)",border:"1px solid var(--bo)",borderRadius:"var(--r)",padding:"20px 16px",textAlign:"center"}}>
+        <div style={{fontFamily:"'Amiri',serif",fontSize:"2rem",color:"var(--gold-l)",marginBottom:8,textShadow:"0 0 20px rgba(201,168,76,.3)"}}>
+          بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+        </div>
+        <div style={{fontFamily:"'Cinzel Decorative',serif",fontSize:".75rem",letterSpacing:".2em",color:"var(--gold)",marginBottom:6}}>
+          GUIDE DE PRIÈRE — ṢALĀH
+        </div>
+        <div style={{fontSize:".75rem",color:"var(--tx3)"}}>Version 5.0 · 2025</div>
+      </div>
+
+      {/* Sections */}
+      {sections.map((s,i) => (
+        <div key={i} style={{background:"var(--sf)",border:"1px solid var(--bo)",borderRadius:"var(--r)",padding:"14px 16px"}}>
+          <div style={{fontFamily:"'Cinzel Decorative',serif",fontSize:".55rem",letterSpacing:".12em",color:"var(--gold-d)",marginBottom:10}}>
+            {s.titre}
+          </div>
+          <div style={{fontSize:".80rem",color:"var(--tx3)",lineHeight:1.75,whiteSpace:"pre-line"}}>
+            {s.contenu}
+          </div>
+        </div>
+      ))}
+
+      {/* Footer */}
+      <div style={{textAlign:"center",padding:"16px 0 8px"}}>
+        <div style={{fontFamily:"'Amiri',serif",fontSize:"1.1rem",color:"var(--gold-d)",marginBottom:4}}>
+          رَبَّنَا تَقَبَّلْ مِنَّا
+        </div>
+        <div style={{fontSize:".68rem",color:"var(--tx3)",fontStyle:"italic"}}>
+          Rabbanā taqabbal minnā — Notre Seigneur, accepte de nous.
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ── APP ROOT ──────────────────────────────────────────
 function App(){
   const [mainTab,setMainTab]=useState("qibla");
@@ -882,11 +958,13 @@ function App(){
       <button className={`main-tab${mainTab==="wudu"?" on":""}`} onClick={()=>setMainTab("wudu")}>WUḌŪʾ</button>
       <button className={`main-tab${mainTab==="salah"?" on":""}`} onClick={()=>setMainTab("salah")}>ṢALĀH</button>
       <button className={`main-tab${mainTab==="tasbih"?" on":""}`} onClick={()=>setMainTab("tasbih")}>TASBĪḤ</button>
+      <button className={`main-tab${mainTab==="about"?" on":""}`} onClick={()=>setMainTab("about")}>À PROPOS</button>
     </div>
 
     {mainTab==="qibla"&&<QiblaHorairesTab/>}
     {mainTab==="wudu"&&<WuduTab/>}
     {mainTab==="tasbih"&&<TasbihTab/>}
+    {mainTab==="about"&&<AboutTab/>}
     {mainTab==="salah"&&<>
       <div className="toolbar">
         <span className="ap-lbl">RÉCITATEUR</span>
@@ -905,6 +983,16 @@ function App(){
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+</script>
+<script>
+  // Enregistrement du Service Worker pour PWA
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("/sw.js")
+        .then(r => console.log("SW enregistré :", r.scope))
+        .catch(e => console.log("SW erreur :", e));
+    });
+  }
 </script>
 </body>
 </html>
