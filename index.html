@@ -206,11 +206,11 @@ const { useState, useEffect, useRef, useCallback } = React;
 // ── MAPPING POSTURE → IMAGE ───────────────────────────
 // Les images sont dans le dossier images/ à côté de index.html
 const STEP_POSTURE = {
-  niyya:"takbir", takbir:"takbir", qiyam:"qiyam", qiyam_resume:"qiyam",
-  surah:"qiyam",  ruku:"ruku",     itidal:"itidal",
-  sujud1:"sujud", jalsa:"jalsa",   sujud2:"sujud",
-  tashahhud_int:"tashahhud", tashahhud_final:"tashahhud",
-  salat_ibr:"tashahhud",    salam:"taslim",
+  niyya:"Takbir", takbir:"Takbir", qiyam:"Quiyam", qiyam_resume:"Quiyam",
+  surah:"Quiyam",  ruku:"Ruku",     itidal:"Itidal",
+  sujud1:"Sujud", jalsa:"Jalsa",   sujud2:"Sujud",
+  tashahhud_int:"Tashahud", tashahhud_final:"Tashahud",
+  salat_ibr:"Tashahud",    salam:"Taslim",
 };
 
 const POSTURE_LABELS = {
@@ -291,6 +291,7 @@ function PostureIllustration({postureId}) {
   const label = POSTURE_LABELS[postureId] || "";
   const geste = GESTES[postureId];
   const imgSrc = `images/${postureId}.png`;
+  // Noms exacts des fichiers sur GitHub : Takbir, Quiyam, Ruku, Itidal, Sujud, Jalsa, Tashahud, Taslim
 
   return (
     <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:6,padding:"10px 0",animation:"postureIn .35s ease",width:"100%"}}>
