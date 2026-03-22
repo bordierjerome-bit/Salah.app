@@ -14,6 +14,8 @@
   <style>
     @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
     @keyframes postureIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+    @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
       --gold:#c9a84c;--gold-l:#e8c97a;--gold-d:#8a6e32;--gold-g:rgba(201,168,76,.12);
@@ -32,7 +34,7 @@
     .hdr-t{font-family:'Cinzel Decorative',serif;font-size:.9rem;color:var(--gold);letter-spacing:.15em}
     .hdr-s{font-size:.75rem;color:var(--tx3);margin-top:3px;letter-spacing:.08em}
     .main-tabs{display:flex;border:1px solid var(--bo);border-radius:var(--r);overflow:hidden;margin-bottom:16px}
-    .main-tab{flex:1;padding:10px;background:var(--sf);border:none;cursor:pointer;font-family:'Cinzel Decorative',serif;font-size:.55rem;letter-spacing:.09em;color:var(--tx3);transition:all .2s;border-right:1px solid var(--bo);touch-action:manipulation}
+    .main-tab{flex:1;padding:10px 4px;background:var(--sf);border:none;cursor:pointer;font-family:'Cinzel Decorative',serif;font-size:.48rem;letter-spacing:.07em;color:var(--tx3);transition:all .2s;border-right:1px solid var(--bo);touch-action:manipulation}
     .main-tab:last-child{border-right:none}
     .main-tab.on{background:var(--bg3);color:var(--gold)}
     .toolbar{background:var(--sf);border:1px solid var(--bo);border-radius:var(--r);padding:10px 13px;margin-bottom:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
@@ -61,15 +63,10 @@
     .th-f{display:inline-block;padding:2px 7px;font-size:.51rem;letter-spacing:.09em;border-radius:2px;margin-left:5px;font-family:'Cinzel Decorative',serif;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);color:var(--gold)}
     .aub{display:inline-flex;align-items:center;gap:5px;padding:5px 11px;border-radius:2px;border:1px solid var(--bo);background:var(--bg2);color:var(--tx3);font-family:'Cinzel Decorative',serif;font-size:.51rem;letter-spacing:.09em;cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0;touch-action:manipulation;min-height:36px}
     .aub.pl{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.06);box-shadow:0 0 8px var(--gold-g)}
-    .pulse{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pu .9s ease-in-out infinite;flex-shrink:0;display:inline-block}
-    @keyframes pu{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
-
-    /* IMAGE POSTURE */
+    .pulse-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 1s ease-in-out infinite;flex-shrink:0;display:inline-block}
     .posture-wrap{display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 0 6px;animation:postureIn .35s ease;width:100%}
     .posture-img{width:180px;height:180px;object-fit:contain;filter:drop-shadow(0 0 20px rgba(201,168,76,.35))}
     .posture-lbl{font-family:'Cinzel Decorative',serif;font-size:.5rem;letter-spacing:.1em;color:var(--gold-d);text-align:center}
-
-    /* BOUTON VOIR LE GESTE */
     .geste-btn{display:flex;align-items:center;gap:6px;margin-top:6px;padding:7px 12px;background:var(--bg3);border:1px solid var(--bo);border-radius:var(--r);cursor:pointer;width:100%;touch-action:manipulation;transition:all .2s}
     .geste-btn.open{border-color:var(--gold-d);background:var(--sf2)}
     .geste-ico{font-size:.65rem;color:var(--gold-d);transition:transform .2s;flex-shrink:0}
@@ -83,7 +80,6 @@
     .geste-diff-lbl{font-family:'Cinzel Decorative',serif;font-size:.48rem;letter-spacing:.1em;color:var(--gold-d);margin-bottom:4px}
     .geste-diff-txt{font-size:.76rem;color:var(--tx3);line-height:1.6}
     .geste-warn{font-size:.75rem;color:#e09a50;line-height:1.65;border-left:2px solid rgba(224,154,80,.35);padding-left:9px;font-style:italic}
-
     .ss-wrap{margin:10px 0 4px;background:var(--bg3);border:1px solid var(--bo);border-radius:var(--r);padding:10px 12px}
     .ss-title{font-family:'Cinzel Decorative',serif;font-size:.53rem;letter-spacing:.12em;color:var(--gold-d);margin-bottom:8px}
     .ss-btns{display:flex;gap:5px;flex-wrap:wrap}
@@ -165,6 +161,32 @@
     .wudu-tag{display:inline-block;padding:2px 7px;border-radius:2px;font-family:'Cinzel Decorative',serif;font-size:.49rem;letter-spacing:.08em;margin-bottom:8px}
     .tag-fard{background:rgba(224,112,112,.12);border:1px solid rgba(224,112,112,.35);color:var(--fard)}
     .tag-sunna{background:rgba(122,176,154,.12);border:1px solid rgba(122,176,154,.35);color:var(--sunna)}
+
+    /* ── QIBLA & HORAIRES ── */
+    .qh-wrap{display:flex;flex-direction:column;gap:14px;padding:4px 0}
+    .qh-card{background:var(--sf);border:1px solid var(--bo);border-radius:var(--r);padding:16px}
+    .qh-title{font-family:'Cinzel Decorative',serif;font-size:.65rem;letter-spacing:.14em;color:var(--gold);margin-bottom:14px;text-align:center}
+    .geo-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 18px;border:1px solid var(--gold);background:transparent;color:var(--gold);font-family:'Cinzel Decorative',serif;font-size:.58rem;letter-spacing:.12em;cursor:pointer;border-radius:var(--r);margin:0 auto;touch-action:manipulation;min-height:44px;transition:all .2s}
+    .geo-btn:hover{background:rgba(201,168,76,.08)}
+    .geo-err{font-size:.78rem;color:var(--fard);text-align:center;margin-top:10px}
+    .geo-loading{font-size:.75rem;color:var(--tx3);text-align:center;margin-top:10px;font-style:italic}
+
+    /* Boussole */
+    .compass-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
+    .compass-svg{filter:drop-shadow(0 0 16px rgba(201,168,76,.25))}
+    .compass-info{font-family:'Cinzel Decorative',serif;font-size:.6rem;letter-spacing:.1em;color:var(--gold-d);text-align:center}
+    .compass-deg{font-size:.9rem;color:var(--gold);display:block;margin-bottom:2px}
+
+    /* Horaires */
+    .times-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+    .time-card{background:var(--bg2);border:1px solid var(--bo);border-radius:var(--r);padding:8px 4px;text-align:center}
+    .time-card.next{border-color:var(--gold);background:var(--bg3);box-shadow:0 0 10px var(--gold-g)}
+    .time-name{font-family:'Cinzel Decorative',serif;font-size:.48rem;letter-spacing:.08em;color:var(--gold-d);margin-bottom:4px}
+    .time-ar{font-family:'Amiri',serif;font-size:.95rem;color:var(--gold-l);line-height:1.2;margin-bottom:3px}
+    .time-val{font-size:.82rem;color:var(--tx2)}
+    .time-card.next .time-val{color:var(--gold)}
+    .time-next-badge{font-family:'Cinzel Decorative',serif;font-size:.42rem;color:var(--gold);letter-spacing:.06em;margin-top:3px}
+    .city-info{font-size:.72rem;color:var(--tx3);text-align:center;margin-top:8px;font-style:italic}
   </style>
 </head>
 <body>
@@ -173,15 +195,13 @@
 const { useState, useEffect, useRef, useCallback } = React;
 
 // ── MAPPING POSTURE → IMAGE ───────────────────────────
-// Noms exacts des fichiers dans le dossier images/
 const STEP_POSTURE = {
   niyya:"Takbir", takbir:"Takbir", qiyam:"Quiyam", qiyam_resume:"Quiyam",
-  surah:"Quiyam", ruku:"Ruku",     itidal:"Itidal",
-  sujud1:"Sujud", jalsa:"Jalsa",   sujud2:"Sujud",
+  surah:"Quiyam", ruku:"Ruku", itidal:"Itidal",
+  sujud1:"Sujud", jalsa:"Jalsa", sujud2:"Sujud",
   tashahhud_int:"Tashahud", tashahhud_final:"Tashahud",
   salat_ibr:"Tashahud", salam:"Taslim",
 };
-
 const POSTURE_LABELS = {
   Takbir:"Takbīr — intention & Allahu Akbar",
   Quiyam:"Debout — Qiyām",
@@ -195,117 +215,295 @@ const POSTURE_LABELS = {
 
 // ── DESCRIPTIONS GESTUELLES ───────────────────────────
 const GESTES = {
-  Takbir:{
-    position:"Debout, face à la qibla, pieds légèrement écartés.",
-    geste:"Former l'intention dans le cœur, puis lever les deux mains en disant Allāhu Akbar. Les paumes sont ouvertes, orientées vers la qibla.",
-    homme:"Les mains montent jusqu'aux lobes des oreilles, pouces proches des oreilles. Pieds écartés à largeur des épaules.",
-    femme:"Les mains montent jusqu'aux épaules (pas au-delà). Pieds joints ou légèrement écartés selon les madhabs.",
-    vigilance:"L'intention est une disposition du cœur — la prononcer à voix haute n'est pas établi par la Sunna. Le takbīr doit être complet avant de croiser les mains.",
-  },
-  Quiyam:{
-    position:"Debout, corps droit, regard dirigé vers le lieu de prosternation.",
-    geste:"Croiser les mains sur la poitrine, main droite sur main gauche. Réciter Al-Fātiḥah puis une sourate supplémentaire.",
-    homme:"Main droite saisit le poignet gauche ou repose dessus, au niveau de la poitrine ou sous le nombril selon les madhabs. Les Mālikites laissent les bras le long du corps.",
-    femme:"Mains croisées sur la poitrine, position plus resserrée que l'homme pour plus de couverture du corps.",
-    vigilance:"Réciter Al-Fātiḥah est un pilier (rukn) — la prière est invalide sans elle. Le regard reste fixé sur le lieu de prosternation.",
-  },
-  Ruku:{
-    position:"Se pencher en avant, dos horizontal, mains posées sur les genoux.",
-    geste:"Dire Allāhu Akbar en s'inclinant. Dos parfaitement horizontal, tête dans le prolongement de la colonne. Dire 3 fois Subḥāna Rabbiya l-ʿAẓīm.",
-    homme:"Dos strictement horizontal, genoux tendus, doigts écartés sur les genoux, coudes légèrement éloignés du corps.",
-    femme:"Inclinaison légèrement moins prononcée. Doigts joints, coudes proches du corps, position plus ramassée.",
-    vigilance:"Le dos ne doit être ni arqué ni courbé — une seule ligne droite. Rester immobile (ṭumaʾnīna) au moins le temps de dire le dhikr une fois.",
-  },
-  Itidal:{
-    position:"Retour à la station debout, complètement redressé, bras le long du corps.",
-    geste:"Se relever en disant Samiʿa -llāhu li-man ḥamidah, puis une fois debout dire Rabbanā wa-laka l-ḥamd.",
-    homme:"Corps entièrement redressé, bras le long du corps, regard vers le lieu de prosternation.",
-    femme:"Même position, bras proches du corps.",
-    vigilance:"L'iʿtidāl est un pilier (rukn) — s'arrêter complètement debout est obligatoire avant de descendre en sujūd.",
-  },
-  Sujud:{
-    position:"Prosternation complète, 7 membres touchant le sol simultanément.",
-    geste:"Dire Allāhu Akbar en descendant. Les 7 appuis : front + nez, 2 paumes, 2 genoux, orteils des 2 pieds. Dire 3 fois Subḥāna Rabbiya l-Aʿlā.",
-    homme:"Coudes décollés du sol, abdomen éloigné des cuisses, bras écartés du corps. Orteils orientés vers la qibla.",
-    femme:"Corps plus resserré — coudes posés ou proches du sol, abdomen sur les cuisses, bras proches du corps.",
-    vigilance:"Le front ET le nez doivent toucher le sol. Les orteils doivent être retournés vers la qibla — ne pas poser le dessus du pied.",
-  },
-  Jalsa:{
-    position:"Assise calme entre les deux prosternations.",
-    geste:"Dire Allāhu Akbar en se relevant du 1er sujūd. S'asseoir, dire Rabbi ghfir lī deux fois, puis redescendre en 2ème sujūd.",
-    homme:"Pied gauche à plat, assis dessus. Pied droit redressé, orteils vers la qibla. Mains à plat sur les cuisses.",
-    femme:"Les deux pieds sortent du côté droit. Mains à plat sur les cuisses.",
-    vigilance:"La jalsa est un pilier (rukn) — s'asseoir complètement et calmement est obligatoire.",
-  },
-  Tashahud:{
-    position:"Assise au sol pour la récitation du Tashahhud.",
-    geste:"Main gauche à plat sur la cuisse gauche. Main droite fermée, index droit levé lors de lā ilāha illā -llāh.",
-    homme:"Dernière raka'at : position tawarruk — fesse gauche au sol, pied gauche sous la jambe droite, pied droit redressé.",
-    femme:"Les deux pieds sortent du côté droit, assise sur la fesse gauche.",
-    vigilance:"L'index se lève au moment de la shahāda — acte d'attestation de l'unicité d'Allah. Ne lever qu'un seul doigt.",
-  },
-  Taslim:{
-    position:"Assise (même position que le Tashahhud final).",
-    geste:"Tourner la tête à droite en disant As-salāmu ʿalaykum wa-raḥmatu -llāh, puis à gauche en répétant.",
-    homme:"Geste identique homme et femme.",
-    femme:"Certains savants malikites considèrent qu'un seul salām (à droite) suffit.",
-    vigilance:"Le salām de droite est un pilier (rukn) — ne pas se lever avant ce premier salām.",
-  },
+  Takbir:{position:"Debout, face à la qibla, pieds légèrement écartés.",geste:"Former l'intention dans le cœur, puis lever les deux mains en disant Allāhu Akbar. Les paumes sont ouvertes, orientées vers la qibla.",homme:"Les mains montent jusqu'aux lobes des oreilles, pouces proches des oreilles. Pieds écartés à largeur des épaules.",femme:"Les mains montent jusqu'aux épaules (pas au-delà). Pieds joints ou légèrement écartés selon les madhabs.",vigilance:"L'intention est une disposition du cœur — la prononcer à voix haute n'est pas établi par la Sunna."},
+  Quiyam:{position:"Debout, corps droit, regard dirigé vers le lieu de prosternation.",geste:"Croiser les mains sur la poitrine, main droite sur main gauche. Réciter Al-Fātiḥah puis une sourate supplémentaire.",homme:"Main droite saisit le poignet gauche, au niveau de la poitrine ou sous le nombril selon les madhabs. Les Mālikites laissent les bras le long du corps.",femme:"Mains croisées sur la poitrine, position plus resserrée pour plus de couverture.",vigilance:"Réciter Al-Fātiḥah est un pilier (rukn) — la prière est invalide sans elle."},
+  Ruku:{position:"Se pencher en avant, dos horizontal, mains posées sur les genoux.",geste:"Dire Allāhu Akbar en s'inclinant. Dos parfaitement horizontal, tête dans le prolongement de la colonne. Dire 3 fois Subḥāna Rabbiya l-ʿAẓīm.",homme:"Dos strictement horizontal, genoux tendus, doigts écartés sur les genoux, coudes légèrement éloignés du corps.",femme:"Inclinaison légèrement moins prononcée. Doigts joints, coudes proches du corps.",vigilance:"Le dos ne doit être ni arqué ni courbé. Rester immobile (ṭumaʾnīna) le temps du dhikr."},
+  Itidal:{position:"Retour à la station debout, complètement redressé, bras le long du corps.",geste:"Se relever en disant Samiʿa -llāhu li-man ḥamidah, puis Rabbanā wa-laka l-ḥamd.",homme:"Corps entièrement redressé, bras le long du corps.",femme:"Même position, bras proches du corps.",vigilance:"L'iʿtidāl est un pilier (rukn) — s'arrêter complètement debout avant de descendre en sujūd."},
+  Sujud:{position:"Prosternation complète, 7 membres touchant le sol simultanément.",geste:"Dire Allāhu Akbar en descendant. Les 7 appuis : front + nez, 2 paumes, 2 genoux, orteils des 2 pieds. Dire 3 fois Subḥāna Rabbiya l-Aʿlā.",homme:"Coudes décollés du sol, abdomen éloigné des cuisses, bras écartés du corps.",femme:"Corps plus resserré — coudes posés ou proches du sol, abdomen sur les cuisses.",vigilance:"Le front ET le nez doivent toucher le sol. Les orteils orientés vers la qibla."},
+  Jalsa:{position:"Assise calme entre les deux prosternations.",geste:"Dire Allāhu Akbar en se relevant du 1er sujūd. S'asseoir, dire Rabbi ghfir lī deux fois, puis redescendre.",homme:"Pied gauche à plat, assis dessus. Pied droit redressé, orteils vers la qibla.",femme:"Les deux pieds sortent du côté droit.",vigilance:"La jalsa est un pilier (rukn) — s'asseoir complètement et calmement est obligatoire."},
+  Tashahud:{position:"Assise au sol pour la récitation du Tashahhud.",geste:"Main gauche à plat sur la cuisse. Main droite fermée, index levé lors de lā ilāha illā -llāh.",homme:"Dernière raka'at : position tawarruk — fesse gauche au sol, pied gauche sous la jambe droite.",femme:"Les deux pieds sortent du côté droit, assise sur la fesse gauche.",vigilance:"L'index se lève au moment de la shahāda. Ne lever qu'un seul doigt."},
+  Taslim:{position:"Assise (même position que le Tashahhud final).",geste:"Tourner la tête à droite : As-salāmu ʿalaykum wa-raḥmatu -llāh, puis à gauche.",homme:"Geste identique homme et femme.",femme:"Certains savants mālikites considèrent qu'un seul salām (à droite) suffit.",vigilance:"Le salām de droite est un pilier (rukn) — ne pas se lever avant."},
 };
 
-// ── COMPOSANT POSTURE + GESTE ─────────────────────────
-function PostureIllustration({postureId}) {
-  const [open, setOpen] = useState(false);
-  const label = POSTURE_LABELS[postureId] || "";
-  const geste = GESTES[postureId];
-
-  return (
+// ── COMPOSANT POSTURE ─────────────────────────────────
+function PostureIllustration({postureId}){
+  const [open,setOpen]=useState(false);
+  const label=POSTURE_LABELS[postureId]||"";
+  const geste=GESTES[postureId];
+  return(
     <div className="posture-wrap">
-      {/* Image illustration */}
-      <img
-        src={`images/${postureId}.png`}
-        alt={label}
-        className="posture-img"
-        onError={e => { e.target.style.opacity = "0.2"; }}
-      />
+      <img src={`images/${postureId}.png`} alt={label} className="posture-img" onError={e=>{e.target.style.opacity="0.15";}}/>
       <span className="posture-lbl">{label}</span>
-
-      {/* Bouton Voir le geste */}
-      {geste && <>
-        <button className={`geste-btn${open?" open":""}`} onClick={() => setOpen(x => !x)}>
+      {geste&&<>
+        <button className={`geste-btn${open?" open":""}`} onClick={()=>setOpen(x=>!x)}>
           <span className="geste-ico" style={{transform:open?"rotate(90deg)":"none"}}>▶</span>
           <span className="geste-lbl">{open?"MASQUER LE GESTE":"VOIR LE GESTE"}</span>
         </button>
-        {open && (
-          <div className="geste-panel">
-            <div className="geste-section">
-              <div className="geste-section-t">📍 POSITION</div>
-              <div className="geste-txt">{geste.position}</div>
-            </div>
-            <div className="geste-section">
-              <div className="geste-section-t">🤲 GESTE</div>
-              <div className="geste-txt">{geste.geste}</div>
-            </div>
-            <div className="geste-section">
-              <div className="geste-section-t">👤 HOMME / FEMME</div>
-              <div className="geste-diff">
-                <div className="geste-diff-col">
-                  <div className="geste-diff-lbl">♂ HOMME</div>
-                  <div className="geste-diff-txt">{geste.homme}</div>
-                </div>
-                <div className="geste-diff-col">
-                  <div className="geste-diff-lbl">♀ FEMME</div>
-                  <div className="geste-diff-txt">{geste.femme}</div>
-                </div>
-              </div>
-            </div>
-            <div className="geste-section">
-              <div className="geste-section-t">⚠ VIGILANCE</div>
-              <div className="geste-warn">{geste.vigilance}</div>
+        {open&&<div className="geste-panel">
+          <div className="geste-section"><div className="geste-section-t">📍 POSITION</div><div className="geste-txt">{geste.position}</div></div>
+          <div className="geste-section"><div className="geste-section-t">🤲 GESTE</div><div className="geste-txt">{geste.geste}</div></div>
+          <div className="geste-section">
+            <div className="geste-section-t">👤 HOMME / FEMME</div>
+            <div className="geste-diff">
+              <div className="geste-diff-col"><div className="geste-diff-lbl">♂ HOMME</div><div className="geste-diff-txt">{geste.homme}</div></div>
+              <div className="geste-diff-col"><div className="geste-diff-lbl">♀ FEMME</div><div className="geste-diff-txt">{geste.femme}</div></div>
             </div>
           </div>
-        )}
+          <div className="geste-section"><div className="geste-section-t">⚠ VIGILANCE</div><div className="geste-warn">{geste.vigilance}</div></div>
+        </div>}
       </>}
+    </div>
+  );
+}
+
+// ══════════════════════════════════════════════════════
+// MODULE QIBLA + HORAIRES
+// ══════════════════════════════════════════════════════
+
+// Calcul de la direction de la Qibla
+// Coordonnées de la Kaʿba : 21.4225° N, 39.8262° E
+function calcQibla(lat, lon) {
+  const MECCA_LAT = 21.4225 * Math.PI / 180;
+  const MECCA_LON = 39.8262 * Math.PI / 180;
+  const userLat = lat * Math.PI / 180;
+  const dLon = MECCA_LON - lon * Math.PI / 180;
+  const y = Math.sin(dLon) * Math.cos(MECCA_LAT);
+  const x = Math.cos(userLat) * Math.sin(MECCA_LAT) - Math.sin(userLat) * Math.cos(MECCA_LAT) * Math.cos(dLon);
+  const bearing = Math.atan2(y, x) * 180 / Math.PI;
+  return (bearing + 360) % 360;
+}
+
+// Boussole SVG animée
+function CompassSVG({ qiblaDeg, deviceHeading }) {
+  // qiblaDeg = angle de la Qibla par rapport au Nord géographique
+  // deviceHeading = orientation de l'appareil (si disponible)
+  // L'aiguille dorée pointe vers la Qibla
+  const needleAngle = qiblaDeg - (deviceHeading || 0);
+
+  return (
+    <div className="compass-wrap">
+      <svg className="compass-svg" viewBox="0 0 200 200" width="200" height="200">
+        <defs>
+          <radialGradient id="cglow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#c9a84c" stopOpacity=".15"/>
+            <stop offset="100%" stopColor="#c9a84c" stopOpacity="0"/>
+          </radialGradient>
+          <filter id="cgf"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+
+        {/* Halo */}
+        <circle cx="100" cy="100" r="90" fill="url(#cglow)"/>
+
+        {/* Cadran externe */}
+        <circle cx="100" cy="100" r="88" fill="none" stroke="#c9a84c" strokeWidth="1" strokeOpacity=".3"/>
+        <circle cx="100" cy="100" r="82" fill="none" stroke="#c9a84c" strokeWidth=".4" strokeOpacity=".15"/>
+
+        {/* Graduations — 72 traits (tous les 5°) */}
+        {Array.from({length:72},(_,i)=>{
+          const a=(i*5)*Math.PI/180;
+          const isMaj=i%18===0;const isMed=i%9===0;
+          const r1=82;const r2=isMaj?68:isMed?73:77;
+          return <line key={i}
+            x1={100+r1*Math.sin(a)} y1={100-r1*Math.cos(a)}
+            x2={100+r2*Math.sin(a)} y2={100-r2*Math.cos(a)}
+            stroke="#c9a84c" strokeWidth={isMaj?1.5:isMed?1:.5} strokeOpacity={isMaj?.8:isMed?.5:.25}/>;
+        })}
+
+        {/* Points cardinaux */}
+        {[["N",0,"#e07070"],["E",90,"#c9a84c"],["S",180,"#c9a84c"],["O",270,"#c9a84c"]].map(([l,a,col])=>{
+          const rad=a*Math.PI/180;
+          return <text key={l} x={100+60*Math.sin(rad)} y={100-60*Math.cos(rad)+5}
+            textAnchor="middle" fill={col} fontSize="13" fontFamily="'Cinzel Decorative',serif" fontWeight="500">{l}</text>;
+        })}
+
+        {/* Fond intérieur */}
+        <circle cx="100" cy="100" r="44" fill="#0a0806" stroke="#c9a84c" strokeWidth=".8" strokeOpacity=".2"/>
+
+        {/* Aiguille Qibla — tourne selon l'angle */}
+        <g transform={`rotate(${needleAngle}, 100, 100)`} filter="url(#cgf)">
+          {/* Corps aiguille doré */}
+          <polygon points="100,58 103,100 100,110 97,100" fill="#c9a84c" opacity=".95"/>
+          {/* Contrepointe */}
+          <polygon points="100,110 102,100 100,120 98,100" fill="#5c4e38" opacity=".7"/>
+          {/* Icône Kaʿba au bout de l'aiguille */}
+          <rect x="96" y="50" width="8" height="8" fill="#c9a84c" rx="1"/>
+          <line x1="96" y1="54" x2="104" y2="54" stroke="#0a0806" strokeWidth=".8"/>
+        </g>
+
+        {/* Centre */}
+        <circle cx="100" cy="100" r="6" fill="#c9a84c"/>
+        <circle cx="100" cy="100" r="3" fill="#0a0806"/>
+
+        {/* Label Qibla */}
+        <text x="100" y="148" textAnchor="middle" fill="#c9a84c" fontSize="9" fontFamily="'Cinzel Decorative',serif" letterSpacing="2">QIBLA</text>
+        <text x="100" y="160" textAnchor="middle" fill="#8a6e32" fontSize="8" fontFamily="'Amiri',serif">{Math.round(qiblaDeg)}° depuis le Nord</text>
+      </svg>
+    </div>
+  );
+}
+
+// Horaires de prière via Aladhan API (méthode 3 = MWL)
+const PRAYER_NAMES = [
+  {key:"Fajr",    fr:"Fajr",    ar:"الفجر"},
+  {key:"Sunrise", fr:"Shurūq",  ar:"الشروق"},
+  {key:"Dhuhr",   fr:"Dhuhr",   ar:"الظهر"},
+  {key:"Asr",     fr:"Asr",     ar:"العصر"},
+  {key:"Maghrib", fr:"Maghrib", ar:"المغرب"},
+  {key:"Isha",    fr:"Isha",    ar:"العشاء"},
+];
+
+function findNextPrayer(timings) {
+  const now = new Date();
+  const nowMins = now.getHours()*60 + now.getMinutes();
+  for (const p of PRAYER_NAMES) {
+    if (p.key === "Sunrise") continue; // Shurūq non obligatoire
+    const t = timings[p.key];
+    if (!t) continue;
+    const [h,m] = t.split(":").map(Number);
+    if (h*60+m > nowMins) return p.key;
+  }
+  return "Fajr"; // Demain
+}
+
+function QiblaHorairesTab() {
+  const [status, setStatus] = useState("idle"); // idle | loading | done | error
+  const [qibla, setQibla] = useState(null);
+  const [timings, setTimings] = useState(null);
+  const [city, setCity] = useState("");
+  const [heading, setHeading] = useState(0);
+  const [errMsg, setErrMsg] = useState("");
+
+  // Gyroscope / orientation
+  useEffect(() => {
+    const handler = (e) => {
+      if (e.webkitCompassHeading !== undefined) {
+        setHeading(e.webkitCompassHeading); // iOS
+      } else if (e.alpha !== null) {
+        setHeading(360 - e.alpha); // Android
+      }
+    };
+    if (window.DeviceOrientationEvent) {
+      if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+        // iOS 13+ — on demandera la permission au clic
+      } else {
+        window.addEventListener('deviceorientation', handler);
+      }
+    }
+    return () => window.removeEventListener('deviceorientation', handler);
+  }, []);
+
+  const requestLocation = async () => {
+    setStatus("loading");
+    setErrMsg("");
+
+    // Demande permission gyroscope iOS 13+
+    if (typeof DeviceOrientationEvent !== 'undefined' &&
+        typeof DeviceOrientationEvent.requestPermission === 'function') {
+      try {
+        await DeviceOrientationEvent.requestPermission();
+        window.addEventListener('deviceorientation', (e) => {
+          if (e.webkitCompassHeading !== undefined) setHeading(e.webkitCompassHeading);
+          else if (e.alpha !== null) setHeading(360 - e.alpha);
+        });
+      } catch(e) { /* permission refusée — boussole statique */ }
+    }
+
+    if (!navigator.geolocation) {
+      setErrMsg("La géolocalisation n'est pas disponible sur cet appareil.");
+      setStatus("error"); return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      async (pos) => {
+        const { latitude, longitude } = pos.coords;
+
+        // Calcul Qibla
+        const q = calcQibla(latitude, longitude);
+        setQibla(q);
+
+        // Horaires via Aladhan (méthode 3 = MWL)
+        try {
+          const today = new Date();
+          const d = `${today.getDate()}-${today.getMonth()+1}-${today.getFullYear()}`;
+          const url = `https://api.aladhan.com/v1/timings/${d}?latitude=${latitude}&longitude=${longitude}&method=3`;
+          const res = await fetch(url);
+          const data = await res.json();
+          if (data.code === 200) {
+            setTimings(data.data.timings);
+            setCity(data.data.meta.timezone || "");
+          } else {
+            setErrMsg("Impossible de récupérer les horaires.");
+          }
+        } catch(e) {
+          setErrMsg("Erreur réseau pour les horaires de prière.");
+        }
+        setStatus("done");
+      },
+      (err) => {
+        setErrMsg("Accès à la localisation refusé. Veuillez autoriser la géolocalisation.");
+        setStatus("error");
+      },
+      { enableHighAccuracy: true, timeout: 10000 }
+    );
+  };
+
+  const nextPrayer = timings ? findNextPrayer(timings) : null;
+
+  return (
+    <div className="qh-wrap">
+      {/* ── BOUSSOLE QIBLA ── */}
+      <div className="qh-card">
+        <div className="qh-title">🕋 DIRECTION DE LA QIBLA</div>
+        {status === "idle" && (
+          <div style={{textAlign:"center"}}>
+            <p style={{fontSize:".78rem",color:"var(--tx3)",marginBottom:14,lineHeight:1.6}}>
+              La direction de La Mecque sera calculée en fonction de votre position exacte.
+            </p>
+            <button className="geo-btn" onClick={requestLocation}>
+              📍 LOCALISER MA POSITION
+            </button>
+          </div>
+        )}
+        {status === "loading" && <p className="geo-loading">⏳ Localisation en cours…</p>}
+        {status === "error" && <p className="geo-err">{errMsg}</p>}
+        {status === "done" && qibla !== null && (
+          <>
+            <CompassSVG qiblaDeg={qibla} deviceHeading={heading}/>
+            <p className="compass-info">
+              <span className="compass-deg">{Math.round(qibla)}°</span>
+              Direction vers La Mecque depuis votre position
+              {heading > 0 && " · Gyroscope actif"}
+            </p>
+          </>
+        )}
+      </div>
+
+      {/* ── HORAIRES DE PRIÈRE ── */}
+      <div className="qh-card">
+        <div className="qh-title">🕐 HORAIRES DE PRIÈRE</div>
+        {status === "idle" && (
+          <p style={{fontSize:".78rem",color:"var(--tx3)",textAlign:"center"}}>
+            Appuyez sur "Localiser" ci-dessus pour afficher les horaires.
+          </p>
+        )}
+        {status === "loading" && <p className="geo-loading">⏳ Chargement des horaires…</p>}
+        {status === "error" && !timings && <p className="geo-err">{errMsg}</p>}
+        {timings && (
+          <>
+            <div className="times-grid">
+              {PRAYER_NAMES.map(p => (
+                <div key={p.key} className={`time-card${nextPrayer===p.key?" next":""}`}>
+                  <div className="time-ar">{p.ar}</div>
+                  <div className="time-name">{p.fr}</div>
+                  <div className="time-val">{timings[p.key]?.substring(0,5) || "—"}</div>
+                  {nextPrayer===p.key && <div className="time-next-badge">PROCHAINE</div>}
+                </div>
+              ))}
+            </div>
+            {city && <p className="city-info">📍 Fuseau : {city} · Méthode MWL</p>}
+          </>
+        )}
+      </div>
     </div>
   );
 }
@@ -317,25 +515,25 @@ const WUDU_STEPS = [
   {num:3,titre:"Se laver les mains",tag:"sunna",ar:"",ph:"",txt:"Se laver les deux mains jusqu'aux poignets trois fois, en commençant par la main droite. Passer les doigts entre eux (takhlīl).",note:"Muslim n°233 — Sunna constante du Prophète ﷺ."},
   {num:4,titre:"Se rincer la bouche et le nez",tag:"sunna",ar:"",ph:"",txt:"Rincer la bouche (madmada) puis aspirer dans le nez (istinshāq) et se moucher avec la main gauche (istinthār). Répéter trois fois.",note:"Bukhārī n°162 — Pratique constante du Prophète ﷺ."},
   {num:5,titre:"Se laver le visage",tag:"fard",ar:"",ph:"",txt:"Laver entièrement le visage trois fois — du front jusqu'au menton, d'une oreille à l'autre.",note:"Sourate Al-Māʾidah 5:6 — «…lavez vos visages…»"},
-  {num:6,titre:"Se laver les bras",tag:"fard",ar:"",ph:"",txt:"Laver le bras droit jusqu'au coude inclus trois fois, puis le bras gauche. Commencer par les doigts.",note:"Sourate Al-Māʾidah 5:6 — «…et vos mains jusqu'aux coudes…»"},
-  {num:7,titre:"Masḥ — Passer sur la tête",tag:"fard",ar:"",ph:"",txt:"Passer les deux mains mouillées sur la tête une fois : de la naissance des cheveux vers la nuque puis retour. Passer ensuite les index dans les oreilles.",note:"Sourate Al-Māʾidah 5:6 — «…et passez vos mains sur vos têtes…»"},
-  {num:8,titre:"Se laver les pieds",tag:"fard",ar:"",ph:"",txt:"Laver le pied droit jusqu'à la cheville trois fois, passer le petit doigt entre les orteils (takhlīl), puis le pied gauche.",note:"Sourate Al-Māʾidah 5:6 — «…et vos pieds jusqu'aux chevilles…»"},
+  {num:6,titre:"Se laver les bras",tag:"fard",ar:"",ph:"",txt:"Laver le bras droit jusqu'au coude inclus trois fois, puis le bras gauche.",note:"Sourate Al-Māʾidah 5:6 — «…et vos mains jusqu'aux coudes…»"},
+  {num:7,titre:"Masḥ — Passer sur la tête",tag:"fard",ar:"",ph:"",txt:"Passer les deux mains mouillées sur la tête une fois, de la naissance des cheveux vers la nuque puis retour.",note:"Sourate Al-Māʾidah 5:6 — «…et passez vos mains sur vos têtes…»"},
+  {num:8,titre:"Se laver les pieds",tag:"fard",ar:"",ph:"",txt:"Laver le pied droit jusqu'à la cheville trois fois, passer le petit doigt entre les orteils, puis le pied gauche.",note:"Sourate Al-Māʾidah 5:6 — «…et vos pieds jusqu'aux chevilles…»"},
   {num:9,titre:"Duʿāʾ de clôture",tag:"sunna",ar:"أَشْهَدُ أَن لَّا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",ph:"Ašhadu an lā ilāha illā -llāhu waḥdahu lā šarīka lahu wa-ašhadu anna Muḥammadan ʿabduhu wa-rasūluh",txt:"Après le wuḍūʾ, lever le regard vers le ciel et prononcer la shahāda.",note:"Muslim n°234 — Les huit portes du Paradis lui sont ouvertes."},
 ];
 
-function WuduTab() {
-  return (
+function WuduTab(){
+  return(
     <div className="wudu-wrap">
       <div className="edit-warn"><strong>Wuḍūʾ — Purification rituelle</strong> — Condition préalable à la validité de la prière. Sources : Al-Māʾidah 5:6, Bukhārī, Muslim, Abu Dāwūd.</div>
-      {WUDU_STEPS.map((s,i) => (
+      {WUDU_STEPS.map((s,i)=>(
         <div key={i} className="wudu-step">
           <div className="wudu-num">ÉTAPE {s.num}</div>
           <div className="wudu-title">{s.titre}</div>
           <span className={`wudu-tag ${s.tag==="fard"?"tag-fard":"tag-sunna"}`}>{s.tag==="fard"?"Farḍ — Obligatoire":"Sunna"}</span>
-          {s.ar && <div className="wudu-ar">{s.ar}</div>}
-          {s.ph && <div className="wudu-ph">{s.ph}</div>}
+          {s.ar&&<div className="wudu-ar">{s.ar}</div>}
+          {s.ph&&<div className="wudu-ph">{s.ph}</div>}
           <div className="wudu-txt">{s.txt}</div>
-          {s.note && <div className="wudu-note">{s.note}</div>}
+          {s.note&&<div className="wudu-note">{s.note}</div>}
         </div>
       ))}
     </div>
@@ -344,55 +542,33 @@ function WuduTab() {
 
 // ── DONNÉES PRIÈRE ────────────────────────────────────
 const SURAHS = {
-  kafirun:{id:"kafirun",num:109,name:"Al-Kāfirūn",arabic:"الكافرون",ayat:6,
-    arabicText:"قُلْ يَا أَيُّهَا الْكَافِرُونَ ۝ لَا أَعْبُدُ مَا تَعْبُدُونَ ۝ وَلَا أَنتُمْ عَابِدُونَ مَا أَعْبُدُ ۝ وَلَا أَنَا عَابِدٌ مَّا عَبَدتُّمْ ۝ وَلَا أَنتُمْ عَابِدُونَ مَا أَعْبُدُ ۝ لَكُمْ دِينُكُمْ وَلِيَ دِينِ",
-    phonetic:"Qul yā ayyuhā l-kāfirūn / Lā aʿbudu mā taʿbudūn / Wa-lā antum ʿābidūna mā aʿbud / Wa-lā anā ʿābidun mā ʿabadtum / Wa-lā antum ʿābidūna mā aʿbud / Lakum dīnukum wa-liya dīn",
-    translation:"Dis : Ô mécréants ! Je n'adore pas ce que vous adorez. Et vous n'adorez pas ce que j'adore. À vous votre religion, et à moi la mienne.",
-    sources:{statut:"sunna",statutLabel:"Sunna muʾakkada",quran:[{ref:"Sourate Al-Kāfirūn 109:1–6",texte:"La sourate elle-même."}],hadith:[{ref:"Muslim n°884",narrateur:"Abu Hurayra",texte:"Le Prophète ﷺ récitait Al-Kāfirūn et Al-Ikhlāṣ dans les deux raka'āt du Fajr.",grade:"Sahih"}],geste:"Al-Kāfirūn est une déclaration de désengagement du polythéisme."}},
-  ikhlas:{id:"ikhlas",num:112,name:"Al-Ikhlāṣ",arabic:"الإخلاص",ayat:4,
-    arabicText:"قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ",
-    phonetic:"Qul huwa -llāhu aḥad / Allāhu ṣ-ṣamad / Lam yalid wa-lam yūlad / Wa-lam yakun lahu kufuwan aḥad",
-    translation:"Dis : Il est Allah, l'Unique. Allah, l'Impénétrable. Il n'a pas engendré et n'a pas été engendré. Et nul n'est égal à Lui.",
-    sources:{statut:"sunna",statutLabel:"Sunna muʾakkada — équivaut au tiers du Coran",quran:[{ref:"Sourate Al-Ikhlāṣ 112:1–4",texte:"La sourate elle-même."}],hadith:[{ref:"Bukhārī n°5013 / Muslim n°811",narrateur:"Abu Saʿīd al-Khudrī",texte:"Al-Ikhlāṣ équivaut au tiers du Coran.",grade:"Sahih"}],geste:"Aḥad : unicité ontologique absolue sans équivalent."}},
-  falaq:{id:"falaq",num:113,name:"Al-Falaq",arabic:"الفلق",ayat:5,
-    arabicText:"قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ۝ مِن شَرِّ مَا خَلَقَ ۝ وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ ۝ وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ ۝ وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ",
-    phonetic:"Qul aʿūḏu bi-rabbi l-falaq / Min šarri mā ḫalaq / Wa-min šarri ġāsiqin iḏā waqab / Wa-min šarri n-naffāṯāti fī l-ʿuqad / Wa-min šarri ḥāsidin iḏā ḥasad",
-    translation:"Dis : Je me réfugie auprès du Seigneur de l'aube naissante, contre le mal de ce qu'Il a créé, contre le mal de l'obscurité, contre le mal de celles qui soufflent sur les nœuds, et contre le mal de l'envieux.",
-    sources:{statut:"sunna",statutLabel:"Sunna — Al-Muʿawwidhatayn",quran:[{ref:"Sourate Al-Falaq 113:1–5",texte:"La sourate elle-même."}],hadith:[{ref:"Abu Dāwūd n°1462",narrateur:"ʿUqba ibn ʿĀmir",texte:"Le Prophète ﷺ dit : Récite les Muʿawwidhatayn.",grade:"Sahih selon al-Albānī"}],geste:"Acte de tawakkul — la protection demandée est universelle."}},
-  nas:{id:"nas",num:114,name:"An-Nās",arabic:"الناس",ayat:6,
-    arabicText:"قُلْ أَعُوذُ بِرَبِّ النَّاسِ ۝ مَلِكِ النَّاسِ ۝ إِلَٰهِ النَّاسِ ۝ مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ۝ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ۝ مِنَ الْجِنَّةِ وَالنَّاسِ",
-    phonetic:"Qul aʿūḏu bi-rabbi n-nās / Maliki n-nās / Ilāhi n-nās / Min šarri l-waswāsi l-ḫannās / Allaḏī yuwaswisu fī ṣudūri n-nās / Mina l-jinnati wa-n-nās",
-    translation:"Dis : Je me réfugie auprès du Seigneur des hommes, du Roi des hommes, du Dieu des hommes, contre le mal du tentateur furtif, qui souffle le mal dans les cœurs des hommes, qu'il soit djinn ou homme.",
-    sources:{statut:"sunna",statutLabel:"Sunna — Al-Muʿawwidhatayn",quran:[{ref:"Sourate An-Nās 114:1–6",texte:"La sourate elle-même.",note:"Dernière sourate du Coran."}],hadith:[{ref:"Bukhārī n°5016",narrateur:"ʿĀʾisha",texte:"Le Prophète ﷺ récitait chaque nuit Al-Ikhlāṣ, Al-Falaq et An-Nās.",grade:"Sahih"}],geste:"Allah invoqué sous trois attributs : Rabb, Malik, Ilāh."}},
+  kafirun:{id:"kafirun",num:109,name:"Al-Kāfirūn",arabic:"الكافرون",ayat:6,arabicText:"قُلْ يَا أَيُّهَا الْكَافِرُونَ ۝ لَا أَعْبُدُ مَا تَعْبُدُونَ ۝ وَلَا أَنتُمْ عَابِدُونَ مَا أَعْبُدُ ۝ وَلَا أَنَا عَابِدٌ مَّا عَبَدتُّمْ ۝ وَلَا أَنتُمْ عَابِدُونَ مَا أَعْبُدُ ۝ لَكُمْ دِينُكُمْ وَلِيَ دِينِ",phonetic:"Qul yā ayyuhā l-kāfirūn / Lā aʿbudu mā taʿbudūn / Wa-lā antum ʿābidūna mā aʿbud / Wa-lā anā ʿābidun mā ʿabadtum / Wa-lā antum ʿābidūna mā aʿbud / Lakum dīnukum wa-liya dīn",translation:"Dis : Ô mécréants ! Je n'adore pas ce que vous adorez. Et vous n'adorez pas ce que j'adore. À vous votre religion, et à moi la mienne.",sources:{statut:"sunna",statutLabel:"Sunna muʾakkada",quran:[{ref:"Sourate Al-Kāfirūn 109:1–6",texte:"La sourate elle-même."}],hadith:[{ref:"Muslim n°884",narrateur:"Abu Hurayra",texte:"Le Prophète ﷺ récitait Al-Kāfirūn et Al-Ikhlāṣ dans les deux raka'āt du Fajr.",grade:"Sahih"}],geste:"Al-Kāfirūn est une déclaration de désengagement du polythéisme."}},
+  ikhlas:{id:"ikhlas",num:112,name:"Al-Ikhlāṣ",arabic:"الإخلاص",ayat:4,arabicText:"قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ",phonetic:"Qul huwa -llāhu aḥad / Allāhu ṣ-ṣamad / Lam yalid wa-lam yūlad / Wa-lam yakun lahu kufuwan aḥad",translation:"Dis : Il est Allah, l'Unique. Allah, l'Impénétrable. Il n'a pas engendré et n'a pas été engendré. Et nul n'est égal à Lui.",sources:{statut:"sunna",statutLabel:"Sunna muʾakkada",quran:[{ref:"Sourate Al-Ikhlāṣ 112:1–4",texte:"La sourate elle-même."}],hadith:[{ref:"Bukhārī n°5013 / Muslim n°811",narrateur:"Abu Saʿīd al-Khudrī",texte:"Al-Ikhlāṣ équivaut au tiers du Coran.",grade:"Sahih"}],geste:"Aḥad : unicité ontologique absolue."}},
+  falaq:{id:"falaq",num:113,name:"Al-Falaq",arabic:"الفلق",ayat:5,arabicText:"قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ۝ مِن شَرِّ مَا خَلَقَ ۝ وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ ۝ وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ ۝ وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ",phonetic:"Qul aʿūḏu bi-rabbi l-falaq / Min šarri mā ḫalaq / Wa-min šarri ġāsiqin iḏā waqab / Wa-min šarri n-naffāṯāti fī l-ʿuqad / Wa-min šarri ḥāsidin iḏā ḥasad",translation:"Dis : Je me réfugie auprès du Seigneur de l'aube naissante, contre le mal de ce qu'Il a créé, contre le mal de l'obscurité, contre le mal de celles qui soufflent sur les nœuds, et contre le mal de l'envieux.",sources:{statut:"sunna",statutLabel:"Sunna — Al-Muʿawwidhatayn",quran:[{ref:"Sourate Al-Falaq 113:1–5",texte:"La sourate elle-même."}],hadith:[{ref:"Abu Dāwūd n°1462",narrateur:"ʿUqba ibn ʿĀmir",texte:"Le Prophète ﷺ dit : Récite les Muʿawwidhatayn.",grade:"Sahih selon al-Albānī"}],geste:"Acte de tawakkul."}},
+  nas:{id:"nas",num:114,name:"An-Nās",arabic:"الناس",ayat:6,arabicText:"قُلْ أَعُوذُ بِرَبِّ النَّاسِ ۝ مَلِكِ النَّاسِ ۝ إِلَٰهِ النَّاسِ ۝ مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ۝ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ۝ مِنَ الْجِنَّةِ وَالنَّاسِ",phonetic:"Qul aʿūḏu bi-rabbi n-nās / Maliki n-nās / Ilāhi n-nās / Min šarri l-waswāsi l-ḫannās / Allaḏī yuwaswisu fī ṣudūri n-nās / Mina l-jinnati wa-n-nās",translation:"Dis : Je me réfugie auprès du Seigneur des hommes, du Roi des hommes, du Dieu des hommes, contre le mal du tentateur furtif, qui souffle le mal dans les cœurs des hommes, qu'il soit djinn ou homme.",sources:{statut:"sunna",statutLabel:"Sunna — Al-Muʿawwidhatayn",quran:[{ref:"Sourate An-Nās 114:1–6",texte:"La sourate elle-même.",note:"Dernière sourate du Coran."}],hadith:[{ref:"Bukhārī n°5016",narrateur:"ʿĀʾisha",texte:"Le Prophète ﷺ récitait chaque nuit Al-Ikhlāṣ, Al-Falaq et An-Nās.",grade:"Sahih"}],geste:"Allah invoqué sous trois attributs : Rabb, Malik, Ilāh."}},
 };
 
-const DEFAULT_SURAH = {1:"kafirun",2:"ikhlas"};
-const PRAYERS = [
-  {id:"fajr",name:"Fajr",arabic:"الفجر",rakaat:2},
-  {id:"dhuhr",name:"Dhuhr",arabic:"الظهر",rakaat:4},
-  {id:"asr",name:"Asr",arabic:"العصر",rakaat:4},
-  {id:"maghrib",name:"Maghrib",arabic:"المغرب",rakaat:3},
-  {id:"isha",name:"Isha",arabic:"العشاء",rakaat:4},
-];
-const VOCAL_RAKAAT = {fajr:[1,2],dhuhr:[],asr:[],maghrib:[1,2],isha:[1,2]};
-const TASHAHHUD_INT = {dhuhr:2,asr:2,isha:2};
+const DEFAULT_SURAH={1:"kafirun",2:"ikhlas"};
+const PRAYERS=[{id:"fajr",name:"Fajr",arabic:"الفجر",rakaat:2},{id:"dhuhr",name:"Dhuhr",arabic:"الظهر",rakaat:4},{id:"asr",name:"Asr",arabic:"العصر",rakaat:4},{id:"maghrib",name:"Maghrib",arabic:"المغرب",rakaat:3},{id:"isha",name:"Isha",arabic:"العشاء",rakaat:4}];
+const VOCAL_RAKAAT={fajr:[1,2],dhuhr:[],asr:[],maghrib:[1,2],isha:[1,2]};
+const TASHAHHUD_INT={dhuhr:2,asr:2,isha:2};
 
-const SOURCES = {
-  niyya:{statut:"fard",statutLabel:"Farḍ — Condition (rukn)",quran:[{ref:"Sourate Al-Bayyinah 98:5",texte:"…alors qu'il ne leur avait été commandé que d'adorer Allah, Lui vouant un culte sincère…"}],hadith:[{ref:"Bukhārī n°1 / Muslim n°1907",narrateur:"ʿUmar ibn al-Khaṭṭāb",texte:"Les actes ne valent que par les intentions.",grade:"Sahih mutawātir"}],geste:"La niyyah est une disposition du cœur, non une formule orale obligatoire."},
-  takbir:{statut:"fard",statutLabel:"Farḍ — Rukn (pilier d'ouverture)",quran:[{ref:"Sourate Al-Muddaththir 74:3",texte:"Et ton Seigneur, magnifie-Le."}],hadith:[{ref:"Bukhārī n°723 / Muslim n°392",narrateur:"Abu Hurayra",texte:"Lorsque vous vous levez pour prier, faites le takbīr.",grade:"Sahih"}],geste:"Lever les mains symbolise l'abandon du monde. On entre dans un état de sacralité."},
-  qiyam:{statut:"fard",statutLabel:"Farḍ — Récitation obligatoire (rukn)",quran:[{ref:"Sourate Al-Fātiḥah 1:1–7",texte:"La sourate elle-même est la récitation."}],hadith:[{ref:"Bukhārī n°756 / Muslim n°394",narrateur:"ʿUbāda ibn al-Ṣāmit",texte:"Pas de prière valide pour celui qui ne récite pas l'ouverture du Livre.",grade:"Sahih mutawātir"}],geste:"À chaque verset prononcé, Allah répond — la prière est une conversation."},
+const SOURCES={
+  niyya:{statut:"fard",statutLabel:"Farḍ — Condition (rukn)",quran:[{ref:"Sourate Al-Bayyinah 98:5",texte:"…alors qu'il ne leur avait été commandé que d'adorer Allah, Lui vouant un culte sincère…"}],hadith:[{ref:"Bukhārī n°1 / Muslim n°1907",narrateur:"ʿUmar ibn al-Khaṭṭāb",texte:"Les actes ne valent que par les intentions.",grade:"Sahih mutawātir"}],geste:"La niyyah est une disposition du cœur."},
+  takbir:{statut:"fard",statutLabel:"Farḍ — Rukn (pilier d'ouverture)",quran:[{ref:"Sourate Al-Muddaththir 74:3",texte:"Et ton Seigneur, magnifie-Le."}],hadith:[{ref:"Bukhārī n°723 / Muslim n°392",narrateur:"Abu Hurayra",texte:"Lorsque vous vous levez pour prier, faites le takbīr.",grade:"Sahih"}],geste:"Lever les mains symbolise l'abandon du monde."},
+  qiyam:{statut:"fard",statutLabel:"Farḍ — Récitation obligatoire (rukn)",quran:[{ref:"Sourate Al-Fātiḥah 1:1–7",texte:"La sourate elle-même est la récitation."}],hadith:[{ref:"Bukhārī n°756 / Muslim n°394",narrateur:"ʿUbāda ibn al-Ṣāmit",texte:"Pas de prière valide pour celui qui ne récite pas l'ouverture du Livre.",grade:"Sahih mutawātir"}],geste:"La prière est une conversation avec Allah."},
   ruku:{statut:"fard",statutLabel:"Farḍ — Rukn (pilier)",quran:[{ref:"Sourate Al-Ḥajj 22:77",texte:"O vous qui croyez ! Inclinez-vous, prosternez-vous…"}],hadith:[{ref:"Muslim n°772",narrateur:"ʿUqba ibn ʿĀmir",texte:"Le Prophète ﷺ dit : Mettez-la dans votre rukūʿ.",grade:"Sahih"}],geste:"Le dos horizontal : le roi et le mendiant ont le même dos plat devant Allah."},
-  itidal:{statut:"fard",statutLabel:"Farḍ — Rukn (redressement obligatoire)",quran:[],hadith:[{ref:"Bukhārī n°789 / Muslim n°392",narrateur:"Abu Hurayra",texte:"Samiʿa -llāhu li-man ḥamidah, puis Rabbanā wa-laka l-ḥamd.",grade:"Sahih"}],geste:"Allah est sujet agissant dans la bouche du croyant — instant de réception."},
-  sujud1:{statut:"fard",statutLabel:"Farḍ — Rukn (deux fois par raka'at)",quran:[{ref:"Sourate Al-ʿAlaq 96:19",texte:"…prosterne-toi et rapproche-toi [d'Allah]."}],hadith:[{ref:"Muslim n°482",narrateur:"Abu Hurayra",texte:"Le serviteur est le plus proche de son Seigneur en prosternation.",grade:"Sahih"}],geste:"Sept points touchent la terre. Le front — siège de l'intellect — touche le sol."},
-  jalsa:{statut:"fard",statutLabel:"Farḍ — Rukn (assise intermédiaire)",quran:[],hadith:[{ref:"Abu Dāwūd n°874",narrateur:"Ibn ʿAbbās",texte:"Allāhumma -ghfir lī wa -rḥamnī…",grade:"Sahih selon al-Albānī"}],geste:"Une demande de pardon insérée au cœur de l'adoration."},
-  sujud2:{statut:"fard",statutLabel:"Farḍ — Rukn (second sujūd)",quran:[{ref:"Sourate Al-Ḥajj 22:77",texte:"…prosternez-vous…"}],hadith:[{ref:"Muslim n°482",narrateur:"Abu Hurayra",texte:"Le serviteur est le plus proche de son Seigneur en prosternation.",grade:"Sahih"}],geste:"La descente était volontaire — le second sujūd le confirme."},
-  tashahhud_int:{statut:"wajib",statutLabel:"Wājib — sujūd al-sahw si omis",quran:[],hadith:[{ref:"Bukhārī n°831 / Muslim n°402",narrateur:"Ibn Masʿūd",texte:"At-taḥiyyātu li-llāhi… enseigné comme une sourate du Coran.",grade:"Sahih"}],geste:"Pause de témoignage au cœur de la prière."},
-  tashahhud_final:{statut:"wajib",statutLabel:"Wājib (Hanafites) / Farḍ (Chaféites, Hanbalites)",quran:[],hadith:[{ref:"Bukhārī n°831 / Muslim n°402",narrateur:"Ibn Masʿūd",texte:"At-taḥiyyātu li-llāhi wa-ṣ-ṣalawātu…",grade:"Sahih"}],geste:"L'index levé lors de lā ilāha illā -llāh (Abu Dāwūd n°988)."},
-  salat_ibr:{statut:"sunna",statutLabel:"Sunna muʾakkada",quran:[{ref:"Sourate Al-Aḥzāb 33:56",texte:"Allah et Ses anges prient sur le Prophète. O vous qui croyez, priez sur lui…"}],hadith:[{ref:"Bukhārī n°3370 / Muslim n°406",narrateur:"Kaʿb ibn ʿUjra",texte:"Allāhumma ṣalli ʿalā Muḥammad…",grade:"Sahih"}],geste:"Prier sur le Prophète reconnaît que la prière est un héritage transmis."},
+  itidal:{statut:"fard",statutLabel:"Farḍ — Rukn (redressement obligatoire)",quran:[],hadith:[{ref:"Bukhārī n°789 / Muslim n°392",narrateur:"Abu Hurayra",texte:"Samiʿa -llāhu li-man ḥamidah, puis Rabbanā wa-laka l-ḥamd.",grade:"Sahih"}],geste:"Instant de réception divine."},
+  sujud1:{statut:"fard",statutLabel:"Farḍ — Rukn (deux fois par raka'at)",quran:[{ref:"Sourate Al-ʿAlaq 96:19",texte:"…prosterne-toi et rapproche-toi [d'Allah]."}],hadith:[{ref:"Muslim n°482",narrateur:"Abu Hurayra",texte:"Le serviteur est le plus proche de son Seigneur en prosternation.",grade:"Sahih"}],geste:"Sept points touchent la terre."},
+  jalsa:{statut:"fard",statutLabel:"Farḍ — Rukn (assise intermédiaire)",quran:[],hadith:[{ref:"Abu Dāwūd n°874",narrateur:"Ibn ʿAbbās",texte:"Allāhumma -ghfir lī wa -rḥamnī…",grade:"Sahih selon al-Albānī"}],geste:"Une demande de pardon au cœur de l'adoration."},
+  sujud2:{statut:"fard",statutLabel:"Farḍ — Rukn (second sujūd)",quran:[{ref:"Sourate Al-Ḥajj 22:77",texte:"…prosternez-vous…"}],hadith:[{ref:"Muslim n°482",narrateur:"Abu Hurayra",texte:"Le serviteur est le plus proche de son Seigneur en prosternation.",grade:"Sahih"}],geste:"La descente était volontaire."},
+  tashahhud_int:{statut:"wajib",statutLabel:"Wājib — sujūd al-sahw si omis",quran:[],hadith:[{ref:"Bukhārī n°831 / Muslim n°402",narrateur:"Ibn Masʿūd",texte:"At-taḥiyyātu li-llāhi… enseigné comme une sourate du Coran.",grade:"Sahih"}],geste:"Pause de témoignage."},
+  tashahhud_final:{statut:"wajib",statutLabel:"Wājib (Hanafites) / Farḍ (Chaféites, Hanbalites)",quran:[],hadith:[{ref:"Bukhārī n°831 / Muslim n°402",narrateur:"Ibn Masʿūd",texte:"At-taḥiyyātu li-llāhi wa-ṣ-ṣalawātu…",grade:"Sahih"}],geste:"L'index levé lors de lā ilāha illā -llāh."},
+  salat_ibr:{statut:"sunna",statutLabel:"Sunna muʾakkada",quran:[{ref:"Sourate Al-Aḥzāb 33:56",texte:"Allah et Ses anges prient sur le Prophète…"}],hadith:[{ref:"Bukhārī n°3370 / Muslim n°406",narrateur:"Kaʿb ibn ʿUjra",texte:"Allāhumma ṣalli ʿalā Muḥammad…",grade:"Sahih"}],geste:"Prier sur le Prophète reconnaît que la prière est un héritage transmis."},
   salam:{statut:"fard",statutLabel:"Farḍ — Rukn de sortie",quran:[],hadith:[{ref:"Abu Dāwūd n°730",narrateur:"ʿAlī ibn Abī Ṭālib",texte:"…la sortie de la prière est le salām.",grade:"Sahih selon al-Albānī"}],geste:"La prière commence en solitaire et se termine tournée vers les autres."},
 };
 
-const STEPS_BASE = [
+const STEPS_BASE=[
   {id:"niyya",label:"Niyyah",arabic:"نِيَّة",phonetic:"Niyyah",translation:"Intention (formulée en cœur avant le takbīr)",note:"1ère raka'at uniquement",noAudio:true},
   {id:"takbir",label:"Takbīr al-Iḥrām",arabic:"اللَّهُ أَكْبَرُ",phonetic:"Allāhu Akbar",translation:"Allah est le Plus Grand"},
   {id:"qiyam",label:"Qiyām — Al-Fātiḥah",arabic:"بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ۝ الرَّحْمَٰنِ الرَّحِيمِ ۝ مَالِكِ يَوْمِ الدِّينِ ۝ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ۝ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ۝ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ",phonetic:"Bismi-llāhi r-raḥmāni r-raḥīm / Al-ḥamdu li-llāhi rabbi l-ʿālamīn / Ar-raḥmāni r-raḥīm / Māliki yawmi d-dīn / Iyyāka naʿbudu wa-iyyāka nastaʿīn / Ihdina ṣ-ṣirāṭa l-mustaqīm / Ṣirāṭa llaḏīna anʿamta ʿalayhim ġayri l-maġḍūbi ʿalayhim wa-lā ḍ-ḍāllīn",translation:"Au nom d'Allah, le Tout Miséricordieux, le Très Miséricordieux. Toute louange est à Allah, Seigneur des mondes, le Tout Miséricordieux, le Très Miséricordieux, Maître du Jour de la Rétribution. C'est Toi Seul que nous adorons, et c'est Toi Seul dont nous implorons l'aide. Guide-nous dans le droit chemin, le chemin de ceux que Tu as comblés de bienfaits, non celui des frappés de colère ni des égarés.",audioNote:"Récitation verset par verset"},
@@ -404,70 +580,68 @@ const STEPS_BASE = [
   {id:"sujud2",label:"2ème Sujūd",arabic:"سُبْحَانَ رَبِّيَ الْأَعْلَى",phonetic:"Subḥāna Rabbiya l-Aʿlā (×3)",translation:"Gloire à mon Seigneur le Très Haut (×3)",noAudio:true},
 ];
 
-const TD = {id:"",label:"Tashahhud",arabic:"التَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ ۝ السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ ۝ السَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ ۝ أَشْهَدُ أَن لَّا إِلَٰهَ إِلَّا اللَّهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",phonetic:"At-taḥiyyātu li-llāhi wa-ṣ-ṣalawātu wa-ṭ-ṭayyibāt / as-salāmu ʿalayka ayyuhā n-nabiyyu / as-salāmu ʿalaynā wa-ʿalā ʿibādi -llāhi ṣ-ṣāliḥīn / ašhadu an lā ilāha illā -llāhu wa-ašhadu anna muḥammadan ʿabduhu wa-rasūluh",translation:"Les salutations, prières et bonnes œuvres appartiennent à Allah. Que la paix soit sur toi, ô Prophète. Que la paix soit sur nous et sur les serviteurs vertueux d'Allah. J'atteste qu'il n'y a de divinité qu'Allah, et que Muhammad est Son serviteur et Son messager.",noAudio:true};
-const SD = {id:"salat_ibr",label:"Ṣalāt Ibrāhīmiyyah",arabic:"اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ ۝ كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ ۝ اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ ۝ كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ",phonetic:"Allāhumma ṣalli ʿalā Muḥammadin wa-ʿalā āli Muḥammad / kamā ṣallayta ʿalā Ibrāhīma / innaka ḥamīdun majīd / Allāhumma bārik ʿalā Muḥammadin wa-ʿalā āli Muḥammad / kamā bārakta ʿalā Ibrāhīma / innaka ḥamīdun majīd",translation:"Ô Allah, répands Tes grâces sur Muḥammad et sa famille, comme sur Ibrāhīm. Tu es Digne de louange, Glorieux. Ô Allah, bénis Muḥammad et sa famille comme Tu as béni Ibrāhīm.",noAudio:true};
-const SLD = {id:"salam",label:"Salām final",arabic:"السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ",phonetic:"As-salāmu ʿalaykum wa-raḥmatu -llāh (×2 — droite puis gauche)",translation:"Que la paix et la miséricorde d'Allah soient sur vous — deux fois, droite puis gauche",noAudio:true};
+const TD={id:"",label:"Tashahhud",arabic:"التَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ ۝ السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ ۝ السَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ ۝ أَشْهَدُ أَن لَّا إِلَٰهَ إِلَّا اللَّهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",phonetic:"At-taḥiyyātu li-llāhi wa-ṣ-ṣalawātu wa-ṭ-ṭayyibāt / as-salāmu ʿalayka ayyuhā n-nabiyyu / as-salāmu ʿalaynā wa-ʿalā ʿibādi -llāhi ṣ-ṣāliḥīn / ašhadu an lā ilāha illā -llāhu wa-ašhadu anna muḥammadan ʿabduhu wa-rasūluh",translation:"Les salutations, prières et bonnes œuvres appartiennent à Allah. Que la paix soit sur toi, ô Prophète. Que la paix soit sur nous et sur les serviteurs vertueux d'Allah. J'atteste qu'il n'y a de divinité qu'Allah, et que Muhammad est Son serviteur et Son messager.",noAudio:true};
+const SD={id:"salat_ibr",label:"Ṣalāt Ibrāhīmiyyah",arabic:"اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ ۝ كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ ۝ اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ ۝ كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ",phonetic:"Allāhumma ṣalli ʿalā Muḥammadin wa-ʿalā āli Muḥammad / innaka ḥamīdun majīd / Allāhumma bārik ʿalā Muḥammadin wa-ʿalā āli Muḥammad / innaka ḥamīdun majīd",translation:"Ô Allah, répands Tes grâces sur Muḥammad et sa famille comme sur Ibrāhīm. Ô Allah, bénis Muḥammad et sa famille comme Tu as béni Ibrāhīm.",noAudio:true};
+const SLD={id:"salam",label:"Salām final",arabic:"السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ",phonetic:"As-salāmu ʿalaykum wa-raḥmatu -llāh (×2 — droite puis gauche)",translation:"Que la paix et la miséricorde d'Allah soient sur vous — deux fois, droite puis gauche",noAudio:true};
 
-function buildSeq(pid) {
-  const p = PRAYERS.find(x => x.id === pid);
-  const voc = VOCAL_RAKAAT[pid] || [];
-  const intAt = TASHAHHUD_INT[pid];
-  const steps = [];
-  for (let r = 1; r <= p.rakaat; r++) {
-    const isVocal = voc.includes(r);
-    for (const s of STEPS_BASE) {
-      if (s.id === "niyya" && r !== 1) continue;
-      if (s.id === "surah" && r > 2) continue;
-      steps.push({...s, rakaat:r, isVocal, stepKey:`${r}-${s.id}`});
+function buildSeq(pid){
+  const p=PRAYERS.find(x=>x.id===pid);const voc=VOCAL_RAKAAT[pid]||[];const intAt=TASHAHHUD_INT[pid];
+  const steps=[];
+  for(let r=1;r<=p.rakaat;r++){
+    const isVocal=voc.includes(r);
+    for(const s of STEPS_BASE){
+      if(s.id==="niyya"&&r!==1)continue;
+      if(s.id==="surah"&&r>2)continue;
+      steps.push({...s,rakaat:r,isVocal,stepKey:`${r}-${s.id}`});
     }
-    if (intAt && r === intAt && r < p.rakaat) {
-      steps.push({...TD, id:"tashahhud_int", rakaat:r, isVocal:false, stepKey:`${r}-ti`, tashahudType:"intermediaire"});
+    if(intAt&&r===intAt&&r<p.rakaat){
+      steps.push({...TD,id:"tashahhud_int",rakaat:r,isVocal:false,stepKey:`${r}-ti`,tashahudType:"intermediaire"});
       steps.push({id:"qiyam_resume",label:"Qiyām — Reprise",arabic:"قِيَام",phonetic:"Qiyām",translation:"Se relever pour la raka'at suivante",rakaat:r,isVocal:false,stepKey:`${r}-qr`,noAudio:true});
     }
   }
-  steps.push({...TD, id:"tashahhud_final", rakaat:p.rakaat, isVocal:false, stepKey:"f-tf", tashahudType:"final"});
-  steps.push({...SD, id:"salat_ibr", rakaat:p.rakaat, isVocal:false, stepKey:"f-si"});
-  steps.push({...SLD, id:"salam", rakaat:p.rakaat, isVocal:false, stepKey:"f-sl"});
+  steps.push({...TD,id:"tashahhud_final",rakaat:p.rakaat,isVocal:false,stepKey:"f-tf",tashahudType:"final"});
+  steps.push({...SD,id:"salat_ibr",rakaat:p.rakaat,isVocal:false,stepKey:"f-si"});
+  steps.push({...SLD,id:"salam",rakaat:p.rakaat,isVocal:false,stepKey:"f-sl"});
   return steps;
 }
 
-// ── AUDIO ─────────────────────────────────────────────
-const RECITERS = [
-  {id:"ar.alafasy",            name:"Mishary Al-Afasy"},
-  {id:"ar.abdulbasitmurattal", name:"Abdul Basit Murattal"},
-  {id:"ar.husary",             name:"Mahmoud Khalil Al-Husary"},
-  {id:"ar.minshawi",           name:"Mohamed Siddiq Al-Minshawi"},
-  {id:"ar.hanirifai",          name:"Hani Rifai"},
-  {id:"ar.mahermuaiqly",       name:"Maher Al-Muaiqly"},
+// ── AUDIO — mp3quran.net (CORS ouvert, haute qualité) ─
+// Serveurs mp3quran par récitateur
+const RECITERS=[
+  {id:"ar.alafasy",   name:"Mishary Al-Afasy",    server:"https://server8.mp3quran.net/afs/"},
+  {id:"ar.abdulbasit",name:"Abdul Basit Murattal", server:"https://server7.mp3quran.net/basit/"},
+  {id:"ar.husary",    name:"Mahmoud Al-Husary",    server:"https://server13.mp3quran.net/husr/"},
+  {id:"ar.minshawi",  name:"Mohamed Al-Minshawi",  server:"https://server10.mp3quran.net/minsh/"},
+  {id:"ar.maher",     name:"Maher Al-Muaiqly",     server:"https://server12.mp3quran.net/maher/"},
 ];
-const AYAH_OFFSET = {1:1,109:6236,112:6272,113:6277,114:6283};
-function getUrls(rec,n,ayat){
-  const offset=AYAH_OFFSET[n];
-  return Array.from({length:ayat},(_,i)=>`https://cdn.islamic.network/quran/audio/128/${rec}/${offset+i}.mp3`);
+
+// mp3quran : audio par sourate complète (pas par verset)
+// On utilise l'audio sourate entière pour Fātiḥa et les sourates supplémentaires
+function getSurahUrl(rec, surahNum) {
+  const reciter = RECITERS.find(r => r.id === rec) || RECITERS[0];
+  return `${reciter.server}${String(surahNum).padStart(3,"0")}.mp3`;
 }
 
 function useAudio(){
   const [pid,setPid]=useState(null);
   const [rec,setRec]=useState("ar.alafasy");
-  const aRef=useRef(null);const qRef=useRef([]);const iRef=useRef(0);const act=useRef(null);
+  const aRef=useRef(null);
+  const act=useRef(null);
   useEffect(()=>{
-    const el=document.createElement("audio");el.preload="auto";
-    el.onended=()=>adv();el.onerror=()=>adv();aRef.current=el;
+    const el=document.createElement("audio");el.preload="none";
+    el.onended=()=>doStop();el.onerror=()=>doStop();
+    aRef.current=el;
     return()=>{el.pause();el.src="";};
   },[]);
-  function adv(){
-    if(!aRef.current||iRef.current>=qRef.current.length){doStop();return;}
-    const url=qRef.current[iRef.current++];
-    aRef.current.src=url;aRef.current.load();aRef.current.play().catch(()=>doStop());
-  }
   function doStop(){
     if(aRef.current){aRef.current.pause();aRef.current.src="";}
-    qRef.current=[];iRef.current=0;act.current=null;setPid(null);
+    act.current=null;setPid(null);
   }
-  const play=useCallback((urls,id)=>{
+  const play=useCallback((url,id)=>{
     if(act.current===id){doStop();return;}
-    doStop();qRef.current=urls;iRef.current=0;act.current=id;setPid(id);
-    setTimeout(()=>adv(),50);
+    doStop();act.current=id;setPid(id);
+    aRef.current.src=url;aRef.current.load();
+    aRef.current.play().catch(()=>doStop());
   },[]);
   return{play,stop:doStop,playingId:pid,reciterId:rec,setReciterId:setRec};
 }
@@ -498,22 +672,24 @@ function Src({src}){
   );
 }
 
-function ABtn({urls,id,p}){
+function ABtn({surahNum,id,p}){
   const pl=p.playingId===id;
+  const url=getSurahUrl(p.reciterId,surahNum);
   return(
-    <button className={`aub${pl?" pl":""}`} onClick={()=>p.play(urls,id)}>
-      {pl?<><span className="pulse"/>ARRÊTER</>:<>▶ ÉCOUTER</>}
+    <button className={`aub${pl?" pl":""}`} onClick={()=>p.play(url,id)}>
+      {pl?<><span className="pulse-dot"/>ARRÊTER</>:<>▶ ÉCOUTER</>}
     </button>
   );
 }
 
-function SS({rakaat,sel,onSel}){
+function SS({rakaat,sel,onSel,p}){
   const cur=sel[rakaat]||"ikhlas";
   const note=rakaat===1&&cur==="kafirun"?"※ Pratique prophétique : Al-Kāfirūn en 1ère raka'at (Muslim n°884)":rakaat===2&&cur==="ikhlas"?"※ Pratique prophétique : Al-Ikhlāṣ en 2ème raka'at (Muslim n°884)":"";
+  const s=SURAHS[cur];
   return(
     <div className="ss-wrap">
       <div className="ss-title">SOURATE — RAKA'AT {rakaat}</div>
-      <div className="ss-btns">{Object.values(SURAHS).map(s=><button key={s.id} className={`ss-btn${cur===s.id?" on":""}`} onClick={()=>onSel(rakaat,s.id)}><span className="ss-btn-ar">{s.arabic}</span><span className="ss-btn-nm">{s.name}</span></button>)}</div>
+      <div className="ss-btns">{Object.values(SURAHS).map(sx=><button key={sx.id} className={`ss-btn${cur===sx.id?" on":""}`} onClick={()=>onSel(rakaat,sx.id)}><span className="ss-btn-ar">{sx.arabic}</span><span className="ss-btn-nm">{sx.name}</span></button>)}</div>
       {note&&<div className="ss-note">{note}</div>}
     </div>
   );
@@ -526,18 +702,18 @@ function Card({step,p,sel,onSel}){
   const hv=["qiyam","surah","takbir"].includes(step.id);
   if(step.id==="surah"){
     const sid=sel[step.rakaat]||"ikhlas";const s=SURAHS[sid];
-    const urls=getUrls(p.reciterId,s.num,s.ayat);const aid=`sh-${step.rakaat}-${sid}`;
+    const aid=`sh-${step.rakaat}-${sid}`;
     return(
       <div className="sc">
-        <div className="sc-hd"><div className="sc-hd-l"><span className="sc-lbl">Sourate supplémentaire</span></div><ABtn urls={urls} id={aid} p={p}/></div>
+        <div className="sc-hd"><div className="sc-hd-l"><span className="sc-lbl">Sourate supplémentaire</span></div><ABtn surahNum={s.num} id={aid} p={p}/></div>
         <PostureIllustration postureId="Quiyam"/>
-        <SS rakaat={step.rakaat} sel={sel} onSel={onSel}/>
+        <SS rakaat={step.rakaat} sel={sel} onSel={onSel} p={p}/>
         <div className="sc-ar">{s.arabicText}</div><div className="sc-ph">{s.phonetic}</div><div className="sc-tr">{s.translation}</div>
         <Src src={s.sources}/>
       </div>
     );
   }
-  const au=step.id==="qiyam"?getUrls(p.reciterId,1,7):null;
+  const showAudio=step.id==="qiyam";
   return(
     <div className="sc">
       <div className="sc-hd">
@@ -547,7 +723,7 @@ function Card({step,p,sel,onSel}){
           {step.tashahudType==="final"&&<span className="th-f">Final</span>}
           {hv&&<span className={`vb ${step.isVocal?"vh":"vl"}`}>{step.isVocal?"▲ Voix haute":"▽ Voix basse"}</span>}
         </div>
-        {!step.noAudio&&au&&<ABtn urls={au} id={step.stepKey} p={p}/>}
+        {showAudio&&<ABtn surahNum={1} id={step.stepKey} p={p}/>}
       </div>
       <PostureIllustration postureId={pid}/>
       <div className="sc-ar">{step.arabic}</div>
@@ -601,19 +777,18 @@ function CompMode({pid,p,sel,onSel}){
     const r=i+1;const dn=(step.rakaat||0)>r;const cr=step.rakaat===r&&!["tashahhud_final","salat_ibr","salam"].includes(step.id);
     return <div key={r} className={`dot${dn?" dn":""}${cr?" cr":""}`}/>;
   });
+  const showAudio=step.id==="qiyam";
   let body;
   if(step.id==="surah"){
-    const sid=sel[step.rakaat]||"ikhlas";const s=SURAHS[sid];
-    const urls=getUrls(p.reciterId,s.num,s.ayat);const aid=`sh-${step.rakaat}-${sid}`;
+    const sid=sel[step.rakaat]||"ikhlas";const s=SURAHS[sid];const aid=`sh-${step.rakaat}-${sid}`;
     body=<>
-      <div className="cc-meta"><div className="cc-ml"><span className="cc-nm">Sourate supplémentaire</span><span style={{fontSize:".6rem",color:"var(--tx3)"}}>Raka'at {step.rakaat}</span></div><ABtn urls={urls} id={aid} p={p}/></div>
+      <div className="cc-meta"><div className="cc-ml"><span className="cc-nm">Sourate supplémentaire</span><span style={{fontSize:".6rem",color:"var(--tx3)"}}>Raka'at {step.rakaat}</span></div><ABtn surahNum={s.num} id={aid} p={p}/></div>
       <PostureIllustration postureId="Quiyam"/>
-      <SS rakaat={step.rakaat} sel={sel} onSel={(r,id)=>{p.stop();onSel(r,id);}}/>
+      <SS rakaat={step.rakaat} sel={sel} onSel={(r,id)=>{p.stop();onSel(r,id);}} p={p}/>
       <div className="cc-ar">{s.arabicText}</div><div className="cc-ph">{s.phonetic}</div><div className="cc-tr">{s.translation}</div>
       <Src src={s.sources}/>
     </>;
   } else {
-    const au=step.id==="qiyam"?getUrls(p.reciterId,1,7):null;
     body=<>
       <div className="cc-meta">
         <div className="cc-ml">
@@ -622,7 +797,7 @@ function CompMode({pid,p,sel,onSel}){
           {step.tashahudType==="final"&&<span className="th-f">Final</span>}
           {step.rakaat&&!["tashahhud_final","salat_ibr","salam"].includes(step.id)&&<span style={{fontSize:".6rem",color:"var(--tx3)"}}>Raka'at {step.rakaat}</span>}
         </div>
-        {!step.noAudio&&au&&<ABtn urls={au} id={step.stepKey} p={p}/>}
+        {showAudio&&<ABtn surahNum={1} id={step.stepKey} p={p}/>}
       </div>
       <PostureIllustration postureId={postId}/>
       {hv&&<div className={`cv ${step.isVocal?"hi":"lo"}`}><span className="d"/>{step.isVocal?"Récitation à voix haute":"Récitation silencieuse (voix basse)"}</div>}
@@ -646,7 +821,7 @@ function CompMode({pid,p,sel,onSel}){
 }
 
 function App(){
-  const [mainTab,setMainTab]=useState("salah");
+  const [mainTab,setMainTab]=useState("qibla");
   const [pid,setPid]=useState("fajr");
   const [mode,setMode]=useState("reference");
   const [sel,setSel]=useState({...DEFAULT_SURAH});
@@ -662,11 +837,17 @@ function App(){
         <div className="hdr-t">Guide de Prière</div>
         <div className="hdr-s">Ṣalāh — صَلَاة</div>
       </div>
+
+      {/* 4 onglets principaux */}
       <div className="main-tabs">
+        <button className={`main-tab${mainTab==="qibla"?" on":""}`} onClick={()=>setMainTab("qibla")}>QIBLA</button>
         <button className={`main-tab${mainTab==="wudu"?" on":""}`} onClick={()=>setMainTab("wudu")}>WUḌŪʾ</button>
         <button className={`main-tab${mainTab==="salah"?" on":""}`} onClick={()=>setMainTab("salah")}>ṢALĀH</button>
       </div>
-      {mainTab==="wudu"?<WuduTab/>:<>
+
+      {mainTab==="qibla"&&<QiblaHorairesTab/>}
+      {mainTab==="wudu"&&<WuduTab/>}
+      {mainTab==="salah"&&<>
         <div className="toolbar">
           <span className="ap-lbl">RÉCITATEUR</span>
           <select className="ap-sel" value={p.reciterId} onChange={e=>{p.stop();p.setReciterId(e.target.value);}}>
