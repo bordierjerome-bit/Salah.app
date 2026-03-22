@@ -28,9 +28,9 @@
       --fard:#e07070;--wajib:#e09a50;--sunna:#7ab09a;
     }
     body.day-mode{
-      --bg:#f5f0e4;--bg2:#ede5d0;--bg3:#e4d9c0;--sf:#ede5d0;--sf2:#e4d9c0;
-      --bo:rgba(139,100,20,.2);--bo2:rgba(139,100,20,.4);
-      --tx:#2a1a08;--tx2:#6b4e20;--tx3:#9a7840;
+      --bg:#2a1f0e;--bg2:#332510;--bg3:#3d2d14;--sf:#3d2d14;--sf2:#4a3618;
+      --bo:rgba(201,168,76,.22);--bo2:rgba(201,168,76,.5);
+      --tx:#f0dfa8;--tx2:#c9a84c;--tx3:#8a7040;
     }
 
     body{background:var(--bg);color:var(--tx);font-family:'Crimson Pro',Georgia,serif;min-height:100vh;line-height:1.6;transition:background .3s,color .3s}
@@ -434,39 +434,129 @@ function QiblaHorairesTab() {
 
 // ── TASBIH ────────────────────────────────────────────
 const DHIKR = [
-  {ar:"سُبْحَانَ اللَّهِ",    fr:"Subḥāna -llāh",    meaning:"Gloire à Allah"},
-  {ar:"الْحَمْدُ لِلَّهِ",    fr:"Al-ḥamdu li-llāh",  meaning:"Louange à Allah"},
-  {ar:"اللَّهُ أَكْبَرُ",     fr:"Allāhu Akbar",      meaning:"Allah est le Plus Grand"},
+  {
+    ar:"سُبْحَانَ اللَّهِ", fr:"Subḥāna -llāh", meaning:"Gloire à Allah",
+    // Mots-clés reconnus en arabe ET en français (variantes phonétiques incluses)
+    keywords: ["سبحان الله","subhana allah","subhan allah","subhana","سبحان","gloire à allah","gloire allah"]
+  },
+  {
+    ar:"الْحَمْدُ لِلَّهِ", fr:"Al-ḥamdu li-llāh", meaning:"Louange à Allah",
+    keywords: ["الحمد لله","alhamdulillah","al hamdulillah","alhamdo lillah","hamdoulillah","louange à allah","louange allah"]
+  },
+  {
+    ar:"اللَّهُ أَكْبَرُ", fr:"Allāhu Akbar", meaning:"Allah est le Plus Grand",
+    keywords: ["الله أكبر","allahu akbar","allahou akbar","allah akbar","allah est le plus grand"]
+  },
 ];
 
 function TasbihTab() {
-  const [idx, setIdx] = useState(0);      // dhikr actif (0,1,2)
-  const [counts, setCounts] = useState([0,0,0]);
+  const [idx, setIdx]         = useState(0);
+  const [counts, setCounts]   = useState([0,0,0]);
   const [popping, setPopping] = useState(false);
+  const [voiceOn, setVoiceOn] = useState(false);
+  const [listening, setListening] = useState(false);
+  const [lastWord, setLastWord]   = useState("");
+  const [voiceErr, setVoiceErr]   = useState("");
+  const recogRef = useRef(null);
+  const idxRef   = useRef(idx);      // ref pour accès dans le callback speech
+  const countsRef = useRef(counts);
   const TARGET = 33;
 
-  const increment = () => {
-    const newCounts = [...counts];
-    const cur = newCounts[idx];
-    if (cur >= TARGET) return;
-    newCounts[idx] = cur + 1;
-    setCounts(newCounts);
-    // Vibration tactile
-    if (navigator.vibrate) navigator.vibrate(30);
-    // Animation pop
-    setPopping(true); setTimeout(() => setPopping(false), 200);
-    // Passer au dhikr suivant automatiquement
-    if (newCounts[idx] === TARGET && idx < 2) {
-      setTimeout(() => setIdx(idx + 1), 600);
+  // Synchronise les refs
+  useEffect(() => { idxRef.current = idx; },    [idx]);
+  useEffect(() => { countsRef.current = counts; }, [counts]);
+
+  // ── Initialisation reconnaissance vocale ──
+  useEffect(() => {
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SR) return;
+    const r = new SR();
+    r.continuous      = true;
+    r.interimResults  = true;
+    r.maxAlternatives = 3;
+    // On alterne entre arabe et français — on utilise 'ar-SA' mais on teste les deux
+    r.lang = "ar-SA";
+
+    r.onresult = (e) => {
+      for (let i = e.resultIndex; i < e.results.length; i++) {
+        const result = e.results[i];
+        // On teste toutes les alternatives
+        for (let a = 0; a < result.length; a++) {
+          const transcript = result[a].transcript.toLowerCase().trim();
+          setLastWord(transcript);
+          const curIdx = idxRef.current;
+          const cur    = countsRef.current;
+          if (cur[curIdx] >= TARGET) break;
+          // Vérification contre les mots-clés du dhikr actif
+          const matched = DHIKR[curIdx].keywords.some(k => transcript.includes(k));
+          if (matched && result.isFinal) {
+            doIncrement(curIdx);
+            break;
+          }
+        }
+      }
+    };
+
+    r.onerror = (e) => {
+      if (e.error === "not-allowed") setVoiceErr("Microphone non autorisé.");
+      else if (e.error !== "no-speech") setVoiceErr(`Erreur : ${e.error}`);
+    };
+
+    r.onend = () => {
+      // Redémarre automatiquement si le mode vocal est actif
+      if (recogRef.current && recogRef.current._active) {
+        try { recogRef.current.start(); } catch(e) {}
+      } else {
+        setListening(false);
+      }
+    };
+
+    recogRef.current = r;
+    return () => { r._active = false; try { r.stop(); } catch(e) {} };
+  }, []);
+
+  // ── Bascule mode vocal ──
+  const toggleVoice = () => {
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SR) { setVoiceErr("Reconnaissance vocale non disponible sur ce navigateur."); return; }
+    if (!voiceOn) {
+      setVoiceErr("");
+      recogRef.current._active = true;
+      try { recogRef.current.start(); setListening(true); }
+      catch(e) { setVoiceErr("Impossible de démarrer le microphone."); return; }
+      setVoiceOn(true);
+    } else {
+      recogRef.current._active = false;
+      try { recogRef.current.stop(); } catch(e) {}
+      setListening(false);
+      setVoiceOn(false);
+      setLastWord("");
     }
   };
 
-  const reset = () => { setCounts([0,0,0]); setIdx(0); };
+  // ── Incrément ──
+  const doIncrement = (i) => {
+    setCounts(prev => {
+      const n = [...prev];
+      if (n[i] >= TARGET) return prev;
+      n[i] += 1;
+      if (navigator.vibrate) navigator.vibrate(40);
+      // Passage auto au dhikr suivant
+      if (n[i] === TARGET && i < 2) {
+        setTimeout(() => { setIdx(i + 1); idxRef.current = i + 1; }, 700);
+      }
+      return n;
+    });
+    setPopping(true); setTimeout(() => setPopping(false), 200);
+  };
+
+  const increment = () => doIncrement(idx);
+  const reset = () => { setCounts([0,0,0]); setIdx(0); setLastWord(""); };
   const selectDhikr = (i) => { if (counts[i] < TARGET) setIdx(i); };
 
   const allDone = counts.every(c => c >= TARGET);
   const current = DHIKR[idx];
-  const prog = counts[idx] / TARGET * 100;
+  const prog    = counts[idx] / TARGET * 100;
 
   return (
     <div className="tasbih-wrap">
@@ -474,9 +564,11 @@ function TasbihTab() {
       <div style={{display:"flex",gap:8}}>
         {DHIKR.map((d,i) => (
           <button key={i} onClick={() => selectDhikr(i)} style={{
-            flex:1,padding:"10px 4px",background:i===idx?"var(--bg3)":"var(--sf)",
-            border:`1px solid ${i===idx?"var(--gold)":"var(--bo)"}`,borderRadius:"var(--r)",
-            cursor:"pointer",textAlign:"center",transition:"all .2s",touchAction:"manipulation"
+            flex:1,padding:"10px 4px",
+            background:i===idx?"var(--bg3)":"var(--sf)",
+            border:`1px solid ${i===idx?"var(--gold)":"var(--bo)"}`,
+            borderRadius:"var(--r)",cursor:"pointer",textAlign:"center",
+            transition:"all .2s",touchAction:"manipulation"
           }}>
             <div style={{fontFamily:"'Amiri',serif",fontSize:"1rem",color:"var(--gold-l)",lineHeight:1.3}}>{d.ar}</div>
             <div style={{fontFamily:"'Cinzel Decorative',serif",fontSize:".42rem",color:i===idx?"var(--gold)":"var(--tx3)",letterSpacing:".08em",marginTop:3}}>{d.fr}</div>
@@ -492,23 +584,62 @@ function TasbihTab() {
             <div style={{fontFamily:"'Amiri',serif",fontSize:"1.8rem",color:"var(--gold-l)",marginBottom:8}}>الحمد لله</div>
             <div className="tasbih-done-txt">TASBĪḤ ACCOMPLI — 99 DHIKR</div>
           </div>
-        ) : (
-          <>
-            <div className="tasbih-name">{current.ar}</div>
-            <div className="tasbih-fr">{current.fr} — {current.meaning}</div>
-            <div className="tasbih-progress"><div className="tasbih-bar" style={{width:`${prog}%`}}/></div>
-            <div className={`tasbih-counter${popping?" pop":""}`}>{counts[idx]}</div>
-            <div className="tasbih-total">sur {TARGET} · Total : {counts.reduce((a,b)=>a+b,0)} / 99</div>
-            <button className="tasbih-btn" onClick={increment}>{current.ar}</button>
-          </>
-        )}
+        ) : (<>
+          <div className="tasbih-name">{current.ar}</div>
+          <div className="tasbih-fr">{current.fr} — {current.meaning}</div>
+          <div className="tasbih-progress"><div className="tasbih-bar" style={{width:`${prog}%`}}/></div>
+          <div className={`tasbih-counter${popping?" pop":""}`}>{counts[idx]}</div>
+          <div className="tasbih-total">sur {TARGET} · Total : {counts.reduce((a,b)=>a+b,0)} / 99</div>
+
+          {/* Bouton tactile */}
+          <button className="tasbih-btn" onClick={increment}>{current.ar}</button>
+
+          {/* Mode vocal */}
+          <button onClick={toggleVoice} style={{
+            width:"100%",padding:"10px",marginBottom:8,
+            border:`1px solid ${voiceOn?"var(--gold)":"var(--bo)"}`,
+            background:voiceOn?"rgba(201,168,76,.1)":"transparent",
+            color:voiceOn?"var(--gold)":"var(--tx3)",
+            fontFamily:"'Cinzel Decorative',serif",fontSize:".54rem",
+            letterSpacing:".1em",cursor:"pointer",borderRadius:"var(--r)",
+            display:"flex",alignItems:"center",justifyContent:"center",gap:8,
+            touchAction:"manipulation",transition:"all .2s"
+          }}>
+            <span style={{fontSize:"1rem"}}>{voiceOn?"🎙️":"🎤"}</span>
+            {voiceOn ? "MODE VOCAL ACTIF — APPUYER POUR ARRÊTER" : "ACTIVER MODE VOCAL"}
+          </button>
+
+          {/* Indicateur écoute */}
+          {voiceOn && (
+            <div style={{textAlign:"center",marginBottom:6}}>
+              <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:6,marginBottom:4}}>
+                {listening && <span style={{width:8,height:8,borderRadius:"50%",background:"var(--gold)",display:"inline-block",animation:"pulse 1s infinite"}}/>}
+                <span style={{fontSize:".68rem",color:"var(--tx3)",fontStyle:"italic"}}>
+                  {listening ? "En écoute… prononcez le dhikr" : "Démarrage…"}
+                </span>
+              </div>
+              {lastWord && (
+                <div style={{fontSize:".65rem",color:"var(--tx3)",fontStyle:"italic"}}>
+                  Entendu : «{lastWord}»
+                </div>
+              )}
+              <div style={{fontSize:".62rem",color:"var(--gold-d)",marginTop:4}}>
+                Fonctionne en arabe et en français
+              </div>
+            </div>
+          )}
+          {voiceErr && <div style={{fontSize:".72rem",color:"var(--fard)",textAlign:"center",marginBottom:8}}>{voiceErr}</div>}
+        </>)}
         <button className="tasbih-reset" onClick={reset}>↺ REMETTRE À ZÉRO</button>
       </div>
 
       {/* Note hadith */}
       <div style={{background:"var(--sf)",border:"1px solid var(--bo)",borderRadius:"var(--r)",padding:"12px 14px"}}>
         <div style={{fontFamily:"'Cinzel Decorative',serif",fontSize:".52rem",letterSpacing:".1em",color:"var(--gold-d)",marginBottom:6}}>📜 RÉFÉRENCE</div>
-        <div style={{fontSize:".78rem",color:"var(--tx3)",lineHeight:1.65}}>Abū Hurayra rapporte que le Prophète ﷺ dit : « Celui qui dit cent fois Subḥāna -llāh, Al-ḥamdu li-llāh et Allāhu Akbar après chaque prière… ses péchés seront effacés même s'ils étaient aussi nombreux que l'écume de la mer. » <span style={{color:"var(--sunna)",fontSize:".68rem"}}>(Muslim n°597)</span></div>
+        <div style={{fontSize:".78rem",color:"var(--tx3)",lineHeight:1.65}}>
+          Abū Hurayra rapporte que le Prophète ﷺ dit : « Celui qui dit Subḥāna -llāh, Al-ḥamdu li-llāh et Allāhu Akbar trente-trois fois après chaque prière… ses péchés seront effacés même s'ils étaient aussi nombreux que l'écume de la mer. »
+          <span style={{color:"var(--sunna)",fontSize:".68rem"}}> (Muslim n°597)</span>
+        </div>
       </div>
     </div>
   );
