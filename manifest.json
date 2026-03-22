@@ -1,0 +1,24 @@
+{
+  "name": "Guide de Prière — Ṣalāh",
+  "short_name": "Ṣalāh",
+  "description": "Guide complet de la prière islamique : Qibla, horaires, Wuḍūʾ, Ṣalāh, Tasbīḥ.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0806",
+  "theme_color": "#c9a84c",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "images/Takbir.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/Takbir.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["lifestyle", "religion"],
+  "lang": "fr"
+}
