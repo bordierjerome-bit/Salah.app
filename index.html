@@ -892,51 +892,23 @@ function VersetDuJour() {
   const dateStr = `${jours[today.getDay()]} ${today.getDate()} ${mois[today.getMonth()]} ${today.getFullYear()}`;
 
   return (
-    <div style={{
-      background:"var(--sf)",border:"1px solid var(--bo)",
-      borderRadius:"var(--r)",padding:"14px 16px",marginBottom:14,
-      borderLeft:"3px solid var(--gold)"
-    }}>
-      {/* En-tête */}
+    <div style={{background:"var(--sf)",border:"1px solid var(--bo)",borderRadius:"var(--r)",padding:"14px 16px",marginBottom:14,borderLeft:"3px solid var(--gold)"}}>
       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:10}}>
         <div>
-          <div style={{fontFamily:"'Cinzel Decorative',serif",fontSize:".5rem",letterSpacing:".12em",color:"var(--gold-d)"}}>📖 VERSET DU JOUR</div>
+          <div style={{fontFamily:"'Cinzel Decorative',serif",fontSize:".5rem",letterSpacing:".12em",color:"var(--gold-d)"}}>VERSET DU JOUR</div>
           <div style={{fontSize:".68rem",color:"var(--tx3)",marginTop:2}}>{dateStr}</div>
         </div>
         <div style={{fontFamily:"'Cinzel Decorative',serif",fontSize:".48rem",color:"var(--gold-d)",textAlign:"right"}}>{v.ref}</div>
       </div>
-
-      {/* Texte arabe */}
-      <div style={{fontFamily:"'Amiri',serif",fontSize:"1.4rem",color:"var(--gold-l)",textAlign:"right",direction:"rtl",lineHeight:1.9,marginBottom:6}}>
-        {v.ar}
-      </div>
-
-      {/* Phonétique */}
+      <div style={{fontFamily:"'Amiri',serif",fontSize:"1.4rem",color:"var(--gold-l)",textAlign:"right",direction:"rtl",lineHeight:1.9,marginBottom:6}}>{v.ar}</div>
       <div style={{fontStyle:"italic",color:"var(--tx2)",fontSize:".80rem",marginBottom:6}}>{v.ph}</div>
-
-      {/* Traduction */}
-      <div style={{fontSize:".82rem",color:"var(--tx3)",borderLeft:"2px solid var(--bo)",paddingLeft:10,lineHeight:1.65,marginBottom:8}}>
-        {v.fr}
-      </div>
-
-      {/* Réflexion — masquée par défaut */}
-      <button onClick={()=>setOpen(x=>!x)} style={{
-        display:"flex",alignItems:"center",gap:6,padding:"6px 10px",
-        background:"var(--bg3)",border:"1px solid var(--bo)",borderRadius:"var(--r)",
-        cursor:"pointer",width:"100%",touchAction:"manipulation",
-        fontFamily:"'Cinzel Decorative',serif",fontSize:".5rem",
-        letterSpacing:".1em",color:"var(--gold-d)",transition:"all .2s"
-      }}>
-        <span style={{transform:open?"rotate(90deg)":"none",transition:"transform .2s",fontSize:".6rem"}}>▶</span>
-        {open ? "MASQUER LA RÉFLEXION" : "✦ RÉFLEXION DU JOUR"}
+      <div style={{fontSize:".82rem",color:"var(--tx3)",borderLeft:"2px solid var(--bo)",paddingLeft:10,lineHeight:1.65,marginBottom:8}}>{v.fr}</div>
+      <button onClick={()=>setOpen(x=>!x)} style={{display:"flex",alignItems:"center",gap:6,padding:"6px 10px",background:"var(--bg3)",border:"1px solid var(--bo)",borderRadius:"var(--r)",cursor:"pointer",width:"100%",touchAction:"manipulation",fontFamily:"'Cinzel Decorative',serif",fontSize:".5rem",letterSpacing:".1em",color:"var(--gold-d)",transition:"all .2s"}}>
+        <span style={{transform:open?"rotate(90deg)":"none",transition:"transform .2s",fontSize:".6rem"}}>{">"}</span>
+        {open ? "MASQUER LA REFLEXION" : "REFLEXION DU JOUR"}
       </button>
       {open && (
-        <div style={{
-          marginTop:8,padding:"11px 14px",background:"var(--bg2)",
-          border:"1px solid var(--bo)",borderRadius:"var(--r)",
-          fontSize:".82rem",color:"var(--tx2)",lineHeight:1.75,
-          fontStyle:"italic",animation:"fadeIn .25s ease"
-        }}>
+        <div style={{marginTop:8,padding:"11px 14px",background:"var(--bg2)",border:"1px solid var(--bo)",borderRadius:"var(--r)",fontSize:".82rem",color:"var(--tx2)",lineHeight:1.75,fontStyle:"italic"}}>
           {v.reflexion}
         </div>
       )}
