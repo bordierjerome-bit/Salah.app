@@ -873,12 +873,31 @@ const VERSETS_DU_JOUR = [ l'Unique. Allah, l'Impénétrable.",reflexion:"Aḥad 
 ];
 
 function VersetDuJour() {
-  // Sélection basée sur le jour du mois (1-30/31)
-  const today = new Date();
-  const dayIdx = (today.getDate() - 1) % VERSETS_DU_JOUR.length;
-  const v = VERSETS_DU_JOUR[dayIdx];
   const [open, setOpen] = useState(false);
+  const today = new Date();
+  const v = VERSETS_DU_JOUR[(today.getDate() - 1) % VERSETS_DU_JOUR.length];
+  if (!v) return null;
   const jours = ["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
+  const mois = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+  const dateStr = jours[today.getDay()] + " " + today.getDate() + " " + mois[today.getMonth()] + " " + today.getFullYear();
+  return React.createElement("div", {style:{background:"var(--sf)",border:"1px solid var(--bo)",borderRadius:"var(--r)",padding:"14px 16px",marginBottom:14,borderLeft:"3px solid var(--gold)"}},
+    React.createElement("div", {style:{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:10}},
+      React.createElement("div", null,
+        React.createElement("div", {style:{fontFamily:"'Cinzel Decorative',serif",fontSize:".5rem",letterSpacing:".12em",color:"var(--gold-d)"}}, "VERSET DU JOUR"),
+        React.createElement("div", {style:{fontSize:".68rem",color:"var(--tx3)",marginTop:2}}, dateStr)
+      ),
+      React.createElement("div", {style:{fontFamily:"'Cinzel Decorative',serif",fontSize:".48rem",color:"var(--gold-d)"}}, v.ref)
+    ),
+    React.createElement("div", {style:{fontFamily:"'Amiri',serif",fontSize:"1.4rem",color:"var(--gold-l)",textAlign:"right",direction:"rtl",lineHeight:1.9,marginBottom:6}}, v.ar),
+    React.createElement("div", {style:{fontStyle:"italic",color:"var(--tx2)",fontSize:".80rem",marginBottom:6}}, v.ph),
+    React.createElement("div", {style:{fontSize:".82rem",color:"var(--tx3)",borderLeft:"2px solid var(--bo)",paddingLeft:10,lineHeight:1.65,marginBottom:8}}, v.fr),
+    React.createElement("button", {
+      onClick: function(){ setOpen(function(x){ return !x; }); },
+      style:{display:"flex",alignItems:"center",gap:6,padding:"6px 10px",background:"var(--bg3)",border:"1px solid var(--bo)",borderRadius:"var(--r)",cursor:"pointer",width:"100%",fontFamily:"'Cinzel Decorative',serif",fontSize:".5rem",letterSpacing:".1em",color:"var(--gold-d)"}
+    }, open ? "MASQUER LA REFLEXION" : "REFLEXION DU JOUR"),
+    open ? React.createElement("div", {style:{marginTop:8,padding:"11px 14px",background:"var(--bg2)",border:"1px solid var(--bo)",borderRadius:"var(--r)",fontSize:".82rem",color:"var(--tx2)",lineHeight:1.75,fontStyle:"italic"}}, v.reflexion) : null
+  );
+}
   const mois = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
   const dateStr = `${jours[today.getDay()]} ${today.getDate()} ${mois[today.getMonth()]} ${today.getFullYear()}`;
 
