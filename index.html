@@ -51,6 +51,28 @@
     body{background:var(--bg);color:var(--tx);font-family:'Crimson Pro',Georgia,serif;min-height:100vh;line-height:1.6;transition:background .3s,color .3s}
     body.day-mode{--bg:#2a1f0e;--bg2:#332510;--bg3:#3d2d14;--sf:#3d2d14;--sf2:#4a3618;--bo:rgba(201,168,76,.22);--bo2:rgba(201,168,76,.5);--tx:#f0dfa8;--tx2:#c9a84c;--tx3:#8a7040;}
     #root{max-width:640px;margin:0 auto;padding:0 15px 80px}
+
+    /* GENRE SWITCH */
+    .genre-bar{display:flex;border:1px solid var(--bo);border-radius:var(--r);overflow:hidden;margin:10px 0 14px}
+    .genre-btn{flex:1;padding:12px 8px;background:var(--sf);border:none;cursor:pointer;font-family:'Cinzel Decorative',serif;font-size:.72rem;letter-spacing:.12em;color:var(--tx3);transition:all .2s;border-right:1px solid var(--bo);touch-action:manipulation;min-height:46px}
+    .genre-btn:last-child{border-right:none}
+    .genre-btn.on{background:var(--bg3);color:var(--gold)}
+    /* RESUME */
+    .resume-wrap{margin:14px 0;background:var(--bg3);border:1px solid var(--bo);border-radius:var(--r);padding:12px;text-align:center}
+    .resume-title{font-family:'Cinzel Decorative',serif;font-size:.65rem;letter-spacing:.12em;color:var(--gold-d);margin-bottom:10px}
+    .resume-img{width:100%;max-width:560px;height:auto;border-radius:var(--r);object-fit:contain}
+    /* ABLUTION TABS */
+    .ablution-tabs{display:flex;border:1px solid var(--bo);border-radius:var(--r);overflow:hidden;margin-bottom:14px}
+    .ablution-tab{flex:1;padding:12px 6px;background:var(--sf);border:none;cursor:pointer;font-family:'Cinzel Decorative',serif;font-size:.60rem;letter-spacing:.07em;color:var(--tx3);transition:all .2s;border-right:1px solid var(--bo);touch-action:manipulation;min-height:46px}
+    .ablution-tab:last-child{border-right:none}
+    .ablution-tab.on{background:var(--bg3);color:var(--gold)}
+    .ablution-intro{background:var(--sf);border:1px solid var(--bo);border-left:3px solid var(--gold);border-radius:var(--r);padding:14px 16px;margin-bottom:14px}
+    .ablution-intro-title{font-family:'Cinzel Decorative',serif;font-size:.72rem;letter-spacing:.12em;color:var(--gold);margin-bottom:6px}
+    .ablution-intro-ar{font-family:'Amiri',serif;font-size:1.3rem;color:var(--gold-l);text-align:right;direction:rtl;line-height:1.9;margin-bottom:6px}
+    .ablution-intro-txt{font-size:.90rem;color:var(--tx3);line-height:1.75}
+    /* QIBLA IMG */
+    .qibla-img-wrap{text-align:center;margin-bottom:14px}
+    .qibla-img{width:160px;height:160px;object-fit:contain;filter:drop-shadow(0 0 14px rgba(201,168,76,.3))}
     ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--bg2)}::-webkit-scrollbar-thumb{background:var(--gold-d);border-radius:2px}
 
     /* ===================== HEADER ===================== */
@@ -300,9 +322,11 @@ function DonateModal({onClose}){
       <div className="donate-modal">
         <div className="donate-modal-title">جَزَاكُمُ اللَّهُ خَيْرًا</div>
         <div className="donate-modal-sub">SOUTENIR L'APPLICATION</div>
-        <div className="donate-modal-txt">
-          Cette application est et restera gratuite. Votre soutien permet de la maintenir, de l'ameliorer et d'ajouter de nouvelles fonctionnalites.<br/><br/>
-          Qu'Allah recompense votre geste.
+        <div className="donate-modal-txt" style={{marginBottom:8}}>
+          Cette application est <strong style={{color:"var(--gold-l)"}}>entierement gratuite</strong> et le restera. Aucune publicite, aucun abonnement, aucune donnee collectee.
+        </div>
+        <div style={{fontSize:".82rem",color:"var(--tx3)",lineHeight:1.75,marginBottom:18,fontStyle:"italic",borderLeft:"2px solid var(--bo)",paddingLeft:12}}>
+          Les dons couvrent les frais d'hebergement et de maintenance. Le surplus est verse a des associations caritatives islamiques au benefice de la communaute. Qu'Allah vous recompense.
         </div>
         <div className="donate-modal-btns">
           <a className="donate-modal-btn donate-modal-btn-paypal"
@@ -396,7 +420,8 @@ function QiblaHorairesTab(){
     <div className="qh-wrap">
       <div className="qh-card">
         <div className="qh-title">DIRECTION DE LA QIBLA</div>
-        {status==="idle"&&<div style={{textAlign:"center"}}><p style={{fontSize:".88rem",color:"var(--tx3)",marginBottom:16,lineHeight:1.7}}>La direction de La Mecque sera calculee depuis votre position exacte.</p><button className="geo-btn" onClick={requestLocation}>LOCALISER MA POSITION</button></div>}
+        {status==="idle"&&<div style={{textAlign:"center"}}><div className="qibla-img-wrap"><img src="images/qibla.png" alt="Qibla" className="qibla-img" onError={e=>{e.target.style.display="none";}}/></div>
+          <p style={{fontSize:".88rem",color:"var(--tx3)",margin:"12px 0 16px",lineHeight:1.7}}>La direction de La Mecque sera calculee depuis votre position exacte.</p><button className="geo-btn" onClick={requestLocation}>LOCALISER MA POSITION</button></div>}
         {status==="loading"&&<p className="geo-loading">Localisation en cours...</p>}
         {status==="error"&&<p className="geo-err">{errMsg}</p>}
         {status==="done"&&qibla!==null&&<><CompassSVG qiblaDeg={qibla} deviceHeading={heading}/><p className="compass-info"><span className="compass-deg">{Math.round(qibla)}°</span>Direction vers La Mecque</p></>}
@@ -417,6 +442,12 @@ function QiblaHorairesTab(){
 
 /* ===================== TASBIH ===================== */
 const DHIKR=[{ar:"سُبْحَانَ اللَّهِ",fr:"Subhana -llah",meaning:"Gloire a Allah",keywords:["subhana allah","subhan allah","subhana","gloire allah"]},{ar:"الْحَمْدُ لِلَّهِ",fr:"Al-hamdu li-llah",meaning:"Louange a Allah",keywords:["alhamdulillah","al hamdulillah","hamdoulillah","louange allah"]},{ar:"اللَّهُ أَكْبَرُ",fr:"Allahu Akbar",meaning:"Allah est le Plus Grand",keywords:["allahu akbar","allahou akbar","allah akbar"]}];
+    </>}
+    {ablTab==="ghusl"&&<>
+      {GHUSL_STEPS.map((s,i)=><div key={i} className="wudu-step"><div className="wudu-num">ETAPE {s.num}</div><div className="wudu-title">{s.titre}</div><span className={"wudu-tag "+(s.tag==="fard"?"tag-fard":"tag-sunna")}>{s.tag==="fard"?"Fard — Obligatoire":"Sunna"}</span>{s.ar&&<div className="wudu-ar">{s.ar}</div>}{s.ph&&<div className="wudu-ph">{s.ph}</div>}<div className="wudu-txt">{s.txt}</div>{s.note&&<div className="wudu-note">{s.note}</div>}</div>)}
+    </>}
+  </div>);}
+
 
 function TasbihTab(){
   const [idx,setIdx]=useState(0);const [counts,setCounts]=useState([0,0,0]);const [popping,setPopping]=useState(false);const [voiceOn,setVoiceOn]=useState(false);const [listening,setListening]=useState(false);const [lastWord,setLastWord]=useState("");const [voiceErr,setVoiceErr]=useState("");const recogRef=useRef(null);const idxRef=useRef(0);const countsRef=useRef([0,0,0]);const TARGET=33;
@@ -464,7 +495,43 @@ const WUDU_STEPS=[
   {num:9,titre:"Dua de cloture",tag:"sunna",ar:"أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",ph:"Ashhadu an la ilaha illa -llahu wahdahu la sharika lah, wa-ashhadu anna Muhammadan abduhu wa-rasuluh",txt:"Apres le wudu, lever le regard vers le ciel et prononcer la shahada complete. Les huit portes du Paradis lui sont ouvertes.",note:"Muslim n234."}
 ];
 
-function WuduTab(){return(<div className="wudu-wrap"><div className="edit-warn"><strong>Wudu — Purification rituelle</strong> — Condition prealable a la validite de la priere. Chaque etape doit etre effectuee dans l'ordre avec une intention sincere.</div>{WUDU_STEPS.map((s,i)=><div key={i} className="wudu-step"><div className="wudu-num">ETAPE {s.num}</div><div className="wudu-title">{s.titre}</div><span className={"wudu-tag "+(s.tag==="fard"?"tag-fard":"tag-sunna")}>{s.tag==="fard"?"Fard — Obligatoire":"Sunna"}</span>{s.ar&&<div className="wudu-ar">{s.ar}</div>}{s.ph&&<div className="wudu-ph">{s.ph}</div>}<div className="wudu-txt">{s.txt}</div>{s.note&&<div className="wudu-note">{s.note}</div>}</div>)}</div>);}
+const GHUSL_STEPS=[
+  {num:1,titre:"Cas rendant le Ghusl obligatoire",tag:"fard",ar:"",ph:"",txt:"Le Ghusl est obligatoire dans cinq situations : 1) L'ejaculation avec plaisir. 2) Le rapport sexuel (meme sans ejaculation). 3) La fin des regles (hayd). 4) Les pertes post-partum (nifas). 5) La mort (effectue par d'autres).",note:"Al-Maida 5:6 — Si vous etes en etat de janaba, purifiez-vous."},
+  {num:2,titre:"Niyyah — Intention",tag:"fard",ar:"\u0646\u064e\u0648\u064e\u064a\u0652\u062a\u064f \u0627\u0644\u063a\u064f\u0633\u0652\u0644\u064e \u0644\u0650\u0631\u064e\u0641\u0652\u0639\u0650 \u0627\u0644\u062d\u064e\u062f\u064e\u062b\u0650 \u0627\u0644\u0623\u064e\u0643\u0652\u0628\u064e\u0631\u0650",ph:"Nawaytu l-ghusla li-rafʿi l-hadithi l-akbar",txt:"Former l'intention sincere de se purifier de l'impurete majeure (hadath akbar). L'intention est indispensable a la validite du ghusl.",note:"Bukhari n1."},
+  {num:3,titre:"Basmalah",tag:"sunna",ar:"\u0628\u0650\u0633\u0652\u0645\u0650 \u0627\u0644\u0644\u0651\u064e\u0647\u0650 \u0627\u0644\u0631\u0651\u064e\u062d\u0652\u0645\u064e\u0670\u0646\u0650 \u0627\u0644\u0631\u0651\u064e\u062d\u0650\u064a\u0645\u0650",ph:"Bismi -llahi r-rahmani r-rahim",txt:"Commencer par prononcer le nom d'Allah.",note:"Abu Dawud n101."},
+  {num:4,titre:"Se laver les mains",tag:"sunna",ar:"",ph:"",txt:"Laver les deux mains trois fois avant de commencer pour les debarrasser de toute impurete.",note:"Bukhari n248."},
+  {num:5,titre:"Eliminer toute impurete visible",tag:"fard",ar:"",ph:"",txt:"Laver soigneusement a l'eau toute impurete presente sur le corps. Cette etape conditionne la validite du ghusl.",note:"Bukhari n248 — Muslim n316."},
+  {num:6,titre:"Effectuer le Wudu complet",tag:"sunna",ar:"",ph:"",txt:"Accomplir le wudu integralement comme pour la priere (sauf les pieds selon certains savants, qui seront laves en fin de ghusl). C'est la sunna du Prophete.",note:"Bukhari n248 — Aisha rapporte que le Prophete commencait par le wudu."},
+  {num:7,titre:"Verser l'eau sur la tete — 3 fois",tag:"fard",ar:"",ph:"",txt:"Verser l'eau abondamment sur le sommet de la tete trois fois en faisant penetrer l'eau jusqu'a la racine des cheveux et en massant le cuir chevelu.",note:"Bukhari n248 — Muslim n316."},
+  {num:8,titre:"Rincer le cote droit",tag:"fard",ar:"",ph:"",txt:"Faire couler l'eau sur la totalite du cote droit du corps, du haut vers le bas, en s'assurant que l'eau atteint les plis, les aisselles et les zones cachees.",note:"Muslim n316."},
+  {num:9,titre:"Rincer le cote gauche",tag:"fard",ar:"",ph:"",txt:"Meme procedure pour le cote gauche. Chaque partie du corps doit etre atteinte par l'eau — aucune zone ne doit rester seche.",note:"Muslim n316."},
+  {num:10,titre:"Laver les pieds",tag:"sunna",ar:"",ph:"",txt:"Terminer par le lavage des deux pieds si cela n'a pas ete effectue lors du wudu. Passer le petit doigt entre les orteils.",note:"Bukhari n248."},
+  {num:11,titre:"Points importants",tag:"fard",ar:"",ph:"",txt:"Femme : il n'est pas obligatoire de defaire les nattes si l'eau atteint la racine des cheveux. Homme : s'assurer qu'aucune partie du corps ne reste seche. Ghusl minimal valide : intention + eau sur tout le corps sans exception.",note:"Muslim n330 — Umm Salama."}
+];
+
+function WuduTab({genre}){
+  const [ablTab,setAblTab]=React.useState("wudu");
+  return(<div className="wudu-wrap">
+    <div className="ablution-tabs">
+      <button className={"ablution-tab"+(ablTab==="wudu"?" on":"")} onClick={()=>setAblTab("wudu")}>PETITES ABLUTIONS — WUDU</button>
+      <button className={"ablution-tab"+(ablTab==="ghusl"?" on":"")} onClick={()=>setAblTab("ghusl")}>GRANDES ABLUTIONS — GHUSL</button>
+    </div>
+    {ablTab==="wudu"&&<>
+      <div className="ablution-intro">
+        <div className="ablution-intro-title">الْوُضُوءُ — Purification mineure</div>
+        <div className="ablution-intro-ar">يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوٓاْ إِذَا قُمۡتُمۡ إِلَى ٱلصَّلَوٰةِ فَٱغۡسِلُواْ وُجُوهَكُمۡ</div>
+        <div className="ablution-intro-txt">Le wudu est la purification rituelle mineure, condition de validite de la priere. Il leve l'impurete mineure (hadath asghar) causee par les besoins naturels, le sommeil profond ou le contact charnel. Allah dit : "O croyants ! Quand vous vous levez pour la priere, lavez vos visages..." (Al-Maida 5:6)</div>
+      </div>
+    </>}
+    {ablTab==="ghusl"&&<>
+      <div className="ablution-intro">
+        <div className="ablution-intro-title">الْغُسْلُ — Purification majeure</div>
+        <div className="ablution-intro-ar">وَإِن كُنتُمۡ جُنُبًا فَٱطَّهَّرُواْ</div>
+        <div className="ablution-intro-txt">Le ghusl est la purification rituelle majeure. Il leve l'impurete majeure (hadath akbar) et est obligatoire avant la priere, la recitation du Coran et le tawaf. Allah dit : "Si vous etes en etat de janaba, purifiez-vous integralement." (Al-Maida 5:6)</div>
+      </div>
+    </>}
+    {ablTab==="wudu"&&<>
+<div className="edit-warn"><strong>Wudu — Purification rituelle</strong> — Condition prealable a la validite de la priere. Chaque etape doit etre effectuee dans l'ordre avec une intention sincere.</div>{WUDU_STEPS.map((s,i)=><div key={i} className="wudu-step"><div className="wudu-num">ETAPE {s.num}</div><div className="wudu-title">{s.titre}</div><span className={"wudu-tag "+(s.tag==="fard"?"tag-fard":"tag-sunna")}>{s.tag==="fard"?"Fard — Obligatoire":"Sunna"}</span>{s.ar&&<div className="wudu-ar">{s.ar}</div>}{s.ph&&<div className="wudu-ph">{s.ph}</div>}<div className="wudu-txt">{s.txt}</div>{s.note&&<div className="wudu-note">{s.note}</div>}</div>)}</div>);}
 
 /* ===================== SALAH DATA ===================== */
 const STEP_POSTURE={niyya:"Takbir",takbir:"Takbir",qiyam:"Quiyam",qiyam_resume:"Quiyam",surah:"Quiyam",ruku:"Ruku",itidal:"Itidal",sujud1:"Sujud",jalsa:"Jalsa",sujud2:"Sujud",tashahhud_int:"Tashahud",tashahhud_final:"Tashahud",salat_ibr:"Tashahud",salam:"Taslim"};
@@ -528,23 +595,27 @@ function Src({src}){const [o,setO]=useState(false);return(<div style={{marginTop
 function ABtn({surahNum,id,p}){const pl=p.playingId===id;return(<button className={"aub"+(pl?" pl":"")} onClick={()=>p.play(getSurahUrl(p.reciterId,surahNum),id)}>{pl?<><span className="pulse-dot"/>ARRETER</>:<>{"▶"} ECOUTER</>}</button>);}
 function SS({rakaat,sel,onSel}){const cur=sel[rakaat]||"ikhlas";const note=rakaat===1&&cur==="kafirun"?"Al-Kafirun en 1ere rakaat (Muslim n884)":rakaat===2&&cur==="ikhlas"?"Al-Ikhlas en 2eme rakaat (Muslim n884)":"";return(<div className="ss-wrap"><div className="ss-title">SOURATE — RAKAAT {rakaat}</div><div className="ss-btns">{Object.values(SURAHS).map(s=><button key={s.id} className={"ss-btn"+(cur===s.id?" on":"")} onClick={()=>onSel(rakaat,s.id)}><span className="ss-btn-ar">{s.arabic}</span><span className="ss-btn-nm">{s.name}</span></button>)}</div>{note&&<div className="ss-note">{note}</div>}</div>);}
 
-function PostureIllustration({postureId}){
+function PostureIllustration({postureId,genre}){
   const [open,setOpen]=useState(false);const label=POSTURE_LABELS[postureId]||"";const geste=GESTES[postureId];
-  return(<div className="posture-wrap"><img src={"images/"+postureId+".png"} alt={label} className="posture-img" onError={e=>{e.target.style.opacity="0.15";}} /><span className="posture-lbl">{label}</span>{geste&&<><button className={"geste-btn"+(open?" open":"")} onClick={()=>setOpen(x=>!x)}><span className="geste-ico" style={{transform:open?"rotate(90deg)":"none"}}>{">"}</span><span className="geste-lbl">{open?"MASQUER":"VOIR LE GESTE"}</span></button>{open&&<div className="geste-panel"><div className="geste-section"><div className="geste-section-t">POSITION</div><div className="geste-txt">{geste.position}</div></div><div className="geste-section"><div className="geste-section-t">GESTE</div><div className="geste-txt">{geste.geste}</div></div><div className="geste-section"><div className="geste-section-t">HOMME / FEMME</div><div className="geste-diff"><div className="geste-diff-col"><div className="geste-diff-lbl">HOMME</div><div className="geste-diff-txt">{geste.homme}</div></div><div className="geste-diff-col"><div className="geste-diff-lbl">FEMME</div><div className="geste-diff-txt">{geste.femme}</div></div></div></div><div className="geste-section"><div className="geste-section-t">VIGILANCE</div><div className="geste-warn">{geste.vigilance}</div></div></div>}</>}</div>);
+  return(<div className="posture-wrap"><img src={"images/"+genre+"_"+postureId+".png"} alt={label} className="posture-img" onError={e=>{e.target.style.opacity="0.15";}} /><span className="posture-lbl">{label}</span>{geste&&<><button className={"geste-btn"+(open?" open":"")} onClick={()=>setOpen(x=>!x)}><span className="geste-ico" style={{transform:open?"rotate(90deg)":"none"}}>{">"}</span><span className="geste-lbl">{open?"MASQUER":"VOIR LE GESTE"}</span></button>{open&&<div className="geste-panel"><div className="geste-section"><div className="geste-section-t">POSITION</div><div className="geste-txt">{geste.position}</div></div><div className="geste-section"><div className="geste-section-t">GESTE</div><div className="geste-txt">{geste.geste}</div></div><div className="geste-section"><div className="geste-section-t">HOMME / FEMME</div><div className="geste-diff"><div className="geste-diff-col"><div className="geste-diff-lbl">HOMME</div><div className="geste-diff-txt">{geste.homme}</div></div><div className="geste-diff-col"><div className="geste-diff-lbl">FEMME</div><div className="geste-diff-txt">{geste.femme}</div></div></div></div><div className="geste-section"><div className="geste-section-t">VIGILANCE</div><div className="geste-warn">{geste.vigilance}</div></div></div>}</>}</div>);
 }
 
-function Card({step,p,sel,onSel}){const pid=STEP_POSTURE[step.id]||"Quiyam";const srcId=step.id==="tashahhud_int"?"tashahhud_int":step.id==="tashahhud_final"?"tashahhud_final":step.id;const src=SOURCES[srcId];const hv=["qiyam","surah","takbir"].includes(step.id);if(step.id==="surah"){const sid=sel[step.rakaat]||"ikhlas";const s=SURAHS[sid];const aid="sh-"+step.rakaat+"-"+sid;return(<div className="sc"><div className="sc-hd"><div className="sc-hd-l"><span className="sc-lbl">Sourate supplementaire</span></div><ABtn surahNum={s.num} id={aid} p={p}/></div><PostureIllustration postureId="Quiyam"/><SS rakaat={step.rakaat} sel={sel} onSel={onSel}/><div className="sc-ar">{s.arabicText}</div><div className="sc-ph">{s.phonetic}</div><div className="sc-tr">{s.translation}</div><Src src={s.sources}/></div>);}return(<div className="sc"><div className="sc-hd"><div className="sc-hd-l"><span className="sc-lbl">{step.label}</span>{step.tashahudType==="intermediaire"&&<span className="th-i">Intermediaire</span>}{step.tashahudType==="final"&&<span className="th-f">Final</span>}{hv&&<span className={"vb "+(step.isVocal?"vh":"vl")}>{step.isVocal?"Voix haute":"Voix basse"}</span>}</div>{step.id==="qiyam"&&<ABtn surahNum={1} id={step.stepKey} p={p}/>}</div><PostureIllustration postureId={pid}/><div className="sc-ar">{step.arabic}</div><div className="sc-ph">{step.phonetic}</div><div className="sc-tr">{step.translation}</div>{step.note&&<div className="sc-nt">{step.note}</div>}{step.audioNote&&<div className="sc-nt">{step.audioNote}</div>}{src&&<Src src={src}/>}</div>);}
+function Card({step,p,sel,onSel,genre}){const pid=STEP_POSTURE[step.id]||"Quiyam";const srcId=step.id==="tashahhud_int"?"tashahhud_int":step.id==="tashahhud_final"?"tashahhud_final":step.id;const src=SOURCES[srcId];const hv=["qiyam","surah","takbir"].includes(step.id);if(step.id==="surah"){const sid=sel[step.rakaat]||"ikhlas";const s=SURAHS[sid];const aid="sh-"+step.rakaat+"-"+sid;return(<div className="sc"><div className="sc-hd"><div className="sc-hd-l"><span className="sc-lbl">Sourate supplementaire</span></div><ABtn surahNum={s.num} id={aid} p={p}/></div><PostureIllustration postureId="Quiyam" genre={genre}/><SS rakaat={step.rakaat} sel={sel} onSel={onSel}/><div className="sc-ar">{s.arabicText}</div><div className="sc-ph">{s.phonetic}</div><div className="sc-tr">{s.translation}</div><Src src={s.sources}/></div>);}return(<div className="sc"><div className="sc-hd"><div className="sc-hd-l"><span className="sc-lbl">{step.label}</span>{step.tashahudType==="intermediaire"&&<span className="th-i">Intermediaire</span>}{step.tashahudType==="final"&&<span className="th-f">Final</span>}{hv&&<span className={"vb "+(step.isVocal?"vh":"vl")}>{step.isVocal?"Voix haute":"Voix basse"}</span>}</div>{step.id==="qiyam"&&<ABtn surahNum={1} id={step.stepKey} p={p}/>}</div><PostureIllustration postureId={pid} genre={genre}/><div className="sc-ar">{step.arabic}</div><div className="sc-ph">{step.phonetic}</div><div className="sc-tr">{step.translation}</div>{step.note&&<div className="sc-nt">{step.note}</div>}{step.audioNote&&<div className="sc-nt">{step.audioNote}</div>}{src&&<Src src={src}/>}</div>);}
 
-function RefMode({pid,p,sel,onSel}){const prayer=PRAYERS.find(x=>x.id===pid);const seq=buildSeq(pid);const grp={};const fin=[];for(const s of seq){if(["tashahhud_final","salat_ibr","salam"].includes(s.id))fin.push(s);else{if(!grp[s.rakaat])grp[s.rakaat]=[];grp[s.rakaat].push(s);}}return(<div><div className="edit-warn"><strong>Note editoriale</strong> — References issues de Bukhari Muslim Abu Dawud Tirmidhi. A verifier par un erudit qualifie.</div>{Object.entries(grp).map(([r,steps])=>{const iv=VOCAL_RAKAAT[pid].includes(parseInt(r));return(<div key={r} style={{marginBottom:20}}><div className="section-title">Rakaat {r} / {prayer.rakaat}<span className={"vb "+(iv?"vh":"vl")}>{iv?"Voix haute":"Voix basse"}</span></div>{steps.map((s,i)=><Card key={i} step={s} p={p} sel={sel} onSel={onSel}/>)}</div>);})}{fin.length>0&&<div style={{marginBottom:20}}><div className="section-title">Cloture</div>{fin.map((s,i)=><Card key={i} step={s} p={p} sel={sel} onSel={onSel}/>)}</div>}</div>);}
+function RefMode({pid,p,sel,onSel,genre}){const prayer=PRAYERS.find(x=>x.id===pid);const seq=buildSeq(pid);const grp={};const fin=[];for(const s of seq){if(["tashahhud_final","salat_ibr","salam"].includes(s.id))fin.push(s);else{if(!grp[s.rakaat])grp[s.rakaat]=[];grp[s.rakaat].push(s);}}return(<div><div className="resume-wrap">
+        <div className="resume-title">RESUME DES POSTURES — {genre.toUpperCase()}</div>
+        <img src={"images/resume_posture_"+genre+".png"} alt={"Resume "+genre} className="resume-img" onError={e=>{e.target.style.opacity=".1";}}/>
+      </div>
+      <div className="edit-warn"><strong>Note editoriale</strong> — References issues de Bukhari Muslim Abu Dawud Tirmidhi. A verifier par un erudit qualifie.</div>{Object.entries(grp).map(([r,steps])=>{const iv=VOCAL_RAKAAT[pid].includes(parseInt(r));return(<div key={r} style={{marginBottom:20}}><div className="section-title">Rakaat {r} / {prayer.rakaat}<span className={"vb "+(iv?"vh":"vl")}>{iv?"Voix haute":"Voix basse"}</span></div>{steps.map((s,i)=><Card key={i} step={s} p={p} sel={sel} onSel={onSel} genre={genre}/>)}</div>);})}{fin.length>0&&<div style={{marginBottom:20}}><div className="section-title">Cloture</div>{fin.map((s,i)=><Card key={i} step={s} p={p} sel={sel} onSel={onSel} genre={genre}/>)}</div>}</div>);}
 
-function CompMode({pid,p,sel,onSel}){const prayer=PRAYERS.find(x=>x.id===pid);const seq=buildSeq(pid);const [idx,setIdx]=useState(0);const [done,setDone]=useState(false);useEffect(()=>{p.stop();},[idx]);const go=(n)=>{p.stop();n>=0&&n<seq.length?setIdx(n):setDone(true);};if(done)return(<div className="done"><div className="done-ar">الحمد لله</div><div className="done-t">Priere accomplie</div><div className="done-s">Qu'Allah accepte votre priere</div><div className="orn">* * *</div><button className="rb-btn" onClick={()=>{p.stop();setIdx(0);setDone(false);}}>RECOMMENCER</button></div>);const step=seq[idx];const prog=Math.round((idx/(seq.length-1))*100);const isLast=idx===seq.length-1;const hv=["qiyam","surah","takbir"].includes(step.id);const srcId=step.id==="tashahhud_int"?"tashahhud_int":step.id==="tashahhud_final"?"tashahhud_final":step.id;const src=SOURCES[srcId];const postId=STEP_POSTURE[step.id]||"Quiyam";const dots=Array.from({length:prayer.rakaat},(_,i)=>{const r=i+1;const dn=(step.rakaat||0)>r;const cr=step.rakaat===r&&!["tashahhud_final","salat_ibr","salam"].includes(step.id);return <div key={r} className={"dot"+(dn?" dn":"")+(cr?" cr":"")}/>;});let body;if(step.id==="surah"){const sid=sel[step.rakaat]||"ikhlas";const s=SURAHS[sid];const aid="sh-"+step.rakaat+"-"+sid;body=<><div className="cc-meta"><div className="cc-ml"><span className="cc-nm">Sourate supplementaire</span><span style={{fontSize:".72rem",color:"var(--tx3)"}}>Rakaat {step.rakaat}</span></div><ABtn surahNum={s.num} id={aid} p={p}/></div><PostureIllustration postureId="Quiyam"/><SS rakaat={step.rakaat} sel={sel} onSel={(r,id)=>{p.stop();onSel(r,id);}}/><div className="cc-ar">{s.arabicText}</div><div className="cc-ph">{s.phonetic}</div><div className="cc-tr">{s.translation}</div><Src src={s.sources}/></>;}else{body=<><div className="cc-meta"><div className="cc-ml"><span className="cc-nm">{step.label}</span>{step.tashahudType==="intermediaire"&&<span className="th-i">Intermediaire</span>}{step.tashahudType==="final"&&<span className="th-f">Final</span>}{step.rakaat&&!["tashahhud_final","salat_ibr","salam"].includes(step.id)&&<span style={{fontSize:".72rem",color:"var(--tx3)"}}>Rakaat {step.rakaat}</span>}</div>{step.id==="qiyam"&&<ABtn surahNum={1} id={step.stepKey} p={p}/>}</div><PostureIllustration postureId={postId}/>{hv&&<div className={"cv "+(step.isVocal?"hi":"lo")}><span className="d"/>{step.isVocal?"Recitation a voix haute":"Recitation silencieuse"}</div>}<div className="cc-ar">{step.arabic}</div><div className="cc-ph">{step.phonetic}</div><div className="cc-tr">{step.translation}</div>{step.note&&<div className="cc-nt">{step.note}</div>}{step.audioNote&&<div className="cc-nt">{step.audioNote}</div>}{src&&<Src src={src}/>}</>;}return(<div><div className="cp-prg"><div className="prg-w"><div className="prg-b" style={{width:prog+"%"}}/></div><div className="prg-l">{idx+1} / {seq.length}</div></div><div className="cp-dots">{dots}</div><div className="cc">{body}</div><div className="cn"><button className="nb" onClick={()=>go(idx-1)} disabled={idx===0}>{"< Retour"}</button>{isLast?<button className="nb dn2" onClick={()=>setDone(true)}>Terminer</button>:<button className="nb pr" onClick={()=>go(idx+1)}>{"Suivant >"}</button>}</div></div>);}
+function CompMode({pid,p,sel,onSel,genre}){const prayer=PRAYERS.find(x=>x.id===pid);const seq=buildSeq(pid);const [idx,setIdx]=useState(0);const [done,setDone]=useState(false);useEffect(()=>{p.stop();},[idx]);const go=(n)=>{p.stop();n>=0&&n<seq.length?setIdx(n):setDone(true);};if(done)return(<div className="done"><div className="done-ar">الحمد لله</div><div className="done-t">Priere accomplie</div><div className="done-s">Qu'Allah accepte votre priere</div><div className="orn">* * *</div><button className="rb-btn" onClick={()=>{p.stop();setIdx(0);setDone(false);}}>RECOMMENCER</button></div>);const step=seq[idx];const prog=Math.round((idx/(seq.length-1))*100);const isLast=idx===seq.length-1;const hv=["qiyam","surah","takbir"].includes(step.id);const srcId=step.id==="tashahhud_int"?"tashahhud_int":step.id==="tashahhud_final"?"tashahhud_final":step.id;const src=SOURCES[srcId];const postId=STEP_POSTURE[step.id]||"Quiyam";const dots=Array.from({length:prayer.rakaat},(_,i)=>{const r=i+1;const dn=(step.rakaat||0)>r;const cr=step.rakaat===r&&!["tashahhud_final","salat_ibr","salam"].includes(step.id);return <div key={r} className={"dot"+(dn?" dn":"")+(cr?" cr":"")}/>;});let body;if(step.id==="surah"){const sid=sel[step.rakaat]||"ikhlas";const s=SURAHS[sid];const aid="sh-"+step.rakaat+"-"+sid;body=<><div className="cc-meta"><div className="cc-ml"><span className="cc-nm">Sourate supplementaire</span><span style={{fontSize:".72rem",color:"var(--tx3)"}}>Rakaat {step.rakaat}</span></div><ABtn surahNum={s.num} id={aid} p={p}/></div><PostureIllustration postureId="Quiyam" genre={genre}/><SS rakaat={step.rakaat} sel={sel} onSel={(r,id)=>{p.stop();onSel(r,id);}}/><div className="cc-ar">{s.arabicText}</div><div className="cc-ph">{s.phonetic}</div><div className="cc-tr">{s.translation}</div><Src src={s.sources}/></>;}else{body=<><div className="cc-meta"><div className="cc-ml"><span className="cc-nm">{step.label}</span>{step.tashahudType==="intermediaire"&&<span className="th-i">Intermediaire</span>}{step.tashahudType==="final"&&<span className="th-f">Final</span>}{step.rakaat&&!["tashahhud_final","salat_ibr","salam"].includes(step.id)&&<span style={{fontSize:".72rem",color:"var(--tx3)"}}>Rakaat {step.rakaat}</span>}</div>{step.id==="qiyam"&&<ABtn surahNum={1} id={step.stepKey} p={p}/>}</div><PostureIllustration postureId={postId}/>{hv&&<div className={"cv "+(step.isVocal?"hi":"lo")}><span className="d"/>{step.isVocal?"Recitation a voix haute":"Recitation silencieuse"}</div>}<div className="cc-ar">{step.arabic}</div><div className="cc-ph">{step.phonetic}</div><div className="cc-tr">{step.translation}</div>{step.note&&<div className="cc-nt">{step.note}</div>}{step.audioNote&&<div className="cc-nt">{step.audioNote}</div>}{src&&<Src src={src}/>}</>;}return(<div><div className="cp-prg"><div className="prg-w"><div className="prg-b" style={{width:prog+"%"}}/></div><div className="prg-l">{idx+1} / {seq.length}</div></div><div className="cp-dots">{dots}</div><div className="cc">{body}</div><div className="cn"><button className="nb" onClick={()=>go(idx-1)} disabled={idx===0}>{"< Retour"}</button>{isLast?<button className="nb dn2" onClick={()=>setDone(true)}>Terminer</button>:<button className="nb pr" onClick={()=>go(idx+1)}>{"Suivant >"}</button>}</div></div>);}
 
 function AboutTab({onDonate}){const sections=[{titre:"A PROPOS DE CETTE APPLICATION",contenu:"Cette application a ete concue pour accompagner le musulman dans sa pratique quotidienne de la salah. Elle couvre l'ensemble du cycle de la priere avec des references authentifiees."},{titre:"FONCTIONNALITES",contenu:"Boussole Qibla avec gyroscope\nHoraires de priere par geolocalisation\nNotifications de rappel\nGuide du Wudu\nGuide complet de la Salah\nIllustrations des postures\nRecitation audio par 5 recitateurs\nCompteur de Tasbih vocal\nVerset du jour\nMode jour / nuit"},{titre:"SOURCES ISLAMIQUES",contenu:"Sahih al-Bukhari\nSahih Muslim\nSunan Abu Dawud\nSunan al-Tirmidhi\n\nLes positions jurisprudentielles mentionnent les quatre madhabs. Cette application est un outil d'apprentissage et ne se substitue pas a l'avis d'un erudit qualifie."},{titre:"SOURCES AUDIO",contenu:"Les recitations sont fournies par mp3quran.net.\nMishary Rashid Al-Afasy\nAbdul Basit Murattal\nMahmoud Khalil Al-Husary\nMohamed Siddiq Al-Minshawi\nMaher Al-Muaiqly"},{titre:"CALCUL DE LA QIBLA",contenu:"La direction de la Qibla est calculee selon la formule du grand cercle. Coordonnees de la Kaba : 21.4225 N 39.8262 E. Horaires via API Aladhan methode MWL."},{titre:"CREDITS",contenu:"Conception et developpement : Jerome Bordier (ArtByJay)\nIllustrations des postures : creations originales\nPolices : Amiri Cinzel Decorative Crimson Pro\n\nQu'Allah accepte ce travail et le rende benefique."}];
   return(<div style={{display:"flex",flexDirection:"column",gap:12,padding:"4px 0"}}>
     <div style={{background:"var(--sf)",border:"1px solid var(--bo)",borderRadius:"var(--r)",padding:"20px 16px",textAlign:"center"}}>
       <div style={{fontFamily:"'Amiri',serif",fontSize:"2.2rem",color:"var(--gold-l)",marginBottom:8}}>بِسۡمِ اللَّهِ الرَّحۡمَنِ الرَّحِيمِ</div>
       <div style={{fontFamily:"'Cinzel Decorative',serif",fontSize:".82rem",letterSpacing:".2em",color:"var(--gold)",marginBottom:6}}>GUIDE DE PRIERE — SALAH</div>
-      <div style={{fontSize:".82rem",color:"var(--tx3)"}}>Version 7.0 — 2025</div>
+      <div style={{fontSize:".82rem",color:"var(--tx3)"}}>Version 8.0 — 2025</div>
     </div>
     <div style={{background:"var(--sf)",border:"1px solid var(--bo2)",borderRadius:"var(--r)",padding:"18px 16px",textAlign:"center"}}>
       <div style={{fontFamily:"'Cinzel Decorative',serif",fontSize:".72rem",letterSpacing:".12em",color:"var(--gold)",marginBottom:8}}>SOUTENIR L'APPLICATION</div>
@@ -566,6 +637,8 @@ function App(){
   const [ck,setCk]=useState(0);
   const [dayMode,setDayMode]=useState(false);
   const [showDonate,setShowDonate]=useState(false);
+  const [genre,setGenre]=useState("homme");
+  const [genre,setGenre]=useState('homme');
   const p=useAudio();
   useEffect(()=>{document.body.classList.toggle("day-mode",dayMode);},[dayMode]);
   const share=async()=>{const data={title:"Guide de Priere - Salah",text:"Application complete de guide de priere islamique.",url:window.location.href};if(navigator.share){try{await navigator.share(data);}catch(e){}}else{navigator.clipboard.writeText(window.location.href);alert("Lien copie !");}};
@@ -585,6 +658,10 @@ function App(){
         <div className="hdr-s">Salah</div>
       </div>
 
+      <div className="genre-bar">
+        <button className={"genre-btn"+(genre==="homme"?" on":"")} onClick={()=>setGenre("homme")}>HOMME</button>
+        <button className={"genre-btn"+(genre==="femme"?" on":"")} onClick={()=>setGenre("femme")}>FEMME</button>
+      </div>
       <div className="donate-bar">
         <span className="donate-label">SOUTENIR :</span>
         <button onClick={()=>setShowDonate(true)} className="donate-btn donate-paypal">
@@ -595,25 +672,29 @@ function App(){
         </button>
       </div>
 
+      <div className="genre-bar">
+        <button className={"genre-btn"+(genre==="homme"?" on":"")} onClick={()=>setGenre("homme")}>HOMME</button>
+        <button className={"genre-btn"+(genre==="femme"?" on":"")} onClick={()=>setGenre("femme")}>FEMME</button>
+      </div>
       <VersetDuJour/>
 
       <div className="main-tabs">
         <button className={"main-tab"+(mainTab==="qibla"?" on":"")} onClick={()=>setMainTab("qibla")}>QIBLA</button>
-        <button className={"main-tab"+(mainTab==="wudu"?" on":"")} onClick={()=>setMainTab("wudu")}>WUDU</button>
+        <button className={"main-tab"+(mainTab==="wudu"?" on":"")} onClick={()=>setMainTab("wudu")}>ABLUTIONS</button>
         <button className={"main-tab"+(mainTab==="salah"?" on":"")} onClick={()=>setMainTab("salah")}>SALAH</button>
         <button className={"main-tab"+(mainTab==="tasbih"?" on":"")} onClick={()=>setMainTab("tasbih")}>TASBIH</button>
         <button className={"main-tab"+(mainTab==="about"?" on":"")} onClick={()=>setMainTab("about")}>A PROPOS</button>
       </div>
 
       {mainTab==="qibla"&&<QiblaHorairesTab/>}
-      {mainTab==="wudu"&&<WuduTab/>}
+      {mainTab==="wudu"&&<WuduTab genre={genre}/>}
       {mainTab==="tasbih"&&<TasbihTab/>}
       {mainTab==="about"&&<AboutTab onDonate={()=>setShowDonate(true)}/>}
       {mainTab==="salah"&&<>
         <div className="toolbar"><span className="ap-lbl">RECITATEUR</span><select className="ap-sel" value={p.reciterId} onChange={e=>{p.stop();p.setReciterId(e.target.value);}}>{RECITERS.map(r=><option key={r.id} value={r.id}>{r.name}</option>)}</select></div>
         <div className="pg">{PRAYERS.map(x=><button key={x.id} className={"pb"+(pid===x.id?" on":"")} onClick={()=>sp(x.id)}><span className="pb-ar">{x.arabic}</span><span className="pb-nm">{x.name}</span><span className="pb-rk">{x.rakaat} rakaat</span></button>)}</div>
         <div className="mt"><button className={"mb"+(mode==="reference"?" on":"")} onClick={()=>sw("reference")}>REFERENCE</button><button className={"mb"+(mode==="companion"?" on":"")} onClick={()=>sw("companion")}>COMPAGNON PAS A PAS</button></div>
-        {mode==="reference"?<RefMode key={pid} pid={pid} p={p} sel={sel} onSel={os}/>:<CompMode key={pid+"-"+ck} pid={pid} p={p} sel={sel} onSel={os}/>}
+        {mode==="reference"?<RefMode key={pid+genre} pid={pid} p={p} sel={sel} onSel={os} genre={genre}/>:<CompMode key={pid+"-"+ck+genre} pid={pid} p={p} sel={sel} onSel={os} genre={genre}/>}
       </>}
     </div>
   );
