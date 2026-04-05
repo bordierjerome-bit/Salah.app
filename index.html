@@ -73,7 +73,9 @@
     .donate-modal{background:var(--bg2);border:1px solid var(--bo2);border-radius:var(--r);padding:28px 22px;max-width:380px;width:100%;text-align:center}
     .donate-modal-btn{display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 20px;border-radius:var(--r);font-family:'Cinzel Decorative',serif;font-size:.70rem;letter-spacing:.1em;cursor:pointer;transition:all .2s;border:1px solid;text-decoration:none;min-height:52px;background:none;width:100%;margin-bottom:10px}
     .dmb-paypal{border-color:rgba(0,112,192,.45);color:#5baee0}
+    .dmb-paypal:hover{background:rgba(0,112,192,.12)}
     .dmb-stripe{border-color:rgba(99,91,255,.45);color:#a49cff}
+    .dmb-stripe:hover{background:rgba(99,91,255,.12)}
     .donate-bar{display:flex;align-items:center;justify-content:center;gap:10px;margin:0 0 14px;flex-wrap:wrap}
     .donate-label{font-family:'Cinzel Decorative',serif;font-size:.68rem;letter-spacing:.1em;color:var(--tx3)}
     .donate-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:var(--r);font-family:'Cinzel Decorative',serif;font-size:.62rem;letter-spacing:.1em;cursor:pointer;transition:all .2s;border:1px solid;min-height:40px;background:none}
@@ -327,26 +329,31 @@ function DonateModal({onClose}){
   return(
     <div className="donate-modal-overlay" onClick={e=>{if(e.target===e.currentTarget)onClose();}}>
       <div className="donate-modal">
-        <div style={{fontFamily:"'Amiri',serif",fontSize:"1.7rem",color:"var(--gold-l)",marginBottom:6}}>جَزَاكُمُ اللَّهُ خَيْرًا</div>
-        <div style={{fontFamily:"'Cinzel Decorative',serif",fontSize:".72rem",letterSpacing:".14em",color:"var(--gold)",marginBottom:14}}>SOUTENIR L'APPLICATION</div>
-        <div style={{fontSize:".90rem",color:"var(--tx2)",lineHeight:1.8,marginBottom:8,textAlign:"left",borderLeft:"2px solid var(--bo)",paddingLeft:12}}>
-          Cette application est <strong style={{color:"var(--gold-l)"}}>entierement gratuite</strong> et le restera. Aucune publicite, aucun abonnement.
+        <div className="donate-modal-title">جَزَاكُمُ اللَّهُ خَيْرًا</div>
+        <div className="donate-modal-sub">SOUTENIR L'APPLICATION</div>
+        <div className="donate-modal-txt">
+          Cette application est et restera gratuite. Votre soutien permet de la maintenir, de l'ameliorer et d'ajouter de nouvelles fonctionnalites.<br/><br/>
+          Qu'Allah recompense votre geste.
         </div>
-        <div style={{fontSize:".82rem",color:"var(--tx3)",lineHeight:1.75,marginBottom:18,fontStyle:"italic"}}>
-          Les dons couvrent les frais d'hebergement et de maintenance. Le surplus est verse a des associations caritatives islamiques. Qu'Allah vous recompense.
+        <div className="donate-modal-btns">
+          <a className="donate-modal-btn donate-modal-btn-paypal"
+             href="https://www.paypal.com/donate/?hosted_button_id=VOTRE_ID_PAYPAL"
+             target="_blank" rel="noopener noreferrer">
+            <span style={{fontSize:"1.1rem"}}>🅿</span> DONNER VIA PAYPAL
+          </a>
+          <a className="donate-modal-btn donate-modal-btn-stripe"
+             href="https://buy.stripe.com/VOTRE_LIEN_STRIPE"
+             target="_blank" rel="noopener noreferrer">
+            <span style={{fontSize:"1.1rem"}}>⚡</span> DONNER VIA STRIPE
+          </a>
         </div>
-        <a className="donate-modal-btn dmb-paypal" href="https://www.paypal.com/donate/?hosted_button_id=VOTRE_ID_PAYPAL" target="_blank" rel="noopener noreferrer">
-          P DONNER VIA PAYPAL
-        </a>
-        <a className="donate-modal-btn dmb-stripe" href="https://buy.stripe.com/VOTRE_LIEN_STRIPE" target="_blank" rel="noopener noreferrer">
-          DONNER VIA STRIPE / CARTE
-        </a>
-        <button className="donate-close" onClick={onClose}>FERMER</button>
+        <button className="donate-modal-close" onClick={onClose}>FERMER</button>
       </div>
     </div>
   );
 }
 
+/* ===================== VERSET DU JOUR ===================== */
 function VersetDuJour() {
   const [open, setOpen] = useState(false);
   const versets = window.VERSETS || [];
@@ -420,7 +427,7 @@ function QiblaHorairesTab(){
     <div className="qh-wrap">
       <div className="qh-card">
         <div className="qh-title">DIRECTION DE LA QIBLA</div>
-        {status==="idle"&&<div style={{textAlign:"center"}}><div className="qibla-img-wrap"><img src="images/qibla.png" alt="Qibla" className="qibla-img" onError={e=>{e.target.style.display="none";}}/></div><p style={{fontSize:".88rem",color:"var(--tx3)",margin:"12px 0 16px",lineHeight:1.7}}>La direction de La Mecque sera calculee depuis votre position exacte.</p><button className="geo-btn" onClick={requestLocation}>LOCALISER MA POSITION</button></div>}
+        {status==="idle"&&<div style={{textAlign:"center"}}><p style={{fontSize:".88rem",color:"var(--tx3)",marginBottom:16,lineHeight:1.7}}>La direction de La Mecque sera calculee depuis votre position exacte.</p><button className="geo-btn" onClick={requestLocation}>LOCALISER MA POSITION</button></div>}
         {status==="loading"&&<p className="geo-loading">Localisation en cours...</p>}
         {status==="error"&&<p className="geo-err">{errMsg}</p>}
         {status==="done"&&qibla!==null&&<><CompassSVG qiblaDeg={qibla} deviceHeading={heading}/><p className="compass-info"><span className="compass-deg">{Math.round(qibla)}°</span>Direction vers La Mecque</p></>}
@@ -492,13 +499,13 @@ function WuduTab({genre}){
   const [ablTab,setAblTab]=React.useState("wudu");
   const GHUSL=[
     {num:1,titre:"Cas rendant le Ghusl obligatoire",tag:"fard",ar:"",ph:"",txt:"Le Ghusl est obligatoire dans cinq cas : 1) Ejaculation avec plaisir. 2) Rapport sexuel. 3) Fin des regles (hayd). 4) Pertes post-partum (nifas). 5) Deces (effectue par d'autres).",note:"Al-Maida 5:6."},
-    {num:2,titre:"Niyyah — Intention",tag:"fard",ar:"\u0646\u064e\u0648\u064e\u064a\u0652\u062a\u064f \u0627\u0644\u063a\u064f\u0633\u0652\u0644\u064e",ph:"Nawaytu l-ghusla",txt:"Former l'intention sincere de se purifier de l'impurete majeure.",note:"Bukhari n1."},
-    {num:3,titre:"Basmalah",tag:"sunna",ar:"\u0628\u0650\u0633\u0652\u0645\u0650 \u0627\u0644\u0644\u0651\u064e\u0647\u0650",ph:"Bismi -llah",txt:"Prononcer le nom d'Allah avant de commencer.",note:"Abu Dawud n101."},
+    {num:2,titre:"Niyyah - Intention",tag:"fard",ar:"نَوَيْتُ الغُسْلَ",ph:"Nawaytu l-ghusla",txt:"Former l'intention sincere de se purifier de l'impurete majeure.",note:"Bukhari n1."},
+    {num:3,titre:"Basmalah",tag:"sunna",ar:"بِسْمِ اللَّهِ",ph:"Bismi -llah",txt:"Prononcer le nom d'Allah avant de commencer.",note:"Abu Dawud n101."},
     {num:4,titre:"Se laver les mains",tag:"sunna",ar:"",ph:"",txt:"Laver les deux mains trois fois.",note:"Bukhari n248."},
     {num:5,titre:"Eliminer toute impurete visible",tag:"fard",ar:"",ph:"",txt:"Nettoyer soigneusement toute impurete sur le corps. Condition de validite du ghusl.",note:"Bukhari n248, Muslim n316."},
     {num:6,titre:"Effectuer le Wudu complet",tag:"sunna",ar:"",ph:"",txt:"Accomplir le wudu comme pour la priere. Sunna du Prophete.",note:"Bukhari n248."},
-    {num:7,titre:"Verser l'eau sur la tete — 3 fois",tag:"fard",ar:"",ph:"",txt:"Verser l'eau abondamment trois fois en faisant penetrer jusqu'a la racine des cheveux.",note:"Muslim n316."},
-    {num:8,titre:"Rincer le cote droit",tag:"fard",ar:"",ph:"",txt:"Faire couler l'eau sur tout le cote droit du haut vers le bas. Atteindre toutes les zones.",note:"Muslim n316."},
+    {num:7,titre:"Verser l'eau sur la tete - 3 fois",tag:"fard",ar:"",ph:"",txt:"Verser l'eau abondamment trois fois jusqu'a la racine des cheveux.",note:"Muslim n316."},
+    {num:8,titre:"Rincer le cote droit",tag:"fard",ar:"",ph:"",txt:"Faire couler l'eau sur tout le cote droit du haut vers le bas.",note:"Muslim n316."},
     {num:9,titre:"Rincer le cote gauche",tag:"fard",ar:"",ph:"",txt:"Meme procedure pour le cote gauche. Aucune zone ne doit rester seche.",note:"Muslim n316."},
     {num:10,titre:"Laver les pieds",tag:"sunna",ar:"",ph:"",txt:"Laver les deux pieds en passant entre les orteils.",note:"Bukhari n248."},
     {num:11,titre:"Points importants",tag:"fard",ar:"",ph:"",txt:"Femme : pas besoin de defaire les nattes si l'eau atteint la racine. Ghusl minimal valide : intention + eau sur tout le corps.",note:"Muslim n330."}
@@ -506,17 +513,16 @@ function WuduTab({genre}){
   return(
     <div className="wudu-wrap">
       <div className="ablution-tabs">
-        <button className={"ablution-tab"+(ablTab==="wudu"?" on":"")} onClick={()=>setAblTab("wudu")}>PETITES ABLUTIONS</button>
-        <button className={"ablution-tab"+(ablTab==="ghusl"?" on":"")} onClick={()=>setAblTab("ghusl")}>GRANDES ABLUTIONS</button>
+        <button className={"ablution-tab"+(ablTab==="wudu"?" on":"")} onClick={()=>setAblTab("wudu")}>PETITES ABLUTIONS - WUDU</button>
+        <button className={"ablution-tab"+(ablTab==="ghusl"?" on":"")} onClick={()=>setAblTab("ghusl")}>GRANDES ABLUTIONS - GHUSL</button>
       </div>
-      {ablTab==="wudu"&&<div className="ablution-intro"><div className="ablution-intro-title">Wudu — Purification mineure</div><div className="ablution-intro-txt">Condition de validite de la priere. Leve l'impurete mineure (hadath asghar). Allah dit : "O croyants ! Quand vous vous levez pour la priere, lavez vos visages..." (Al-Maida 5:6)</div></div>}
-      {ablTab==="ghusl"&&<div className="ablution-intro"><div className="ablution-intro-title">Ghusl — Purification majeure</div><div className="ablution-intro-ar">\u0648\u064e\u0625\u0650\u0646 \u0643\u064f\u0646\u062a\u064f\u0645\u0652 \u062c\u064f\u0646\u064f\u0628\u064b\u0627 \u0641\u064e\u0627\u0637\u0651\u064e\u0647\u0651\u064e\u0631\u064f\u0648\u0627</div><div className="ablution-intro-txt">Leve l'impurete majeure (hadath akbar). Obligatoire avant la priere, la recitation du Coran et le tawaf. (Al-Maida 5:6)</div></div>}
+      {ablTab==="wudu"&&<div className="ablution-intro"><div className="ablution-intro-title">Wudu - Purification mineure</div><div className="ablution-intro-txt">Condition de validite de la priere. Leve l'impurete mineure. Allah dit : "O croyants ! Quand vous vous levez pour la priere, lavez vos visages..." (Al-Maida 5:6)</div></div>}
+      {ablTab==="ghusl"&&<div className="ablution-intro"><div className="ablution-intro-title">Ghusl - Purification majeure</div><div className="ablution-intro-ar">وَإِن كُنتُمْ جُنُبًا فَاطَّهَّرُوا</div><div className="ablution-intro-txt">Leve l'impurete majeure. Obligatoire avant la priere, la recitation du Coran et le tawaf. (Al-Maida 5:6)</div></div>}
       {ablTab==="wudu"&&WUDU_STEPS.map((s,i)=><div key={i} className="wudu-step"><div className="wudu-num">ETAPE {s.num}</div><div className="wudu-title">{s.titre}</div><span className={"wudu-tag "+(s.tag==="fard"?"tag-fard":"tag-sunna")}>{s.tag==="fard"?"Fard":"Sunna"}</span>{s.ar&&<div className="wudu-ar">{s.ar}</div>}{s.ph&&<div className="wudu-ph">{s.ph}</div>}<div className="wudu-txt">{s.txt}</div>{s.note&&<div className="wudu-note">{s.note}</div>}</div>)}
       {ablTab==="ghusl"&&GHUSL.map((s,i)=><div key={i} className="wudu-step"><div className="wudu-num">ETAPE {s.num}</div><div className="wudu-title">{s.titre}</div><span className={"wudu-tag "+(s.tag==="fard"?"tag-fard":"tag-sunna")}>{s.tag==="fard"?"Fard":"Sunna"}</span>{s.ar&&<div className="wudu-ar">{s.ar}</div>}{s.ph&&<div className="wudu-ph">{s.ph}</div>}<div className="wudu-txt">{s.txt}</div>{s.note&&<div className="wudu-note">{s.note}</div>}</div>)}
     </div>
   );
 }
-
 const SURAHS={
   kafirun:{id:"kafirun",num:109,name:"Al-Kafirun",arabic:"الكافرون",ayat:6,
     arabicText:"قُلۡ يَٰٓأَيُّهَا ٱلۡكَٰفِرُونَ ۝ لَآ أَعۡبُدُ مَا تَعۡبُدُونَ ۝ وَلَآ أَنتُمۡ عَٰبِدُونَ مَآ أَعۡبُدُ ۝ وَلَآ أَنَا۠ عَابِدٞ مَّا عَبَدتُّمۡ ۝ وَلَآ أَنتُمۡ عَٰبِدُونَ مَآ أَعۡبُدُ ۝ لَكُمۡ دِينُكُمۡ وَلِيَ دِينِ",
@@ -641,7 +647,8 @@ function App(){
         </button>
       </div>
 
-      <div className="genre-bar"><button className={"genre-btn"+(genre==="homme"?" on":"")} onClick={()=>setGenre("homme")}>HOMME</button><button className={"genre-btn"+(genre==="femme"?" on":"")} onClick={()=>setGenre("femme")}>FEMME</button></div><div className="donate-bar"><span className="donate-label">SOUTENIR :</span><button onClick={()=>setShowDonate(true)} className="donate-btn donate-paypal">PayPal</button><button onClick={()=>setShowDonate(true)} className="donate-btn donate-stripe">Stripe</button></div>
+      <div className="genre-bar"><button className={"genre-btn"+(genre==="homme"?" on":"")} onClick={()=>setGenre("homme")}>HOMME</button><button className={"genre-btn"+(genre==="femme"?" on":"")} onClick={()=>setGenre("femme")}>FEMME</button></div>
+      <div className="donate-bar"><span className="donate-label">SOUTENIR :</span><button onClick={()=>setShowDonate(true)} className="donate-btn donate-paypal">PayPal</button><button onClick={()=>setShowDonate(true)} className="donate-btn donate-stripe">Stripe</button></div>
       <VersetDuJour/>
 
       <div className="main-tabs">
