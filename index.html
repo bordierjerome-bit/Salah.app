@@ -16,29 +16,28 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js" crossorigin></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
 
-  <!-- Versets du jour - donnees externes au JSX pour eviter les erreurs de parsing -->
   <script>
   window.VERSETS = [
-    {ref:"Al-Fatihah 1:5", ar:"\u0625\u064a\u0651\u0627\u0643\u064e \u0646\u064e\u0639\u0652\u0628\u064f\u062f\u064f \u0648\u064e\u0625\u064a\u0651\u0627\u0643\u064e \u0646\u064e\u0633\u0652\u062a\u064e\u0639\u0650\u064a\u0646\u064f", ph:"Iyyaka nabudu wa-iyyaka nastain", fr:"C'est Toi Seul que nous adorons et c'est Toi Seul dont nous implorons l'aide.", ref2:"La priere est une conversation avec Allah. Chaque jour tu renouvelles ce pacte."},
-    {ref:"Al-Baqarah 2:152", ar:"\u0641\u064e\u0627\u0630\u0652\u0643\u064f\u0631\u064f\u0648\u0646\u0650\u064a \u0623\u064e\u0630\u0652\u0643\u064f\u0631\u0652\u0643\u064f\u0645\u0652", ph:"Fadhkuruni adhkurkum", fr:"Souvenez-vous de Moi, Je me souviendrai de vous.", ref2:"Chaque dhikr prononce est une reponse divine garantie."},
-    {ref:"Al-Baqarah 2:286", ar:"\u0644\u0627 \u064a\u064f\u0643\u064e\u0644\u0651\u0650\u0641\u064f \u0627\u0644\u0644\u0651\u0647\u064f \u0646\u064e\u0641\u0652\u0633\u064b\u0627 \u0625\u0644\u0651\u0627 \u0648\u064f\u0633\u0652\u0639\u064e\u0647\u064e\u0627", ph:"La yukallifu -llahu nafsan illa wusaha", fr:"Allah n'impose a personne une charge superieure a sa capacite.", ref2:"Ce qui t'est demande est a ta portee. Allah le garantit."},
-    {ref:"Al Imran 3:173", ar:"\u062d\u064e\u0633\u0652\u0628\u064f\u0646\u064e\u0627 \u0627\u0644\u0644\u0651\u0647\u064f \u0648\u064e\u0646\u0650\u0639\u0652\u0645\u064e \u0627\u0644\u0648\u064e\u0643\u0650\u064a\u0644\u064f", ph:"Hasbuna -llahu wa-nima l-wakil", fr:"Allah nous suffit et quel excellent Protecteur !", ref2:"Ibrahim l'a dit dans le feu. La confiance en Allah est le plus grand bouclier."},
-    {ref:"An-Nisa 4:103", ar:"\u0625\u0646\u0651\u064e \u0627\u0644\u0635\u0651\u064e\u0644\u0627\u0629\u064e \u0643\u0627\u0646\u064e\u062a\u0652 \u0639\u064e\u0644\u0649 \u0627\u0644\u0645\u064f\u0624\u0652\u0645\u0650\u0646\u0650\u064a\u0646\u064e \u0643\u0650\u062a\u0627\u0628\u064b\u0627 \u0645\u064e\u0651\u0648\u0652\u0642\u064f\u0648\u062a\u064b\u0627", ph:"Inna s-salata kanat ala l-muminine kitaban mawquta", fr:"La priere est pour les croyants une obligation a des heures determinees.", ref2:"La priere est un rendez-vous avec Allah. Cinq fois par jour Il t'attend."},
-    {ref:"Al-Maida 5:6", ar:"\u0648\u0644\u0643\u0646 \u064a\u064f\u0631\u0650\u064a\u062f\u064f \u0644\u0650\u064a\u064f\u0637\u064e\u0647\u0651\u0650\u0631\u064e\u0643\u064f\u0645\u0652", ph:"Wa-lakin yuridu li-yutahhirakum", fr:"Mais Il veut vous purifier.", ref2:"Le wudu n'est pas une contrainte. C'est un cadeau de purification."},
-    {ref:"Al-Araf 7:55", ar:"\u0627\u062f\u0652\u0639\u064f\u0648\u0627 \u0631\u064e\u0628\u0651\u064e\u0643\u064f\u0645\u0652 \u062a\u064e\u0636\u064e\u0631\u0651\u064f\u0639\u064b\u0627 \u0648\u064e\u062e\u064f\u0641\u0652\u064a\u064e\u0629\u064b", ph:"Udu rabbakum tadarruan wa-khufyatan", fr:"Invoquez votre Seigneur avec humilite et en secret.", ref2:"Le dua le plus puissant est celui du coeur brise murmure dans le silence."},
-    {ref:"Ar-Rad 13:28", ar:"\u0623\u0644\u0627 \u0628\u0650\u0630\u0650\u0643\u0652\u0631\u0650 \u0627\u0644\u0644\u0651\u0647\u0650 \u062a\u064e\u0637\u0652\u0645\u064e\u0626\u0650\u0646\u0651\u064f \u0627\u0644\u0642\u064f\u0644\u064f\u0648\u0628\u064f", ph:"Ala bi-dhikri -llahi tatmainn al-qulub", fr:"C'est par l'invocation d'Allah que les coeurs trouvent la quietude.", ref2:"L'anxiete a un remede ancien. Le dhikr n'est pas une formule c'est une presence."},
-    {ref:"Ibrahim 14:7", ar:"\u0644\u064e\u0626\u0650\u0646 \u0634\u064e\u0643\u064e\u0631\u0652\u062a\u064f\u0645\u0652 \u0644\u064e\u0623\u064e\u0632\u0650\u064a\u062f\u064e\u0646\u0651\u064e\u0643\u064f\u0645\u0652", ph:"La-in shakartum la-azidannakum", fr:"Si vous etes reconnaissants J'augmenterai certainement Mes bienfaits.", ref2:"La gratitude est un multiplicateur divin."},
-    {ref:"Al-Isra 17:44", ar:"\u0648\u0625\u0646 \u0645\u0651\u0650\u0646 \u0634\u064e\u064a\u0652\u0621\u064d \u0625\u0644\u0651\u0627 \u064a\u064f\u0633\u064e\u0628\u0651\u0650\u062d\u064f \u0628\u0650\u062d\u064e\u0645\u0652\u062f\u0650\u0647\u0650", ph:"Wa-in min shayin illa yusabbihu bi-hamdihi", fr:"Il n'est rien qui ne celebre Sa gloire.", ref2:"L'univers entier est en priere permanente. Quand tu dis Subhana Allah tu rejoins ce choeur."},
-    {ref:"Ta-Ha 20:14", ar:"\u0623\u0642\u0650\u0645\u0650 \u0627\u0644\u0635\u0651\u064e\u0644\u0627\u0629\u064e \u0644\u0650\u0630\u0650\u0643\u0652\u0631\u0650\u064a", ph:"Aqimi s-salata li-dhikri", fr:"Accomplis la priere pour te souvenir de Moi.", ref2:"La raison de la priere revelee directement par Allah. C'est un rappel d'amour."},
-    {ref:"Al-Anbiya 21:87", ar:"\u0644\u0627 \u0625\u0644\u0670\u0647\u064e \u0625\u0644\u0651\u0627 \u0623\u0646\u062a\u064e \u0633\u064f\u0628\u0652\u062d\u0627\u0646\u064e\u0643\u064e \u0625\u0646\u0651\u0650\u064a \u0643\u064f\u0646\u062a\u064f \u0645\u0650\u0646\u064e \u0627\u0644\u0638\u0651\u0627\u0644\u0650\u0645\u0650\u064a\u0646\u064e", ph:"La ilaha illa anta subhanaka inni kuntu mina z-zalimin", fr:"Il n'y a de divinite que Toi gloire a Toi j'ai ete du nombre des injustes.", ref2:"La dua de Yunus dans le ventre de la baleine. Sa lumiere dans les tenebres."},
-    {ref:"Al-Muminun 23:1", ar:"\u0642\u062f\u0652 \u0623\u064e\u0641\u0652\u0644\u064e\u062d\u064e \u0627\u0644\u0645\u064f\u0624\u0652\u0645\u0650\u0646\u064f\u0648\u0646\u064e", ph:"Qad aflaha l-muminun", fr:"Bienheureux les croyants.", ref2:"Le succes commence par la foi. Non pas la perfection mais la foi sincere."},
-    {ref:"An-Nur 24:35", ar:"\u0627\u0644\u0644\u0651\u0647\u064f \u0646\u064f\u0648\u0631\u064f \u0627\u0644\u0633\u0651\u064e\u0645\u0627\u0648\u0627\u062a\u0650 \u0648\u0627\u0644\u0623\u0631\u0652\u0636\u0650", ph:"Allahu nuru s-samawati wa-l-ard", fr:"Allah est la Lumiere des cieux et de la terre.", ref2:"Tout ce qui existe recoit sa lumiere d'Allah. Dans l'obscurite tourne-toi vers la Source."},
-    {ref:"Al-Ankabut 29:45", ar:"\u0625\u0646\u0651\u064e \u0627\u0644\u0635\u0651\u064e\u0644\u0627\u0629\u064e \u062a\u064e\u0646\u0652\u0647\u0649 \u0639\u064e\u0646\u0650 \u0627\u0644\u0641\u064e\u062d\u0652\u0634\u0627\u0621\u0650 \u0648\u0627\u0644\u0645\u064f\u0646\u0643\u064e\u0631\u0650", ph:"Inna s-salata tanha ani l-fahshai wa-l-munkar", fr:"La priere preserve des actes honteux et reprehensibles.", ref2:"La priere est une protection. Celui qui prie vraiment change interieurement."},
-    {ref:"Az-Zumar 39:53", ar:"\u0644\u0627 \u062a\u064e\u0642\u0652\u0646\u064e\u0637\u064f\u0648\u0627 \u0645\u0650\u0646 \u0631\u0651\u064e\u062d\u0652\u0645\u064e\u0629\u0650 \u0627\u0644\u0644\u0651\u0647\u0650", ph:"La taqnatu min rahmati -llahi", fr:"Ne desespérez pas de la misericorde d'Allah.", ref2:"Allah pardonne tous les peches. Pas certains. Tous. Ne desespere jamais."},
-    {ref:"Ghafir 40:60", ar:"\u0627\u062f\u0652\u0639\u064f\u0648\u0646\u0650\u064a \u0623\u064e\u0633\u0652\u062a\u064e\u062c\u0650\u0628\u0652 \u0644\u064e\u0643\u064f\u0645\u0652", ph:"Uduni astajib lakum", fr:"Invoquez-Moi Je vous repondrai.", ref2:"Une promesse divine sans condition. Invoquez-Moi. Je repondrai."},
-    {ref:"Al-Hujurat 49:13", ar:"\u0625\u0646\u0651\u064e \u0623\u064e\u0643\u0652\u0631\u064e\u0645\u064e\u0643\u064f\u0645\u0652 \u0639\u0650\u0646\u062f\u064e \u0627\u0644\u0644\u0651\u0647\u0650 \u0623\u064e\u062a\u0652\u0642\u064e\u0627\u0643\u064f\u0645\u0652", ph:"Inna akramakum inda -llahi atqakum", fr:"Le plus noble d'entre vous aupres d'Allah est le plus pieux.", ref2:"La seule noblesse qui compte aux yeux d'Allah est la piete. Accessible a tous."},
-    {ref:"Ar-Rahman 55:13", ar:"\u0641\u064e\u0628\u0650\u0623\u064e\u064a\u0651\u0650 \u0622\u0644\u0627\u0621\u0650 \u0631\u064e\u0628\u0651\u0650\u0643\u064f\u0645\u0627 \u062a\u064f\u0643\u064e\u0630\u0651\u0650\u0628\u0627\u0646\u0650", ph:"Fa-bi-ayyi alai rabbikuma tukadhdhiban", fr:"Lequel des bienfaits de votre Seigneur nierez-vous ?", ref2:"Ce verset se repete 31 fois. La gratitude commence par compter ce qu'on a recu."},
-    {ref:"Al-Ikhlas 112:1", ar:"\u0642\u064f\u0644\u0652 \u0647\u064f\u0648\u064e \u0627\u0644\u0644\u0651\u0647\u064f \u0623\u064e\u062d\u064e\u062f\u064c", ph:"Qul huwa -llahu ahad", fr:"Dis : Il est Allah l'Unique.", ref2:"Ahad, Un absolu sans equivalent. En un mot toute la theologie islamique."},
+    {ref:"Al-Fatihah 1:5", ar:"إِيَّاكَ نَعۡبُدُ وَإِيَّاكَ نَسۡتَعِينُ", ph:"Iyyaka nabudu wa-iyyaka nastain", fr:"C'est Toi Seul que nous adorons et c'est Toi Seul dont nous implorons l'aide.", ref2:"La priere est une conversation avec Allah. Chaque jour tu renouvelles ce pacte."},
+    {ref:"Al-Baqarah 2:152", ar:"فَاذۡكُرُونِي أَذۡكُرۡكُمۡ", ph:"Fadhkuruni adhkurkum", fr:"Souvenez-vous de Moi, Je me souviendrai de vous.", ref2:"Chaque dhikr prononce est une reponse divine garantie."},
+    {ref:"Al-Baqarah 2:286", ar:"لَا يُكَلِّفُ اللَّهُ نَفۡسًا إِلَّا وُسۡعَهَا", ph:"La yukallifu -llahu nafsan illa wusaha", fr:"Allah n'impose a personne une charge superieure a sa capacite.", ref2:"Ce qui t'est demande est a ta portee. Allah le garantit."},
+    {ref:"Al Imran 3:173", ar:"حَسۡبُنَا اللَّهُ وَنِعۡمَ الۡوَكِيلُ", ph:"Hasbuna -llahu wa-nima l-wakil", fr:"Allah nous suffit et quel excellent Protecteur !", ref2:"Ibrahim l'a dit dans le feu. La confiance en Allah est le plus grand bouclier."},
+    {ref:"An-Nisa 4:103", ar:"إِنَّ الصَّلَاةَ كَانَتۡ عَلَى الۡمُؤۡمِنِينَ كِتَابًا مَّوۡقُوتًا", ph:"Inna s-salata kanat ala l-muminine kitaban mawquta", fr:"La priere est pour les croyants une obligation a des heures determinees.", ref2:"La priere est un rendez-vous avec Allah. Cinq fois par jour Il t'attend."},
+    {ref:"Al-Maida 5:6", ar:"وَلَكِن يُرِيدُ لِيُطَهِّرَكُمۡ", ph:"Wa-lakin yuridu li-yutahhirakum", fr:"Mais Il veut vous purifier.", ref2:"Le wudu n'est pas une contrainte. C'est un cadeau de purification."},
+    {ref:"Al-Araf 7:55", ar:"ادۡعُواْ رَبَّكُمۡ تَضَرُّعًا وَخُفۡيَةً", ph:"Udu rabbakum tadarruan wa-khufyatan", fr:"Invoquez votre Seigneur avec humilite et en secret.", ref2:"Le dua le plus puissant est celui du coeur brise murmure dans le silence."},
+    {ref:"Ar-Rad 13:28", ar:"أَلَا بِذِكۡرِ اللَّهِ تَطۡمَئِنُّ الۡقُلُوبُ", ph:"Ala bi-dhikri -llahi tatmainn al-qulub", fr:"C'est par l'invocation d'Allah que les coeurs trouvent la quietude.", ref2:"L'anxiete a un remede ancien. Le dhikr n'est pas une formule c'est une presence."},
+    {ref:"Ibrahim 14:7", ar:"لَئِن شَكَرۡتُمۡ لَأَزِيدَنَّكُمۡ", ph:"La-in shakartum la-azidannakum", fr:"Si vous etes reconnaissants J'augmenterai certainement Mes bienfaits.", ref2:"La gratitude est un multiplicateur divin."},
+    {ref:"Al-Isra 17:44", ar:"وَإِن مِّن شَيۡءٍ إِلَّا يُسَبِّحُ بِحَمۡدِهِ", ph:"Wa-in min shayin illa yusabbihu bi-hamdihi", fr:"Il n'est rien qui ne celebre Sa gloire.", ref2:"L'univers entier est en priere permanente. Quand tu dis Subhana Allah tu rejoins ce choeur."},
+    {ref:"Ta-Ha 20:14", ar:"أَقِمِ الصَّلَاةَ لِذِكۡرِي", ph:"Aqimi s-salata li-dhikri", fr:"Accomplis la priere pour te souvenir de Moi.", ref2:"La raison de la priere revelee directement par Allah. C'est un rappel d'amour."},
+    {ref:"Al-Anbiya 21:87", ar:"لَّا إِلَٰهَ إِلَّا أَنتَ سُبۡحَٰنَكَ إِنِّي كُنتُ مِنَ الظَّٰلِمِينَ", ph:"La ilaha illa anta subhanaka inni kuntu mina z-zalimin", fr:"Il n'y a de divinite que Toi gloire a Toi j'ai ete du nombre des injustes.", ref2:"La dua de Yunus dans le ventre de la baleine. Sa lumiere dans les tenebres."},
+    {ref:"Al-Muminun 23:1", ar:"قَدۡ أَفۡلَحَ الۡمُؤۡمِنُونَ", ph:"Qad aflaha l-muminun", fr:"Bienheureux les croyants.", ref2:"Le succes commence par la foi. Non pas la perfection mais la foi sincere."},
+    {ref:"An-Nur 24:35", ar:"اللَّهُ نُورُ السَّمَاوَاتِ وَالۡأَرۡضِ", ph:"Allahu nuru s-samawati wa-l-ard", fr:"Allah est la Lumiere des cieux et de la terre.", ref2:"Tout ce qui existe recoit sa lumiere d'Allah. Dans l'obscurite tourne-toi vers la Source."},
+    {ref:"Al-Ankabut 29:45", ar:"إِنَّ الصَّلَاةَ تَنۡهَىٰ عَنِ الۡفَحۡشَاءِ وَالۡمُنكَرِ", ph:"Inna s-salata tanha ani l-fahshai wa-l-munkar", fr:"La priere preserve des actes honteux et reprehensibles.", ref2:"La priere est une protection. Celui qui prie vraiment change interieurement."},
+    {ref:"Az-Zumar 39:53", ar:"لَا تَقۡنَطُواْ مِن رَّحۡمَةِ اللَّهِ", ph:"La taqnatu min rahmati -llahi", fr:"Ne desespérez pas de la misericorde d'Allah.", ref2:"Allah pardonne tous les peches. Pas certains. Tous. Ne desespere jamais."},
+    {ref:"Ghafir 40:60", ar:"ادۡعُونِي أَسۡتَجِبۡ لَكُمۡ", ph:"Uduni astajib lakum", fr:"Invoquez-Moi Je vous repondrai.", ref2:"Une promesse divine sans condition. Invoquez-Moi. Je repondrai."},
+    {ref:"Al-Hujurat 49:13", ar:"إِنَّ أَكۡرَمَكُمۡ عِندَ اللَّهِ أَتۡقَىٰكُمۡ", ph:"Inna akramakum inda -llahi atqakum", fr:"Le plus noble d'entre vous aupres d'Allah est le plus pieux.", ref2:"La seule noblesse qui compte aux yeux d'Allah est la piete. Accessible a tous."},
+    {ref:"Ar-Rahman 55:13", ar:"فَبِأَيِّ آلَاءِ رَبِّكُمَا تُكَذِّبَانِ", ph:"Fa-bi-ayyi alai rabbikuma tukadhdhiban", fr:"Lequel des bienfaits de votre Seigneur nierez-vous ?", ref2:"Ce verset se repete 31 fois. La gratitude commence par compter ce qu'on a recu."},
+    {ref:"Al-Ikhlas 112:1", ar:"قُلۡ هُوَ اللَّهُ أَحَدٌ", ph:"Qul huwa -llahu ahad", fr:"Dis : Il est Allah l'Unique.", ref2:"Ahad, Un absolu sans equivalent. En un mot toute la theologie islamique."},
   ];
   </script>
 
@@ -53,189 +52,240 @@
     body.day-mode{--bg:#2a1f0e;--bg2:#332510;--bg3:#3d2d14;--sf:#3d2d14;--sf2:#4a3618;--bo:rgba(201,168,76,.22);--bo2:rgba(201,168,76,.5);--tx:#f0dfa8;--tx2:#c9a84c;--tx3:#8a7040;}
     #root{max-width:640px;margin:0 auto;padding:0 15px 80px}
     ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--bg2)}::-webkit-scrollbar-thumb{background:var(--gold-d);border-radius:2px}
+
+    /* ===================== HEADER ===================== */
     .hdr{text-align:center;padding:20px 0 12px}
     .hdr::after{content:'';display:block;width:160px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:12px auto 0}
-    .hdr-b{font-family:'Amiri',serif;font-size:1.8rem;color:var(--gold-l);margin-bottom:6px;text-shadow:0 0 24px rgba(201,168,76,.3)}
-    .hdr-t{font-family:'Cinzel Decorative',serif;font-size:.9rem;color:var(--gold);letter-spacing:.15em}
-    .hdr-s{font-size:.75rem;color:var(--tx3);margin-top:3px;letter-spacing:.08em}
+    .hdr-b{font-family:'Amiri',serif;font-size:2rem;color:var(--gold-l);margin-bottom:6px;text-shadow:0 0 24px rgba(201,168,76,.3)}
+    .hdr-t{font-family:'Cinzel Decorative',serif;font-size:1rem;color:var(--gold);letter-spacing:.15em}
+    .hdr-s{font-size:.85rem;color:var(--tx3);margin-top:3px;letter-spacing:.08em}
     .hdr-actions{display:flex;justify-content:flex-end;gap:8px;margin-bottom:6px}
-    .hdr-btn{background:var(--sf);border:1px solid var(--bo);border-radius:var(--r);padding:6px 10px;cursor:pointer;font-size:.75rem;color:var(--tx2);touch-action:manipulation;transition:all .2s;display:flex;align-items:center;gap:5px}
+    .hdr-btn{background:var(--sf);border:1px solid var(--bo);border-radius:var(--r);padding:8px 12px;cursor:pointer;font-size:.82rem;color:var(--tx2);touch-action:manipulation;transition:all .2s;display:flex;align-items:center;gap:5px;min-height:38px}
     .hdr-btn:hover{border-color:var(--gold);color:var(--gold)}
-    .verset-card{background:var(--sf);border:1px solid var(--bo);border-radius:var(--r);padding:14px 16px;margin-bottom:14px;border-left:3px solid var(--gold)}
+
+    /* ===================== DONATE ===================== */
+    .donate-bar{display:flex;align-items:center;justify-content:center;gap:10px;margin:10px 0 14px;flex-wrap:wrap}
+    .donate-label{font-family:'Cinzel Decorative',serif;font-size:.68rem;letter-spacing:.1em;color:var(--tx3)}
+    .donate-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:var(--r);font-family:'Cinzel Decorative',serif;font-size:.62rem;letter-spacing:.1em;cursor:pointer;transition:all .2s;border:1px solid;text-decoration:none;min-height:40px;font-weight:400}
+    .donate-paypal{background:rgba(0,112,192,.10);border-color:rgba(0,112,192,.4);color:#5baee0}
+    .donate-paypal:hover{background:rgba(0,112,192,.18);border-color:#5baee0}
+    .donate-stripe{background:rgba(99,91,255,.10);border-color:rgba(99,91,255,.4);color:#a49cff}
+    .donate-stripe:hover{background:rgba(99,91,255,.18);border-color:#a49cff}
+    .donate-icon{font-size:.95rem}
+
+    /* ===================== VERSET ===================== */
+    .verset-card{background:var(--sf);border:1px solid var(--bo);border-radius:var(--r);padding:16px 18px;margin-bottom:14px;border-left:3px solid var(--gold)}
     .verset-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-    .verset-label{font-family:'Cinzel Decorative',serif;font-size:.5rem;letter-spacing:.12em;color:var(--gold-d)}
-    .verset-date{font-size:.68rem;color:var(--tx3);margin-top:2px}
-    .verset-ref{font-family:'Cinzel Decorative',serif;font-size:.48rem;color:var(--gold-d)}
-    .verset-ar{font-family:'Amiri',serif;font-size:1.4rem;color:var(--gold-l);text-align:right;direction:rtl;line-height:1.9;margin-bottom:6px}
-    .verset-ph{font-style:italic;color:var(--tx2);font-size:.80rem;margin-bottom:6px}
-    .verset-fr{font-size:.82rem;color:var(--tx3);border-left:2px solid var(--bo);padding-left:10px;line-height:1.65;margin-bottom:8px}
-    .verset-btn{display:flex;align-items:center;gap:6px;padding:6px 10px;background:var(--bg3);border:1px solid var(--bo);border-radius:var(--r);cursor:pointer;width:100%;font-family:'Cinzel Decorative',serif;font-size:.5rem;letter-spacing:.1em;color:var(--gold-d);transition:all .2s}
-    .verset-reflexion{margin-top:8px;padding:11px 14px;background:var(--bg2);border:1px solid var(--bo);border-radius:var(--r);font-size:.82rem;color:var(--tx2);line-height:1.75;font-style:italic}
+    .verset-label{font-family:'Cinzel Decorative',serif;font-size:.65rem;letter-spacing:.12em;color:var(--gold-d)}
+    .verset-date{font-size:.78rem;color:var(--tx3);margin-top:2px}
+    .verset-ref{font-family:'Cinzel Decorative',serif;font-size:.6rem;color:var(--gold-d)}
+    .verset-ar{font-family:'Amiri',serif;font-size:1.6rem;color:var(--gold-l);text-align:right;direction:rtl;line-height:2;margin-bottom:8px}
+    .verset-ph{font-style:italic;color:var(--tx2);font-size:.92rem;margin-bottom:6px}
+    .verset-fr{font-size:.92rem;color:var(--tx3);border-left:2px solid var(--bo);padding-left:10px;line-height:1.7;margin-bottom:10px}
+    .verset-btn{display:flex;align-items:center;gap:6px;padding:8px 12px;background:var(--bg3);border:1px solid var(--bo);border-radius:var(--r);cursor:pointer;width:100%;font-family:'Cinzel Decorative',serif;font-size:.62rem;letter-spacing:.1em;color:var(--gold-d);transition:all .2s;min-height:40px}
+    .verset-reflexion{margin-top:8px;padding:12px 16px;background:var(--bg2);border:1px solid var(--bo);border-radius:var(--r);font-size:.90rem;color:var(--tx2);line-height:1.8;font-style:italic}
+
+    /* ===================== TABS ===================== */
     .main-tabs{display:flex;border:1px solid var(--bo);border-radius:var(--r);overflow:hidden;margin-bottom:16px}
-    .main-tab{flex:1;padding:10px 2px;background:var(--sf);border:none;cursor:pointer;font-family:'Cinzel Decorative',serif;font-size:.44rem;letter-spacing:.06em;color:var(--tx3);transition:all .2s;border-right:1px solid var(--bo);touch-action:manipulation}
+    .main-tab{flex:1;padding:12px 2px;background:var(--sf);border:none;cursor:pointer;font-family:'Cinzel Decorative',serif;font-size:.58rem;letter-spacing:.06em;color:var(--tx3);transition:all .2s;border-right:1px solid var(--bo);touch-action:manipulation;min-height:44px}
     .main-tab:last-child{border-right:none}
     .main-tab.on{background:var(--bg3);color:var(--gold)}
+
+    /* ===================== TOOLBAR ===================== */
     .toolbar{background:var(--sf);border:1px solid var(--bo);border-radius:var(--r);padding:10px 13px;margin-bottom:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-    .ap-lbl{font-family:'Cinzel Decorative',serif;font-size:.54rem;color:var(--gold-d);letter-spacing:.14em;white-space:nowrap}
-    .ap-sel{flex:1;min-width:130px;background:var(--bg2);border:1px solid var(--bo);color:var(--tx2);font-family:'Crimson Pro',serif;font-size:.82rem;padding:5px 26px 5px 9px;border-radius:var(--r);cursor:pointer;outline:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238a6e32'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 9px center}
+    .ap-lbl{font-family:'Cinzel Decorative',serif;font-size:.65rem;color:var(--gold-d);letter-spacing:.14em;white-space:nowrap}
+    .ap-sel{flex:1;min-width:130px;background:var(--bg2);border:1px solid var(--bo);color:var(--tx2);font-family:'Crimson Pro',serif;font-size:.90rem;padding:6px 26px 6px 9px;border-radius:var(--r);cursor:pointer;outline:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238a6e32'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 9px center}
+
+    /* ===================== PRAYER GRID ===================== */
     .pg{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:12px 0}
-    .pb{background:var(--sf);border:1px solid var(--bo);border-radius:var(--r);padding:10px 4px;text-align:center;cursor:pointer;transition:all .2s;color:var(--tx2);font-family:inherit;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+    .pb{background:var(--sf);border:1px solid var(--bo);border-radius:var(--r);padding:12px 4px;text-align:center;cursor:pointer;transition:all .2s;color:var(--tx2);font-family:inherit;-webkit-tap-highlight-color:transparent;touch-action:manipulation;min-height:72px}
     .pb:active{transform:scale(.97)}
     .pb.on{border-color:var(--gold);background:var(--bg3);color:var(--gold-l);box-shadow:0 0 12px var(--gold-g),inset 0 0 12px var(--gold-g)}
-    .pb-ar{display:block;font-family:'Amiri',serif;font-size:1.15rem;line-height:1.3;margin-bottom:2px}
-    .pb-nm{font-size:.68rem;letter-spacing:.05em}
-    .pb-rk{font-size:.58rem;color:var(--tx3);margin-top:1px}
+    .pb-ar{display:block;font-family:'Amiri',serif;font-size:1.25rem;line-height:1.3;margin-bottom:3px}
+    .pb-nm{font-size:.78rem;letter-spacing:.05em}
+    .pb-rk{font-size:.68rem;color:var(--tx3);margin-top:2px}
     .pb.on .pb-rk{color:var(--gold-d)}
     .mt{display:flex;border:1px solid var(--bo);border-radius:var(--r);overflow:hidden;margin-bottom:16px}
-    .mb{flex:1;padding:9px;background:var(--sf);border:none;cursor:pointer;font-family:'Cinzel Decorative',serif;font-size:.57rem;letter-spacing:.09em;color:var(--tx3);transition:all .2s;border-right:1px solid var(--bo);touch-action:manipulation}
+    .mb{flex:1;padding:11px;background:var(--sf);border:none;cursor:pointer;font-family:'Cinzel Decorative',serif;font-size:.68rem;letter-spacing:.09em;color:var(--tx3);transition:all .2s;border-right:1px solid var(--bo);touch-action:manipulation;min-height:44px}
     .mb:last-child{border-right:none}
     .mb.on{background:var(--bg3);color:var(--gold)}
-    .statut{display:inline-flex;align-items:center;padding:2px 8px;border-radius:2px;font-family:'Cinzel Decorative',serif;font-size:.51rem;letter-spacing:.08em;white-space:nowrap}
+
+    /* ===================== BADGES ===================== */
+    .statut{display:inline-flex;align-items:center;padding:3px 9px;border-radius:2px;font-family:'Cinzel Decorative',serif;font-size:.62rem;letter-spacing:.08em;white-space:nowrap}
     .st-fard{background:rgba(224,112,112,.12);border:1px solid rgba(224,112,112,.35);color:var(--fard)}
     .st-wajib{background:rgba(224,154,80,.12);border:1px solid rgba(224,154,80,.35);color:var(--wajib)}
     .st-sunna{background:rgba(122,176,154,.12);border:1px solid rgba(122,176,154,.35);color:var(--sunna)}
-    .vb{display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border-radius:2px;font-size:.55rem;letter-spacing:.06em;font-family:'Cinzel Decorative',serif}
+    .vb{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:2px;font-size:.65rem;letter-spacing:.06em;font-family:'Cinzel Decorative',serif}
     .vh{background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);color:var(--gold)}
     .vl{background:rgba(90,122,106,.1);border:1px solid rgba(90,122,106,.3);color:var(--vl)}
-    .th-i{display:inline-block;padding:2px 7px;font-size:.51rem;letter-spacing:.09em;border-radius:2px;margin-left:5px;font-family:'Cinzel Decorative',serif;background:rgba(100,80,160,.15);border:1px solid rgba(100,80,160,.3);color:#a090e0}
-    .th-f{display:inline-block;padding:2px 7px;font-size:.51rem;letter-spacing:.09em;border-radius:2px;margin-left:5px;font-family:'Cinzel Decorative',serif;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);color:var(--gold)}
-    .aub{display:inline-flex;align-items:center;gap:5px;padding:5px 11px;border-radius:2px;border:1px solid var(--bo);background:var(--bg2);color:var(--tx3);font-family:'Cinzel Decorative',serif;font-size:.51rem;letter-spacing:.09em;cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0;touch-action:manipulation;min-height:36px}
+    .th-i{display:inline-block;padding:3px 8px;font-size:.62rem;letter-spacing:.09em;border-radius:2px;margin-left:5px;font-family:'Cinzel Decorative',serif;background:rgba(100,80,160,.15);border:1px solid rgba(100,80,160,.3);color:#a090e0}
+    .th-f{display:inline-block;padding:3px 8px;font-size:.62rem;letter-spacing:.09em;border-radius:2px;margin-left:5px;font-family:'Cinzel Decorative',serif;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);color:var(--gold)}
+    .aub{display:inline-flex;align-items:center;gap:5px;padding:7px 13px;border-radius:2px;border:1px solid var(--bo);background:var(--bg2);color:var(--tx3);font-family:'Cinzel Decorative',serif;font-size:.62rem;letter-spacing:.09em;cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0;touch-action:manipulation;min-height:40px}
     .aub.pl{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.06)}
     .pulse-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 1s ease-in-out infinite;flex-shrink:0;display:inline-block}
+
+    /* ===================== POSTURE ===================== */
     .posture-wrap{display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 0 6px;animation:postureIn .35s ease;width:100%}
-    .posture-img{width:180px;height:180px;object-fit:contain;filter:drop-shadow(0 0 20px rgba(201,168,76,.35))}
-    .posture-lbl{font-family:'Cinzel Decorative',serif;font-size:.5rem;letter-spacing:.1em;color:var(--gold-d);text-align:center}
-    .geste-btn{display:flex;align-items:center;gap:6px;margin-top:6px;padding:7px 12px;background:var(--bg3);border:1px solid var(--bo);border-radius:var(--r);cursor:pointer;width:100%;touch-action:manipulation;transition:all .2s}
+    .posture-img{width:200px;height:200px;object-fit:contain;filter:drop-shadow(0 0 20px rgba(201,168,76,.35))}
+    .posture-lbl{font-family:'Cinzel Decorative',serif;font-size:.62rem;letter-spacing:.1em;color:var(--gold-d);text-align:center}
+    .geste-btn{display:flex;align-items:center;gap:6px;margin-top:6px;padding:9px 13px;background:var(--bg3);border:1px solid var(--bo);border-radius:var(--r);cursor:pointer;width:100%;touch-action:manipulation;transition:all .2s;min-height:42px}
     .geste-btn.open{border-color:var(--gold-d);background:var(--sf2)}
-    .geste-ico{font-size:.65rem;color:var(--gold-d);transition:transform .2s;flex-shrink:0}
-    .geste-lbl{font-family:'Cinzel Decorative',serif;font-size:.53rem;letter-spacing:.11em;color:var(--gold-d);flex:1}
-    .geste-panel{margin-top:8px;background:var(--bg2);border:1px solid var(--bo);border-radius:var(--r);padding:13px 15px;animation:fadeIn .25s ease;display:flex;flex-direction:column;gap:10px;width:100%}
-    .geste-section{display:flex;flex-direction:column;gap:4px}
-    .geste-section-t{font-family:'Cinzel Decorative',serif;font-size:.5rem;letter-spacing:.12em;color:var(--gold-d);margin-bottom:2px}
-    .geste-txt{font-size:.82rem;color:var(--tx2);line-height:1.7}
+    .geste-ico{font-size:.72rem;color:var(--gold-d);transition:transform .2s;flex-shrink:0}
+    .geste-lbl{font-family:'Cinzel Decorative',serif;font-size:.64rem;letter-spacing:.11em;color:var(--gold-d);flex:1}
+    .geste-panel{margin-top:8px;background:var(--bg2);border:1px solid var(--bo);border-radius:var(--r);padding:14px 16px;animation:fadeIn .25s ease;display:flex;flex-direction:column;gap:12px;width:100%}
+    .geste-section{display:flex;flex-direction:column;gap:5px}
+    .geste-section-t{font-family:'Cinzel Decorative',serif;font-size:.62rem;letter-spacing:.12em;color:var(--gold-d);margin-bottom:2px}
+    .geste-txt{font-size:.90rem;color:var(--tx2);line-height:1.75}
     .geste-diff{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
-    .geste-diff-col{background:var(--sf);border:1px solid var(--bo);border-radius:var(--r);padding:8px 10px}
-    .geste-diff-lbl{font-family:'Cinzel Decorative',serif;font-size:.48rem;letter-spacing:.1em;color:var(--gold-d);margin-bottom:4px}
-    .geste-diff-txt{font-size:.76rem;color:var(--tx3);line-height:1.6}
-    .geste-warn{font-size:.75rem;color:#e09a50;line-height:1.65;border-left:2px solid rgba(224,154,80,.35);padding-left:9px;font-style:italic}
-    .ss-wrap{margin:10px 0 4px;background:var(--bg3);border:1px solid var(--bo);border-radius:var(--r);padding:10px 12px}
-    .ss-title{font-family:'Cinzel Decorative',serif;font-size:.53rem;letter-spacing:.12em;color:var(--gold-d);margin-bottom:8px}
-    .ss-btns{display:flex;gap:5px;flex-wrap:wrap}
-    .ss-btn{padding:6px 10px;border-radius:2px;border:1px solid var(--bo);background:var(--bg2);color:var(--tx3);font-family:'Crimson Pro',serif;font-size:.79rem;cursor:pointer;transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:1px;touch-action:manipulation;min-height:48px;justify-content:center}
+    .geste-diff-col{background:var(--sf);border:1px solid var(--bo);border-radius:var(--r);padding:10px 12px}
+    .geste-diff-lbl{font-family:'Cinzel Decorative',serif;font-size:.60rem;letter-spacing:.1em;color:var(--gold-d);margin-bottom:5px}
+    .geste-diff-txt{font-size:.85rem;color:var(--tx3);line-height:1.65}
+    .geste-warn{font-size:.85rem;color:#e09a50;line-height:1.7;border-left:2px solid rgba(224,154,80,.35);padding-left:9px;font-style:italic}
+
+    /* ===================== SOURATE SELECTOR ===================== */
+    .ss-wrap{margin:10px 0 4px;background:var(--bg3);border:1px solid var(--bo);border-radius:var(--r);padding:12px 14px}
+    .ss-title{font-family:'Cinzel Decorative',serif;font-size:.65rem;letter-spacing:.12em;color:var(--gold-d);margin-bottom:10px}
+    .ss-btns{display:flex;gap:6px;flex-wrap:wrap}
+    .ss-btn{padding:8px 12px;border-radius:2px;border:1px solid var(--bo);background:var(--bg2);color:var(--tx3);font-family:'Crimson Pro',serif;font-size:.88rem;cursor:pointer;transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:2px;touch-action:manipulation;min-height:54px;justify-content:center}
     .ss-btn.on{border-color:var(--gold);background:rgba(201,168,76,.08);color:var(--gold-l)}
-    .ss-btn-ar{font-family:'Amiri',serif;font-size:1.05rem;line-height:1.2}
-    .ss-btn-nm{font-size:.57rem;letter-spacing:.04em}
-    .ss-note{font-size:.64rem;color:var(--gold-d);margin-top:7px;font-style:italic}
-    .sc{background:var(--sf);border:1px solid var(--bo);border-radius:var(--r);padding:13px 15px;margin-bottom:8px}
-    .sc-hd{display:flex;align-items:flex-start;justify-content:space-between;gap:9px;flex-wrap:wrap;margin-bottom:8px}
+    .ss-btn-ar{font-family:'Amiri',serif;font-size:1.15rem;line-height:1.2}
+    .ss-btn-nm{font-size:.65rem;letter-spacing:.04em}
+    .ss-note{font-size:.72rem;color:var(--gold-d);margin-top:8px;font-style:italic}
+
+    /* ===================== STEP CARD ===================== */
+    .sc{background:var(--sf);border:1px solid var(--bo);border-radius:var(--r);padding:14px 16px;margin-bottom:10px}
+    .sc-hd{display:flex;align-items:flex-start;justify-content:space-between;gap:9px;flex-wrap:wrap;margin-bottom:10px}
     .sc-hd-l{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-    .sc-lbl{font-family:'Cinzel Decorative',serif;font-size:.55rem;letter-spacing:.11em;color:var(--gold-d)}
-    .sc-ar{font-family:'Amiri',serif;font-size:1.35rem;line-height:1.9;color:var(--gold-l);text-align:right;direction:rtl;margin-bottom:5px}
-    .sc-ph{font-style:italic;color:var(--tx2);font-size:.82rem;margin-bottom:4px}
-    .sc-tr{font-size:.80rem;color:var(--tx3);border-left:2px solid var(--bo);padding-left:10px;margin-top:4px;line-height:1.65}
-    .sc-nt{font-size:.63rem;color:var(--gold-d);margin-top:4px;font-style:italic}
-    .src-toggle{display:flex;align-items:center;gap:6px;margin-top:10px;padding:6px 10px;background:var(--bg3);border:1px solid var(--bo);border-radius:var(--r);cursor:pointer;width:100%;touch-action:manipulation}
+    .sc-lbl{font-family:'Cinzel Decorative',serif;font-size:.68rem;letter-spacing:.11em;color:var(--gold-d)}
+    .sc-ar{font-family:'Amiri',serif;font-size:1.55rem;line-height:2;color:var(--gold-l);text-align:right;direction:rtl;margin-bottom:7px}
+    .sc-ph{font-style:italic;color:var(--tx2);font-size:.92rem;margin-bottom:5px}
+    .sc-tr{font-size:.90rem;color:var(--tx3);border-left:2px solid var(--bo);padding-left:10px;margin-top:5px;line-height:1.7}
+    .sc-nt{font-size:.76rem;color:var(--gold-d);margin-top:5px;font-style:italic}
+
+    /* ===================== SOURCES ===================== */
+    .src-toggle{display:flex;align-items:center;gap:6px;margin-top:12px;padding:8px 12px;background:var(--bg3);border:1px solid var(--bo);border-radius:var(--r);cursor:pointer;width:100%;touch-action:manipulation;min-height:42px}
     .src-toggle.open{border-color:var(--gold-d);background:var(--sf2)}
-    .src-ico{font-size:.65rem;color:var(--gold-d);transition:transform .2s;flex-shrink:0}
-    .src-lbl{font-family:'Cinzel Decorative',serif;font-size:.53rem;letter-spacing:.11em;color:var(--gold-d);flex:1}
-    .src-panel{margin-top:7px;display:flex;flex-direction:column;gap:10px}
-    .src-block{background:var(--bg2);border:1px solid var(--bo);border-radius:var(--r);padding:11px 14px}
-    .src-block-t{font-family:'Cinzel Decorative',serif;font-size:.53rem;letter-spacing:.13em;color:var(--gold-d);margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--bo)}
-    .qe{margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--bo)}
+    .src-ico{font-size:.72rem;color:var(--gold-d);transition:transform .2s;flex-shrink:0}
+    .src-lbl{font-family:'Cinzel Decorative',serif;font-size:.64rem;letter-spacing:.11em;color:var(--gold-d);flex:1}
+    .src-panel{margin-top:8px;display:flex;flex-direction:column;gap:10px}
+    .src-block{background:var(--bg2);border:1px solid var(--bo);border-radius:var(--r);padding:13px 16px}
+    .src-block-t{font-family:'Cinzel Decorative',serif;font-size:.64rem;letter-spacing:.13em;color:var(--gold-d);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--bo)}
+    .qe{margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--bo)}
     .qe:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
-    .qe-ref{font-family:'Cinzel Decorative',serif;font-size:.55rem;color:var(--gold);letter-spacing:.06em;margin-bottom:3px}
-    .qe-ar{font-family:'Amiri',serif;font-size:1.05rem;color:var(--gold-l);text-align:right;direction:rtl;line-height:1.65;margin-bottom:3px}
-    .qe-nt{font-size:.74rem;color:var(--tx3);font-style:italic}
-    .he{margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--bo)}
+    .qe-ref{font-family:'Cinzel Decorative',serif;font-size:.66rem;color:var(--gold);letter-spacing:.06em;margin-bottom:4px}
+    .qe-ar{font-family:'Amiri',serif;font-size:1.15rem;color:var(--gold-l);text-align:right;direction:rtl;line-height:1.8;margin-bottom:4px}
+    .qe-nt{font-size:.84rem;color:var(--tx3);font-style:italic}
+    .he{margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--bo)}
     .he:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
-    .he-ref{font-family:'Cinzel Decorative',serif;font-size:.55rem;color:var(--sunna);letter-spacing:.06em;margin-bottom:2px}
-    .he-narr{font-size:.68rem;color:var(--tx3);margin-bottom:3px;font-style:italic}
-    .he-txt{font-size:.82rem;color:var(--tx2);line-height:1.6;margin-bottom:3px;border-left:2px solid rgba(122,176,154,.3);padding-left:8px}
-    .he-gr{font-size:.64rem;padding:2px 7px;border-radius:2px;display:inline-block;background:rgba(122,176,154,.1);border:1px solid rgba(122,176,154,.25);color:var(--sunna)}
-    .ge-txt{font-size:.84rem;color:var(--tx2);line-height:1.75}
-    .no-quran{font-size:.78rem;color:var(--tx3);font-style:italic}
-    .edit-warn{background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.14);border-radius:var(--r);padding:9px 12px;margin-bottom:13px;font-size:.71rem;color:var(--tx3);line-height:1.6}
+    .he-ref{font-family:'Cinzel Decorative',serif;font-size:.66rem;color:var(--sunna);letter-spacing:.06em;margin-bottom:3px}
+    .he-narr{font-size:.78rem;color:var(--tx3);margin-bottom:4px;font-style:italic}
+    .he-txt{font-size:.90rem;color:var(--tx2);line-height:1.65;margin-bottom:4px;border-left:2px solid rgba(122,176,154,.3);padding-left:8px}
+    .he-gr{font-size:.72rem;padding:3px 8px;border-radius:2px;display:inline-block;background:rgba(122,176,154,.1);border:1px solid rgba(122,176,154,.25);color:var(--sunna)}
+    .ge-txt{font-size:.92rem;color:var(--tx2);line-height:1.8}
+    .no-quran{font-size:.86rem;color:var(--tx3);font-style:italic}
+
+    /* ===================== COMPANION MODE ===================== */
+    .edit-warn{background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.14);border-radius:var(--r);padding:10px 13px;margin-bottom:14px;font-size:.82rem;color:var(--tx3);line-height:1.65}
     .edit-warn strong{color:var(--gold-d)}
-    .section-title{font-family:'Cinzel Decorative',serif;font-size:.59rem;letter-spacing:.14em;color:var(--gold-d);text-transform:uppercase;margin-bottom:10px;padding-bottom:5px;border-bottom:1px solid var(--bo);display:flex;align-items:center;gap:8px}
+    .section-title{font-family:'Cinzel Decorative',serif;font-size:.70rem;letter-spacing:.14em;color:var(--gold-d);text-transform:uppercase;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid var(--bo);display:flex;align-items:center;gap:8px}
     .cp-prg{display:flex;align-items:center;gap:9px;margin-bottom:14px}
     .prg-w{flex:1;height:2px;background:var(--sf2);border-radius:1px;overflow:hidden}
     .prg-b{height:100%;background:linear-gradient(90deg,var(--gold-d),var(--gold));transition:width .4s ease}
-    .prg-l{font-size:.62rem;color:var(--tx3);white-space:nowrap}
+    .prg-l{font-size:.72rem;color:var(--tx3);white-space:nowrap}
     .cp-dots{display:flex;gap:5px;margin-bottom:12px}
     .dot{width:9px;height:9px;border-radius:50%;border:1px solid var(--bo2);transition:all .3s}
     .dot.dn{background:var(--gold-d);border-color:var(--gold-d)}
     .dot.cr{background:var(--gold);border-color:var(--gold);box-shadow:0 0 8px var(--gold)}
-    .cc{background:var(--sf);border:1px solid var(--bo2);border-radius:var(--r);padding:18px 18px 15px;box-shadow:0 0 36px var(--gold-g);min-height:240px;display:flex;flex-direction:column;gap:11px}
+    .cc{background:var(--sf);border:1px solid var(--bo2);border-radius:var(--r);padding:18px 18px 16px;box-shadow:0 0 36px var(--gold-g);min-height:240px;display:flex;flex-direction:column;gap:12px}
     .cc-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
     .cc-ml{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-    .cc-nm{font-family:'Cinzel Decorative',serif;font-size:.69rem;letter-spacing:.11em;color:var(--gold)}
-    .cc-ar{font-family:'Amiri',serif;font-size:1.7rem;line-height:1.85;color:var(--gold-l);text-align:right;direction:rtl}
-    .cc-ph{font-style:italic;color:var(--tx2);font-size:.88rem}
-    .cc-tr{font-size:.82rem;color:var(--tx3);border-left:2px solid var(--gold-d);padding-left:12px;line-height:1.7}
-    .cc-nt{font-size:.67rem;color:var(--gold-d);font-style:italic}
-    .cv{display:flex;align-items:center;gap:7px;padding:6px 12px;border-radius:var(--r);font-size:.70rem}
+    .cc-nm{font-family:'Cinzel Decorative',serif;font-size:.80rem;letter-spacing:.11em;color:var(--gold)}
+    .cc-ar{font-family:'Amiri',serif;font-size:1.85rem;line-height:2;color:var(--gold-l);text-align:right;direction:rtl}
+    .cc-ph{font-style:italic;color:var(--tx2);font-size:.96rem}
+    .cc-tr{font-size:.90rem;color:var(--tx3);border-left:2px solid var(--gold-d);padding-left:12px;line-height:1.75}
+    .cc-nt{font-size:.76rem;color:var(--gold-d);font-style:italic}
+    .cv{display:flex;align-items:center;gap:7px;padding:7px 12px;border-radius:var(--r);font-size:.80rem}
     .cv.hi{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.25);color:var(--gold)}
     .cv.lo{background:rgba(90,122,106,.08);border:1px solid rgba(90,122,106,.25);color:var(--vl)}
     .cv .d{width:6px;height:6px;border-radius:50%;flex-shrink:0;background:currentColor}
     .cn{display:flex;gap:8px;margin-top:14px}
-    .nb{padding:12px 14px;border-radius:var(--r);border:1px solid var(--bo);background:var(--sf);color:var(--tx2);font-family:'Cinzel Decorative',serif;font-size:.57rem;letter-spacing:.11em;cursor:pointer;transition:all .2s;flex:1;text-align:center;touch-action:manipulation;min-height:46px}
+    .nb{padding:13px 14px;border-radius:var(--r);border:1px solid var(--bo);background:var(--sf);color:var(--tx2);font-family:'Cinzel Decorative',serif;font-size:.68rem;letter-spacing:.11em;cursor:pointer;transition:all .2s;flex:1;text-align:center;touch-action:manipulation;min-height:50px}
     .nb:disabled{opacity:.3;pointer-events:none}
     .nb.pr{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.06)}
     .nb.dn2{border-color:var(--gold);color:var(--gold-l);background:rgba(201,168,76,.1)}
     .done{text-align:center;padding:46px 20px}
-    .done-ar{font-family:'Amiri',serif;font-size:2.2rem;color:var(--gold-l);margin-bottom:9px;text-shadow:0 0 28px rgba(201,168,76,.4)}
-    .done-t{font-family:'Cinzel Decorative',serif;font-size:.80rem;letter-spacing:.2em;color:var(--gold);margin-bottom:7px}
-    .done-s{color:var(--tx3);font-size:.80rem}
+    .done-ar{font-family:'Amiri',serif;font-size:2.4rem;color:var(--gold-l);margin-bottom:9px;text-shadow:0 0 28px rgba(201,168,76,.4)}
+    .done-t{font-family:'Cinzel Decorative',serif;font-size:.90rem;letter-spacing:.2em;color:var(--gold);margin-bottom:7px}
+    .done-s{color:var(--tx3);font-size:.88rem}
     .orn{text-align:center;color:var(--gold-d);font-size:.85rem;letter-spacing:.3em;margin:8px 0;opacity:.6}
-    .rb-btn{margin-top:20px;padding:11px 26px;border:1px solid var(--gold);background:transparent;color:var(--gold);font-family:'Cinzel Decorative',serif;font-size:.62rem;letter-spacing:.15em;cursor:pointer;border-radius:var(--r);touch-action:manipulation;min-height:44px}
+    .rb-btn{margin-top:20px;padding:12px 28px;border:1px solid var(--gold);background:transparent;color:var(--gold);font-family:'Cinzel Decorative',serif;font-size:.72rem;letter-spacing:.15em;cursor:pointer;border-radius:var(--r);touch-action:manipulation;min-height:48px}
+
+    /* ===================== WUDU ===================== */
     .wudu-wrap{padding:4px 0}
-    .wudu-step{background:var(--sf);border:1px solid var(--bo);border-radius:var(--r);padding:14px 16px;margin-bottom:10px}
-    .wudu-num{font-family:'Cinzel Decorative',serif;font-size:.52rem;color:var(--gold-d);letter-spacing:.12em;margin-bottom:4px}
-    .wudu-title{font-family:'Cinzel Decorative',serif;font-size:.72rem;color:var(--gold);letter-spacing:.1em;margin-bottom:6px}
-    .wudu-ar{font-family:'Amiri',serif;font-size:1.2rem;color:var(--gold-l);text-align:right;direction:rtl;margin-bottom:5px;line-height:1.8}
-    .wudu-ph{font-style:italic;color:var(--tx2);font-size:.80rem;margin-bottom:4px}
-    .wudu-txt{font-size:.82rem;color:var(--tx3);line-height:1.7}
-    .wudu-note{font-size:.67rem;color:var(--gold-d);margin-top:6px;font-style:italic;border-left:2px solid var(--bo);padding-left:8px}
-    .wudu-tag{display:inline-block;padding:2px 7px;border-radius:2px;font-family:'Cinzel Decorative',serif;font-size:.49rem;letter-spacing:.08em;margin-bottom:8px}
+    .wudu-step{background:var(--sf);border:1px solid var(--bo);border-radius:var(--r);padding:16px 18px;margin-bottom:12px}
+    .wudu-num{font-family:'Cinzel Decorative',serif;font-size:.64rem;color:var(--gold-d);letter-spacing:.12em;margin-bottom:4px}
+    .wudu-title{font-family:'Cinzel Decorative',serif;font-size:.82rem;color:var(--gold);letter-spacing:.1em;margin-bottom:8px}
+    .wudu-ar{font-family:'Amiri',serif;font-size:1.4rem;color:var(--gold-l);text-align:right;direction:rtl;margin-bottom:6px;line-height:1.9}
+    .wudu-ph{font-style:italic;color:var(--tx2);font-size:.90rem;margin-bottom:5px}
+    .wudu-txt{font-size:.92rem;color:var(--tx3);line-height:1.75}
+    .wudu-note{font-size:.78rem;color:var(--gold-d);margin-top:8px;font-style:italic;border-left:2px solid var(--bo);padding-left:8px}
+    .wudu-tag{display:inline-block;padding:3px 9px;border-radius:2px;font-family:'Cinzel Decorative',serif;font-size:.60rem;letter-spacing:.08em;margin-bottom:10px}
     .tag-fard{background:rgba(224,112,112,.12);border:1px solid rgba(224,112,112,.35);color:var(--fard)}
     .tag-sunna{background:rgba(122,176,154,.12);border:1px solid rgba(122,176,154,.35);color:var(--sunna)}
+
+    /* ===================== QIBLA & HORAIRES ===================== */
     .qh-wrap{display:flex;flex-direction:column;gap:14px;padding:4px 0}
-    .qh-card{background:var(--sf);border:1px solid var(--bo);border-radius:var(--r);padding:16px}
-    .qh-title{font-family:'Cinzel Decorative',serif;font-size:.65rem;letter-spacing:.14em;color:var(--gold);margin-bottom:14px;text-align:center}
-    .geo-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 18px;border:1px solid var(--gold);background:transparent;color:var(--gold);font-family:'Cinzel Decorative',serif;font-size:.58rem;letter-spacing:.12em;cursor:pointer;border-radius:var(--r);margin:0 auto;touch-action:manipulation;min-height:44px;transition:all .2s}
-    .geo-err{font-size:.78rem;color:var(--fard);text-align:center;margin-top:10px}
-    .geo-loading{font-size:.75rem;color:var(--tx3);text-align:center;margin-top:10px;font-style:italic}
+    .qh-card{background:var(--sf);border:1px solid var(--bo);border-radius:var(--r);padding:18px}
+    .qh-title{font-family:'Cinzel Decorative',serif;font-size:.78rem;letter-spacing:.14em;color:var(--gold);margin-bottom:16px;text-align:center}
+    .geo-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border:1px solid var(--gold);background:transparent;color:var(--gold);font-family:'Cinzel Decorative',serif;font-size:.70rem;letter-spacing:.12em;cursor:pointer;border-radius:var(--r);margin:0 auto;touch-action:manipulation;min-height:48px;transition:all .2s}
+    .geo-err{font-size:.86rem;color:var(--fard);text-align:center;margin-top:10px}
+    .geo-loading{font-size:.84rem;color:var(--tx3);text-align:center;margin-top:10px;font-style:italic}
     .compass-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
-    .compass-info{font-family:'Cinzel Decorative',serif;font-size:.6rem;letter-spacing:.1em;color:var(--gold-d);text-align:center}
-    .compass-deg{font-size:.9rem;color:var(--gold);display:block;margin-bottom:2px}
-    .times-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
-    .time-card{background:var(--bg2);border:1px solid var(--bo);border-radius:var(--r);padding:10px 6px;text-align:center}
+    .compass-info{font-family:'Cinzel Decorative',serif;font-size:.70rem;letter-spacing:.1em;color:var(--gold-d);text-align:center}
+    .compass-deg{font-size:1rem;color:var(--gold);display:block;margin-bottom:2px}
+    .times-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+    .time-card{background:var(--bg2);border:1px solid var(--bo);border-radius:var(--r);padding:12px 8px;text-align:center}
     .time-card.next{border-color:var(--gold);background:var(--bg3);box-shadow:0 0 10px var(--gold-g)}
-    .time-name{font-family:'Cinzel Decorative',serif;font-size:.48rem;letter-spacing:.08em;color:var(--gold-d);margin-bottom:4px}
-    .time-ar{font-family:'Amiri',serif;font-size:1rem;color:var(--gold-l);line-height:1.2;margin-bottom:3px}
-    .time-val{font-size:.88rem;color:var(--tx2);font-weight:500}
+    .time-name{font-family:'Cinzel Decorative',serif;font-size:.60rem;letter-spacing:.08em;color:var(--gold-d);margin-bottom:5px}
+    .time-ar{font-family:'Amiri',serif;font-size:1.15rem;color:var(--gold-l);line-height:1.3;margin-bottom:4px}
+    .time-val{font-size:1rem;color:var(--tx2);font-weight:500}
     .time-card.next .time-val{color:var(--gold)}
-    .time-next-badge{font-family:'Cinzel Decorative',serif;font-size:.42rem;color:var(--gold);letter-spacing:.06em;margin-top:3px}
-    .city-info{font-size:.72rem;color:var(--tx3);text-align:center;margin-top:8px;font-style:italic}
-    .notif-row{display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding:10px 12px;background:var(--bg2);border:1px solid var(--bo);border-radius:var(--r)}
-    .notif-lbl{font-family:'Cinzel Decorative',serif;font-size:.54rem;letter-spacing:.1em;color:var(--tx2)}
-    .notif-btn{padding:6px 14px;border:1px solid var(--bo);background:transparent;color:var(--tx3);font-family:'Cinzel Decorative',serif;font-size:.5rem;letter-spacing:.08em;cursor:pointer;border-radius:var(--r);transition:all .2s;touch-action:manipulation}
+    .time-next-badge{font-family:'Cinzel Decorative',serif;font-size:.52rem;color:var(--gold);letter-spacing:.06em;margin-top:4px}
+    .city-info{font-size:.80rem;color:var(--tx3);text-align:center;margin-top:10px;font-style:italic}
+    .notif-row{display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding:12px 14px;background:var(--bg2);border:1px solid var(--bo);border-radius:var(--r)}
+    .notif-lbl{font-family:'Cinzel Decorative',serif;font-size:.65rem;letter-spacing:.1em;color:var(--tx2)}
+    .notif-btn{padding:7px 16px;border:1px solid var(--bo);background:transparent;color:var(--tx3);font-family:'Cinzel Decorative',serif;font-size:.62rem;letter-spacing:.08em;cursor:pointer;border-radius:var(--r);transition:all .2s;touch-action:manipulation;min-height:38px}
     .notif-btn.on{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.08)}
-    .notif-status{font-size:.68rem;color:var(--tx3);margin-top:6px;font-style:italic;text-align:center}
+
+    /* ===================== TASBIH ===================== */
     .tasbih-wrap{display:flex;flex-direction:column;gap:16px;padding:4px 0}
-    .tasbih-card{background:var(--sf);border:1px solid var(--bo);border-radius:var(--r);padding:20px 16px;text-align:center}
-    .tasbih-name{font-family:'Amiri',serif;font-size:1.6rem;color:var(--gold-l);margin-bottom:4px;line-height:1.4}
-    .tasbih-fr{font-family:'Cinzel Decorative',serif;font-size:.58rem;letter-spacing:.12em;color:var(--gold-d);margin-bottom:16px}
-    .tasbih-counter{font-family:'Cinzel Decorative',serif;font-size:3.5rem;color:var(--gold);line-height:1;margin-bottom:4px;transition:all .15s}
+    .tasbih-card{background:var(--sf);border:1px solid var(--bo);border-radius:var(--r);padding:22px 18px;text-align:center}
+    .tasbih-name{font-family:'Amiri',serif;font-size:1.9rem;color:var(--gold-l);margin-bottom:5px;line-height:1.4}
+    .tasbih-fr{font-family:'Cinzel Decorative',serif;font-size:.70rem;letter-spacing:.12em;color:var(--gold-d);margin-bottom:18px}
+    .tasbih-counter{font-family:'Cinzel Decorative',serif;font-size:3.5rem;color:var(--gold);line-height:1;margin-bottom:5px;transition:all .15s}
     .tasbih-counter.pop{animation:tasbihPop .2s ease}
-    .tasbih-total{font-size:.72rem;color:var(--tx3);margin-bottom:16px}
-    .tasbih-btn{width:100%;padding:16px;border:2px solid var(--gold);background:rgba(201,168,76,.06);color:var(--gold-l);font-family:'Amiri',serif;font-size:1.3rem;cursor:pointer;border-radius:var(--r);touch-action:manipulation;transition:all .15s;margin-bottom:8px}
+    .tasbih-total{font-size:.82rem;color:var(--tx3);margin-bottom:18px}
+    .tasbih-btn{width:100%;padding:18px;border:2px solid var(--gold);background:rgba(201,168,76,.06);color:var(--gold-l);font-family:'Amiri',serif;font-size:1.5rem;cursor:pointer;border-radius:var(--r);touch-action:manipulation;transition:all .15s;margin-bottom:10px}
     .tasbih-btn:active{background:rgba(201,168,76,.18);transform:scale(.98)}
-    .tasbih-reset{padding:8px 20px;border:1px solid var(--bo);background:transparent;color:var(--tx3);font-family:'Cinzel Decorative',serif;font-size:.5rem;letter-spacing:.1em;cursor:pointer;border-radius:var(--r);touch-action:manipulation}
-    .tasbih-progress{height:3px;background:var(--bg2);border-radius:2px;overflow:hidden;margin-bottom:6px}
+    .tasbih-reset{padding:9px 22px;border:1px solid var(--bo);background:transparent;color:var(--tx3);font-family:'Cinzel Decorative',serif;font-size:.62rem;letter-spacing:.1em;cursor:pointer;border-radius:var(--r);touch-action:manipulation;min-height:40px}
+    .tasbih-progress{height:3px;background:var(--bg2);border-radius:2px;overflow:hidden;margin-bottom:8px}
     .tasbih-bar{height:100%;background:linear-gradient(90deg,var(--gold-d),var(--gold));transition:width .2s ease}
-    .tasbih-done{background:rgba(122,176,154,.1);border:1px solid rgba(122,176,154,.3);border-radius:var(--r);padding:10px;margin-top:8px}
-    .tasbih-done-txt{font-family:'Cinzel Decorative',serif;font-size:.56rem;letter-spacing:.1em;color:var(--sunna)}
+    .tasbih-done{background:rgba(122,176,154,.1);border:1px solid rgba(122,176,154,.3);border-radius:var(--r);padding:12px;margin-top:10px}
+    .tasbih-done-txt{font-family:'Cinzel Decorative',serif;font-size:.68rem;letter-spacing:.1em;color:var(--sunna)}
+
+    /* ===================== DONATE MODAL ===================== */
+    .donate-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;z-index:1000;padding:20px}
+    .donate-modal{background:var(--bg2);border:1px solid var(--bo2);border-radius:var(--r);padding:28px 24px;max-width:360px;width:100%;text-align:center}
+    .donate-modal-title{font-family:'Amiri',serif;font-size:1.6rem;color:var(--gold-l);margin-bottom:6px}
+    .donate-modal-sub{font-family:'Cinzel Decorative',serif;font-size:.65rem;letter-spacing:.12em;color:var(--gold);margin-bottom:6px}
+    .donate-modal-txt{font-size:.88rem;color:var(--tx3);line-height:1.7;margin-bottom:20px}
+    .donate-modal-btns{display:flex;flex-direction:column;gap:10px}
+    .donate-modal-btn{display:flex;align-items:center;justify-content:center;gap:10px;padding:13px 20px;border-radius:var(--r);font-family:'Cinzel Decorative',serif;font-size:.68rem;letter-spacing:.1em;cursor:pointer;transition:all .2s;border:1px solid;text-decoration:none;min-height:50px}
+    .donate-modal-btn-paypal{background:rgba(0,112,192,.12);border-color:rgba(0,112,192,.45);color:#5baee0}
+    .donate-modal-btn-paypal:hover{background:rgba(0,112,192,.22)}
+    .donate-modal-btn-stripe{background:rgba(99,91,255,.12);border-color:rgba(99,91,255,.45);color:#a49cff}
+    .donate-modal-btn-stripe:hover{background:rgba(99,91,255,.22)}
+    .donate-modal-close{margin-top:14px;padding:8px 20px;border:1px solid var(--bo);background:transparent;color:var(--tx3);font-family:'Cinzel Decorative',serif;font-size:.60rem;letter-spacing:.1em;cursor:pointer;border-radius:var(--r);min-height:38px}
   </style>
 </head>
 <body>
@@ -243,7 +293,36 @@
 <script type="text/babel">
 const {useState,useEffect,useRef,useCallback} = React;
 
-// Verset du jour - utilise window.VERSETS defini dans le script precedent
+/* ===================== DONATE MODAL ===================== */
+function DonateModal({onClose}){
+  return(
+    <div className="donate-modal-overlay" onClick={e=>{if(e.target===e.currentTarget)onClose();}}>
+      <div className="donate-modal">
+        <div className="donate-modal-title">جَزَاكُمُ اللَّهُ خَيْرًا</div>
+        <div className="donate-modal-sub">SOUTENIR L'APPLICATION</div>
+        <div className="donate-modal-txt">
+          Cette application est et restera gratuite. Votre soutien permet de la maintenir, de l'ameliorer et d'ajouter de nouvelles fonctionnalites.<br/><br/>
+          Qu'Allah recompense votre geste.
+        </div>
+        <div className="donate-modal-btns">
+          <a className="donate-modal-btn donate-modal-btn-paypal"
+             href="https://www.paypal.com/donate/?hosted_button_id=VOTRE_ID_PAYPAL"
+             target="_blank" rel="noopener noreferrer">
+            <span style={{fontSize:"1.1rem"}}>🅿</span> DONNER VIA PAYPAL
+          </a>
+          <a className="donate-modal-btn donate-modal-btn-stripe"
+             href="https://buy.stripe.com/VOTRE_LIEN_STRIPE"
+             target="_blank" rel="noopener noreferrer">
+            <span style={{fontSize:"1.1rem"}}>⚡</span> DONNER VIA STRIPE
+          </a>
+        </div>
+        <button className="donate-modal-close" onClick={onClose}>FERMER</button>
+      </div>
+    </div>
+  );
+}
+
+/* ===================== VERSET DU JOUR ===================== */
 function VersetDuJour() {
   const [open, setOpen] = useState(false);
   const versets = window.VERSETS || [];
@@ -274,10 +353,9 @@ function VersetDuJour() {
   );
 }
 
-// Calcul Qibla
+/* ===================== QIBLA ===================== */
 function calcQibla(lat,lon){const ML=21.4225*Math.PI/180,MLon=39.8262*Math.PI/180,uLat=lat*Math.PI/180,dLon=MLon-lon*Math.PI/180,y=Math.sin(dLon)*Math.cos(ML),x=Math.cos(uLat)*Math.sin(ML)-Math.sin(uLat)*Math.cos(ML)*Math.cos(dLon);return(Math.atan2(y,x)*180/Math.PI+360)%360;}
 
-// Boussole
 function CompassSVG({qiblaDeg,deviceHeading}){
   const angle=qiblaDeg-(deviceHeading||0);
   return(
@@ -298,13 +376,13 @@ function CompassSVG({qiblaDeg,deviceHeading}){
         <circle cx="100" cy="100" r="6" fill="#c9a84c"/>
         <circle cx="100" cy="100" r="3" fill="#0a0806"/>
         <text x="100" y="148" textAnchor="middle" fill="#c9a84c" fontSize="9" fontFamily="'Cinzel Decorative',serif" letterSpacing="2">QIBLA</text>
-        <text x="100" y="160" textAnchor="middle" fill="#8a6e32" fontSize="8" fontFamily="'Amiri',serif">{Math.round(qiblaDeg)} depuis le Nord</text>
+        <text x="100" y="160" textAnchor="middle" fill="#8a6e32" fontSize="8" fontFamily="'Amiri',serif">{Math.round(qiblaDeg)}° depuis le Nord</text>
       </svg>
     </div>
   );
 }
 
-const PRAYER_NAMES=[{key:"Fajr",fr:"Fajr",ar:"\u0627\u0644\u0641\u062c\u0631"},{key:"Dhuhr",fr:"Dhuhr",ar:"\u0627\u0644\u0638\u0647\u0631"},{key:"Asr",fr:"Asr",ar:"\u0627\u0644\u0639\u0635\u0631"},{key:"Maghrib",fr:"Maghrib",ar:"\u0627\u0644\u0645\u063a\u0631\u0628"},{key:"Isha",fr:"Isha",ar:"\u0627\u0644\u0639\u0634\u0627\u0621"},{key:"Sunrise",fr:"Shuruq",ar:"\u0627\u0644\u0634\u0631\u0648\u0642"}];
+const PRAYER_NAMES=[{key:"Fajr",fr:"Fajr",ar:"الفجر"},{key:"Dhuhr",fr:"Dhuhr",ar:"الظهر"},{key:"Asr",fr:"Asr",ar:"العصر"},{key:"Maghrib",fr:"Maghrib",ar:"المغرب"},{key:"Isha",fr:"Isha",ar:"العشاء"},{key:"Sunrise",fr:"Shuruq",ar:"الشروق"}];
 function findNext(t){const now=new Date(),nm=now.getHours()*60+now.getMinutes();for(const p of PRAYER_NAMES){if(p.key==="Sunrise")continue;const tx=t[p.key];if(!tx)continue;const[h,m]=tx.split(":").map(Number);if(h*60+m>nm)return p.key;}return "Fajr";}
 function scheduleNotifs(t){if(!("Notification"in window)||Notification.permission!=="granted")return;const now=new Date();PRAYER_NAMES.forEach(p=>{if(p.key==="Sunrise")return;const tx=t[p.key];if(!tx)return;const[h,m]=tx.split(":").map(Number);const pd=new Date();pd.setHours(h,m,0,0);const nd=new Date(pd.getTime()-5*60*1000);const delay=nd.getTime()-now.getTime();if(delay>0)setTimeout(()=>{new Notification(p.fr+" dans 5 minutes",{body:"Il est temps de se preparer.",icon:"images/icon.png"});},delay);});}
 
@@ -318,26 +396,27 @@ function QiblaHorairesTab(){
     <div className="qh-wrap">
       <div className="qh-card">
         <div className="qh-title">DIRECTION DE LA QIBLA</div>
-        {status==="idle"&&<div style={{textAlign:"center"}}><p style={{fontSize:".78rem",color:"var(--tx3)",marginBottom:14,lineHeight:1.6}}>La direction de La Mecque sera calculee depuis votre position exacte.</p><button className="geo-btn" onClick={requestLocation}>LOCALISER MA POSITION</button></div>}
+        {status==="idle"&&<div style={{textAlign:"center"}}><p style={{fontSize:".88rem",color:"var(--tx3)",marginBottom:16,lineHeight:1.7}}>La direction de La Mecque sera calculee depuis votre position exacte.</p><button className="geo-btn" onClick={requestLocation}>LOCALISER MA POSITION</button></div>}
         {status==="loading"&&<p className="geo-loading">Localisation en cours...</p>}
         {status==="error"&&<p className="geo-err">{errMsg}</p>}
-        {status==="done"&&qibla!==null&&<><CompassSVG qiblaDeg={qibla} deviceHeading={heading}/><p className="compass-info"><span className="compass-deg">{Math.round(qibla)}</span>Direction vers La Mecque</p></>}
+        {status==="done"&&qibla!==null&&<><CompassSVG qiblaDeg={qibla} deviceHeading={heading}/><p className="compass-info"><span className="compass-deg">{Math.round(qibla)}°</span>Direction vers La Mecque</p></>}
       </div>
       <div className="qh-card">
         <div className="qh-title">HORAIRES DE PRIERE</div>
-        {status==="idle"&&<p style={{fontSize:".78rem",color:"var(--tx3)",textAlign:"center"}}>Appuyez sur Localiser ci-dessus.</p>}
+        {status==="idle"&&<p style={{fontSize:".88rem",color:"var(--tx3)",textAlign:"center"}}>Appuyez sur Localiser ci-dessus.</p>}
         {status==="loading"&&<p className="geo-loading">Chargement des horaires...</p>}
         {timings&&<>
           <div className="times-grid">{PRAYER_NAMES.map(p=><div key={p.key} className={"time-card"+(next===p.key?" next":"")}><div className="time-ar">{p.ar}</div><div className="time-name">{p.fr}</div><div className="time-val">{timings[p.key]?timings[p.key].substring(0,5):"--"}</div>{next===p.key&&<div className="time-next-badge">PROCHAINE</div>}</div>)}</div>
-          {city&&<p className="city-info">{city} - Methode MWL</p>}
-          <div className="notif-row"><span className="notif-lbl">RAPPELS DE PRIERE</span>{notifStatus==="unsupported"&&<span style={{fontSize:".65rem",color:"var(--tx3)"}}>Non disponible</span>}{notifStatus==="denied"&&<span style={{fontSize:".65rem",color:"var(--fard)"}}>Refuse</span>}{notifStatus==="default"&&<button className="notif-btn" onClick={requestNotif}>ACTIVER</button>}{notifStatus==="granted"&&<button className="notif-btn on">ACTIVE</button>}</div>
+          {city&&<p className="city-info">{city} — Methode MWL</p>}
+          <div className="notif-row"><span className="notif-lbl">RAPPELS DE PRIERE</span>{notifStatus==="unsupported"&&<span style={{fontSize:".75rem",color:"var(--tx3)"}}>Non disponible</span>}{notifStatus==="denied"&&<span style={{fontSize:".75rem",color:"var(--fard)"}}>Refuse</span>}{notifStatus==="default"&&<button className="notif-btn" onClick={requestNotif}>ACTIVER</button>}{notifStatus==="granted"&&<button className="notif-btn on">ACTIVE</button>}</div>
         </>}
       </div>
     </div>
   );
 }
 
-const DHIKR=[{ar:"\u0633\u064f\u0628\u0652\u062d\u064e\u0627\u0646\u064e \u0627\u0644\u0644\u0651\u0647\u0650",fr:"Subhana -llah",meaning:"Gloire a Allah",keywords:["subhana allah","subhan allah","subhana","gloire allah"]},{ar:"\u0627\u0644\u062d\u064e\u0645\u0652\u062f\u064f \u0644\u0644\u0651\u0647\u0650",fr:"Al-hamdu li-llah",meaning:"Louange a Allah",keywords:["alhamdulillah","al hamdulillah","hamdoulillah","louange allah"]},{ar:"\u0627\u0644\u0644\u0651\u0647\u064f \u0623\u064e\u0643\u0652\u0628\u064e\u0631\u064f",fr:"Allahu Akbar",meaning:"Allah est le Plus Grand",keywords:["allahu akbar","allahou akbar","allah akbar"]}];
+/* ===================== TASBIH ===================== */
+const DHIKR=[{ar:"سُبْحَانَ اللَّهِ",fr:"Subhana -llah",meaning:"Gloire a Allah",keywords:["subhana allah","subhan allah","subhana","gloire allah"]},{ar:"الْحَمْدُ لِلَّهِ",fr:"Al-hamdu li-llah",meaning:"Louange a Allah",keywords:["alhamdulillah","al hamdulillah","hamdoulillah","louange allah"]},{ar:"اللَّهُ أَكْبَرُ",fr:"Allahu Akbar",meaning:"Allah est le Plus Grand",keywords:["allahu akbar","allahou akbar","allah akbar"]}];
 
 function TasbihTab(){
   const [idx,setIdx]=useState(0);const [counts,setCounts]=useState([0,0,0]);const [popping,setPopping]=useState(false);const [voiceOn,setVoiceOn]=useState(false);const [listening,setListening]=useState(false);const [lastWord,setLastWord]=useState("");const [voiceErr,setVoiceErr]=useState("");const recogRef=useRef(null);const idxRef=useRef(0);const countsRef=useRef([0,0,0]);const TARGET=33;
@@ -349,53 +428,95 @@ function TasbihTab(){
   const allDone=counts.every(c=>c>=TARGET);const current=DHIKR[idx];const prog=counts[idx]/TARGET*100;
   return(
     <div className="tasbih-wrap">
-      <div style={{display:"flex",gap:8}}>{DHIKR.map((d,i)=><button key={i} onClick={()=>selectDhikr(i)} style={{flex:1,padding:"10px 4px",background:i===idx?"var(--bg3)":"var(--sf)",border:"1px solid "+(i===idx?"var(--gold)":"var(--bo)"),borderRadius:"var(--r)",cursor:"pointer",textAlign:"center",transition:"all .2s",touchAction:"manipulation"}}><div style={{fontFamily:"'Amiri',serif",fontSize:"1rem",color:"var(--gold-l)",lineHeight:1.3}}>{d.ar}</div><div style={{fontFamily:"'Cinzel Decorative',serif",fontSize:".42rem",color:i===idx?"var(--gold)":"var(--tx3)",letterSpacing:".08em",marginTop:3}}>{d.fr}</div><div style={{fontSize:".68rem",color:i===idx?"var(--gold)":"var(--tx3)",marginTop:2}}>{counts[i]}/33</div></button>)}</div>
+      <div style={{display:"flex",gap:8}}>{DHIKR.map((d,i)=><button key={i} onClick={()=>selectDhikr(i)} style={{flex:1,padding:"12px 4px",background:i===idx?"var(--bg3)":"var(--sf)",border:"1px solid "+(i===idx?"var(--gold)":"var(--bo)"),borderRadius:"var(--r)",cursor:"pointer",textAlign:"center",transition:"all .2s",touchAction:"manipulation"}}><div style={{fontFamily:"'Amiri',serif",fontSize:"1.15rem",color:"var(--gold-l)",lineHeight:1.3}}>{d.ar}</div><div style={{fontFamily:"'Cinzel Decorative',serif",fontSize:".55rem",color:i===idx?"var(--gold)":"var(--tx3)",letterSpacing:".08em",marginTop:4}}>{d.fr}</div><div style={{fontSize:".80rem",color:i===idx?"var(--gold)":"var(--tx3)",marginTop:3}}>{counts[i]}/33</div></button>)}</div>
       <div className="tasbih-card">
-        {allDone?(<div className="tasbih-done"><div style={{fontFamily:"'Amiri',serif",fontSize:"1.8rem",color:"var(--gold-l)",marginBottom:8}}>{"\u0627\u0644\u062d\u0645\u062f \u0644\u0644\u0647"}</div><div className="tasbih-done-txt">TASBIH ACCOMPLI - 99 DHIKR</div></div>):(<>
+        {allDone?(<div className="tasbih-done"><div style={{fontFamily:"'Amiri',serif",fontSize:"2rem",color:"var(--gold-l)",marginBottom:10}}>الحمد لله</div><div className="tasbih-done-txt">TASBIH ACCOMPLI — 99 DHIKR</div></div>):(<>
           <div className="tasbih-name">{current.ar}</div>
-          <div className="tasbih-fr">{current.fr} - {current.meaning}</div>
+          <div className="tasbih-fr">{current.fr} — {current.meaning}</div>
           <div className="tasbih-progress"><div className="tasbih-bar" style={{width:prog+"%"}}/></div>
           <div className={"tasbih-counter"+(popping?" pop":"")}>{counts[idx]}</div>
-          <div className="tasbih-total">sur {TARGET} - Total : {counts.reduce((a,b)=>a+b,0)} / 99</div>
+          <div className="tasbih-total">sur {TARGET} — Total : {counts.reduce((a,b)=>a+b,0)} / 99</div>
           <button className="tasbih-btn" onClick={increment}>{current.ar}</button>
-          <button onClick={toggleVoice} style={{width:"100%",padding:"10px",marginBottom:8,border:"1px solid "+(voiceOn?"var(--gold)":"var(--bo)"),background:voiceOn?"rgba(201,168,76,.1)":"transparent",color:voiceOn?"var(--gold)":"var(--tx3)",fontFamily:"'Cinzel Decorative',serif",fontSize:".54rem",letterSpacing:".1em",cursor:"pointer",borderRadius:"var(--r)",display:"flex",alignItems:"center",justifyContent:"center",gap:8,touchAction:"manipulation"}}>
-            {voiceOn?"MODE VOCAL ACTIF - APPUYER POUR ARRETER":"ACTIVER MODE VOCAL"}
+          <button onClick={toggleVoice} style={{width:"100%",padding:"11px",marginBottom:10,border:"1px solid "+(voiceOn?"var(--gold)":"var(--bo)"),background:voiceOn?"rgba(201,168,76,.1)":"transparent",color:voiceOn?"var(--gold)":"var(--tx3)",fontFamily:"'Cinzel Decorative',serif",fontSize:".65rem",letterSpacing:".1em",cursor:"pointer",borderRadius:"var(--r)",display:"flex",alignItems:"center",justifyContent:"center",gap:8,touchAction:"manipulation",minHeight:"42px"}}>
+            {voiceOn?"MODE VOCAL ACTIF — APPUYER POUR ARRETER":"ACTIVER MODE VOCAL"}
           </button>
-          {voiceOn&&<div style={{textAlign:"center",marginBottom:6}}><div style={{fontSize:".68rem",color:"var(--tx3)",fontStyle:"italic"}}>{listening?"En ecoute... prononcez le dhikr":"Demarrage..."}</div>{lastWord&&<div style={{fontSize:".65rem",color:"var(--tx3)",marginTop:4}}>Entendu : {lastWord}</div>}</div>}
-          {voiceErr&&<div style={{fontSize:".72rem",color:"var(--fard)",textAlign:"center",marginBottom:8}}>{voiceErr}</div>}
+          {voiceOn&&<div style={{textAlign:"center",marginBottom:8}}><div style={{fontSize:".78rem",color:"var(--tx3)",fontStyle:"italic"}}>{listening?"En ecoute... prononcez le dhikr":"Demarrage..."}</div>{lastWord&&<div style={{fontSize:".76rem",color:"var(--tx3)",marginTop:4}}>Entendu : {lastWord}</div>}</div>}
+          {voiceErr&&<div style={{fontSize:".82rem",color:"var(--fard)",textAlign:"center",marginBottom:10}}>{voiceErr}</div>}
         </>)}
         <button className="tasbih-reset" onClick={reset}>REMETTRE A ZERO</button>
       </div>
-      <div style={{background:"var(--sf)",border:"1px solid var(--bo)",borderRadius:"var(--r)",padding:"12px 14px"}}><div style={{fontFamily:"'Cinzel Decorative',serif",fontSize:".52rem",letterSpacing:".1em",color:"var(--gold-d)",marginBottom:6}}>REFERENCE</div><div style={{fontSize:".78rem",color:"var(--tx3)",lineHeight:1.65}}>Abu Hurayra rapporte que le Prophete dit : Celui qui dit Subhana -llah, Al-hamdu li-llah et Allahu Akbar trente-trois fois apres chaque priere... ses peches seront effaces. (Muslim n597)</div></div>
+      <div style={{background:"var(--sf)",border:"1px solid var(--bo)",borderRadius:"var(--r)",padding:"14px 16px"}}><div style={{fontFamily:"'Cinzel Decorative',serif",fontSize:".64rem",letterSpacing:".1em",color:"var(--gold-d)",marginBottom:8}}>REFERENCE</div><div style={{fontSize:".88rem",color:"var(--tx3)",lineHeight:1.75}}>Abu Hurayra rapporte que le Prophete dit : Celui qui dit Subhana -llah, Al-hamdu li-llah et Allahu Akbar trente-trois fois apres chaque priere... ses peches seront effaces. (Muslim n597)</div></div>
     </div>
   );
 }
 
-const WUDU_STEPS=[{num:1,titre:"Niyyah - Intention",tag:"fard",ar:"\u0646\u064e\u0648\u064e\u064a\u0652\u062a\u064f \u0627\u0644\u0648\u064f\u0636\u064f\u0648\u0621\u064e",ph:"Nawaytu l-wudu",txt:"Former l'intention sincere dans son coeur d'accomplir le wudu pour la priere.",note:"Bukhari n1 - Les actes ne valent que par les intentions."},{num:2,titre:"Basmalah",tag:"sunna",ar:"\u0628\u0650\u0633\u0652\u0645\u0650 \u0627\u0644\u0644\u0651\u0647\u0650",ph:"Bismi -llah",txt:"Prononcer le nom d'Allah avant de commencer.",note:"Abu Dawud n101."},{num:3,titre:"Se laver les mains",tag:"sunna",ar:"",ph:"",txt:"Se laver les deux mains jusqu'aux poignets trois fois, en commencant par la main droite.",note:"Muslim n233."},{num:4,titre:"Se rincer la bouche et le nez",tag:"sunna",ar:"",ph:"",txt:"Rincer la bouche puis aspirer dans le nez et se moucher avec la main gauche. Repeter trois fois.",note:"Bukhari n162."},{num:5,titre:"Se laver le visage",tag:"fard",ar:"",ph:"",txt:"Laver entierement le visage trois fois, du front jusqu'au menton, d'une oreille a l'autre.",note:"Al-Maida 5:6 - lavez vos visages."},{num:6,titre:"Se laver les bras",tag:"fard",ar:"",ph:"",txt:"Laver le bras droit jusqu'au coude inclus trois fois, puis le bras gauche.",note:"Al-Maida 5:6 - vos mains jusqu'aux coudes."},{num:7,titre:"Mash - Passer sur la tete",tag:"fard",ar:"",ph:"",txt:"Passer les deux mains mouillees sur la tete une fois, de la naissance des cheveux vers la nuque puis retour.",note:"Al-Maida 5:6 - passez vos mains sur vos tetes."},{num:8,titre:"Se laver les pieds",tag:"fard",ar:"",ph:"",txt:"Laver le pied droit jusqu'a la cheville trois fois, passer le petit doigt entre les orteils, puis le pied gauche.",note:"Al-Maida 5:6 - vos pieds jusqu'aux chevilles."},{num:9,titre:"Dua de cloture",tag:"sunna",ar:"\u0623\u0634\u0652\u0647\u064e\u062f\u064f \u0623\u0646\u0652 \u0644\u0627 \u0625\u0644\u0670\u0647\u064e \u0625\u0644\u0651\u0627 \u0627\u0644\u0644\u0651\u0647\u064f",ph:"Ashhadu an la ilaha illa -llahu",txt:"Apres le wudu, lever le regard vers le ciel et prononcer la shahada.",note:"Muslim n234 - Les huit portes du Paradis lui sont ouvertes."}];
+/* ===================== WUDU ===================== */
+const WUDU_STEPS=[
+  {num:1,titre:"Niyyah — Intention",tag:"fard",ar:"نَوَيْتُ الْوُضُوءَ",ph:"Nawaytu l-wudu",txt:"Former l'intention sincere dans son coeur d'accomplir le wudu pour la priere. L'intention est une disposition du coeur et n'a pas besoin d'etre prononcee a voix haute.",note:"Bukhari n1 — Les actes ne valent que par les intentions."},
+  {num:2,titre:"Basmalah",tag:"sunna",ar:"بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ",ph:"Bismi -llahi r-rahmani r-rahim",txt:"Prononcer le nom d'Allah avant de commencer. Si oublie au debut, la prononcer des qu'on s'en souvient.",note:"Abu Dawud n101 — Hasan."},
+  {num:3,titre:"Se laver les mains",tag:"sunna",ar:"",ph:"",txt:"Se laver les deux mains jusqu'aux poignets trois fois, en commencant par la main droite. Passer entre les doigts.",note:"Muslim n233."},
+  {num:4,titre:"Se rincer la bouche et le nez",tag:"sunna",ar:"",ph:"",txt:"Rincer la bouche (madmadah) puis aspirer de l'eau dans le nez (istinchaq) et se moucher avec la main gauche (istinthar). Repeter trois fois avec la meme paume.",note:"Bukhari n162."},
+  {num:5,titre:"Se laver le visage",tag:"fard",ar:"",ph:"",txt:"Laver entierement le visage trois fois, du front jusqu'au menton, d'une oreille a l'autre. Pour l'homme barbu : faire penetrer l'eau dans la barbe. Commencer par le haut.",note:"Al-Maida 5:6 — lavez vos visages."},
+  {num:6,titre:"Se laver les bras",tag:"fard",ar:"",ph:"",txt:"Laver le bras droit jusqu'au coude inclus trois fois, puis le bras gauche. S'assurer que l'eau atteint bien les coudes et les plis du bras.",note:"Al-Maida 5:6 — vos mains jusqu'aux coudes."},
+  {num:7,titre:"Mash — Passer sur la tete",tag:"fard",ar:"",ph:"",txt:"Passer les deux mains mouillees sur la totalite de la tete une fois, de la naissance des cheveux vers la nuque puis retour. Ne pas ajouter d'eau nouvelle.",note:"Al-Maida 5:6 — passez vos mains sur vos tetes."},
+  {num:8,titre:"Se laver les oreilles",tag:"sunna",ar:"",ph:"",txt:"Avec la meme eau que le mash : passer les index a l'interieur des oreilles et les pouces derriere les pavillons. Une fois.",note:"Abu Dawud n134 — Sahih."},
+  {num:9,titre:"Se laver les pieds",tag:"fard",ar:"",ph:"",txt:"Laver le pied droit jusqu'a la cheville incluse trois fois, passer le petit doigt de la main gauche entre les orteils (khilal), puis le pied gauche. S'assurer que l'eau atteint les talons.",note:"Al-Maida 5:6 — vos pieds jusqu'aux chevilles."},
+  {num:9,titre:"Dua de cloture",tag:"sunna",ar:"أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",ph:"Ashhadu an la ilaha illa -llahu wahdahu la sharika lah, wa-ashhadu anna Muhammadan abduhu wa-rasuluh",txt:"Apres le wudu, lever le regard vers le ciel et prononcer la shahada complete. Les huit portes du Paradis lui sont ouvertes.",note:"Muslim n234."}
+];
 
-function WuduTab(){return(<div className="wudu-wrap"><div className="edit-warn"><strong>Wudu - Purification rituelle</strong> - Condition prealable a la validite de la priere.</div>{WUDU_STEPS.map((s,i)=><div key={i} className="wudu-step"><div className="wudu-num">ETAPE {s.num}</div><div className="wudu-title">{s.titre}</div><span className={"wudu-tag "+(s.tag==="fard"?"tag-fard":"tag-sunna")}>{s.tag==="fard"?"Fard - Obligatoire":"Sunna"}</span>{s.ar&&<div className="wudu-ar">{s.ar}</div>}{s.ph&&<div className="wudu-ph">{s.ph}</div>}<div className="wudu-txt">{s.txt}</div>{s.note&&<div className="wudu-note">{s.note}</div>}</div>)}</div>);}
+function WuduTab(){return(<div className="wudu-wrap"><div className="edit-warn"><strong>Wudu — Purification rituelle</strong> — Condition prealable a la validite de la priere. Chaque etape doit etre effectuee dans l'ordre avec une intention sincere.</div>{WUDU_STEPS.map((s,i)=><div key={i} className="wudu-step"><div className="wudu-num">ETAPE {s.num}</div><div className="wudu-title">{s.titre}</div><span className={"wudu-tag "+(s.tag==="fard"?"tag-fard":"tag-sunna")}>{s.tag==="fard"?"Fard — Obligatoire":"Sunna"}</span>{s.ar&&<div className="wudu-ar">{s.ar}</div>}{s.ph&&<div className="wudu-ph">{s.ph}</div>}<div className="wudu-txt">{s.txt}</div>{s.note&&<div className="wudu-note">{s.note}</div>}</div>)}</div>);}
 
+/* ===================== SALAH DATA ===================== */
 const STEP_POSTURE={niyya:"Takbir",takbir:"Takbir",qiyam:"Quiyam",qiyam_resume:"Quiyam",surah:"Quiyam",ruku:"Ruku",itidal:"Itidal",sujud1:"Sujud",jalsa:"Jalsa",sujud2:"Sujud",tashahhud_int:"Tashahud",tashahhud_final:"Tashahud",salat_ibr:"Tashahud",salam:"Taslim"};
-const POSTURE_LABELS={Takbir:"Takbir - intention & Allahu Akbar",Quiyam:"Debout - Qiyam",Ruku:"Inclinaison - Ruku",Itidal:"Redressement - Itidal",Sujud:"Prosternation - Sujud",Jalsa:"Assise - Jalsa",Tashahud:"Tashahhud - l'assise",Taslim:"Salam - salutation finale"};
-const GESTES={Takbir:{position:"Debout, face a la qibla, pieds legerement ecartes.",geste:"Former l'intention dans le coeur, puis lever les deux mains en disant Allahu Akbar.",homme:"Les mains montent jusqu'aux lobes des oreilles.",femme:"Les mains montent jusqu'aux epaules.",vigilance:"L'intention est une disposition du coeur."},Quiyam:{position:"Debout, corps droit, regard vers le lieu de prosternation.",geste:"Croiser les mains sur la poitrine, main droite sur gauche. Reciter Al-Fatihah.",homme:"Main droite saisit le poignet gauche.",femme:"Mains croisees sur la poitrine, position resserree.",vigilance:"Al-Fatihah est un pilier - la priere est invalide sans elle."},Ruku:{position:"Penche en avant, dos horizontal, mains sur les genoux.",geste:"Allahu Akbar en s'inclinant. Dos horizontal. 3x Subhana Rabbiya l-Azim.",homme:"Dos strictement horizontal, doigts ecartes.",femme:"Inclinaison moins prononcee, doigts joints.",vigilance:"Le dos doit etre horizontal - ni arque ni courbe."},Itidal:{position:"Debout, completement redresse, bras le long du corps.",geste:"Sami'a -llahu li-man hamidah, puis Rabbana wa-laka l-hamd.",homme:"Corps entierement redresse.",femme:"Meme position.",vigilance:"L'itidal est un pilier - s'arreter debout avant de descendre."},Sujud:{position:"Prosternation, 7 membres au sol.",geste:"Allahu Akbar. 7 appuis : front+nez, 2 paumes, 2 genoux, 2 pieds. 3x Subhana Rabbiya l-Ala.",homme:"Coudes decolles, abdomen eloigne des cuisses.",femme:"Corps resserre, coudes proches du sol.",vigilance:"Front ET nez doivent toucher. Orteils orientes qibla."},Jalsa:{position:"Assise entre les deux prosternations.",geste:"Allahu Akbar, s'asseoir, Rabbi ghfir li x2.",homme:"Pied gauche a plat, assis dessus. Pied droit redresse.",femme:"Deux pieds du cote droit.",vigilance:"La jalsa est un pilier."},Tashahud:{position:"Assise pour la recitation du Tashahhud.",geste:"Main gauche sur cuisse, index droit leve lors de la shahada.",homme:"Derniere raka'at : position tawarruk.",femme:"Deux pieds du cote droit.",vigilance:"Ne lever qu'un seul doigt."},Taslim:{position:"Assise, position Tashahhud.",geste:"Tete a droite : As-salamu alaykum wa-rahmatu -llah, puis a gauche.",homme:"Geste identique.",femme:"Un seul salam suffit selon les malikites.",vigilance:"Le salam de droite est un pilier."}};
+const POSTURE_LABELS={Takbir:"Takbir — intention & Allahu Akbar",Quiyam:"Debout — Qiyam",Ruku:"Inclinaison — Ruku",Itidal:"Redressement — Itidal",Sujud:"Prosternation — Sujud",Jalsa:"Assise — Jalsa",Tashahud:"Tashahhud — l'assise",Taslim:"Salam — salutation finale"};
+const GESTES={Takbir:{position:"Debout, face a la qibla, pieds legerement ecartes.",geste:"Former l'intention dans le coeur, puis lever les deux mains en disant Allahu Akbar.",homme:"Les mains montent jusqu'aux lobes des oreilles.",femme:"Les mains montent jusqu'aux epaules.",vigilance:"L'intention est une disposition du coeur."},Quiyam:{position:"Debout, corps droit, regard vers le lieu de prosternation.",geste:"Croiser les mains sur la poitrine, main droite sur gauche. Reciter Al-Fatihah.",homme:"Main droite saisit le poignet gauche.",femme:"Mains croisees sur la poitrine, position resserree.",vigilance:"Al-Fatihah est un pilier — la priere est invalide sans elle."},Ruku:{position:"Penche en avant, dos horizontal, mains sur les genoux.",geste:"Allahu Akbar en s'inclinant. Dos horizontal. 3x Subhana Rabbiya l-Azim.",homme:"Dos strictement horizontal, doigts ecartes.",femme:"Inclinaison moins prononcee, doigts joints.",vigilance:"Le dos doit etre horizontal — ni arque ni courbe."},Itidal:{position:"Debout, completement redresse, bras le long du corps.",geste:"Sami'a -llahu li-man hamidah, puis Rabbana wa-laka l-hamd.",homme:"Corps entierement redresse.",femme:"Meme position.",vigilance:"L'itidal est un pilier — s'arreter debout avant de descendre."},Sujud:{position:"Prosternation, 7 membres au sol.",geste:"Allahu Akbar. 7 appuis : front+nez, 2 paumes, 2 genoux, 2 pieds. 3x Subhana Rabbiya l-Ala.",homme:"Coudes decolles, abdomen eloigne des cuisses.",femme:"Corps resserre, coudes proches du sol.",vigilance:"Front ET nez doivent toucher. Orteils orientes qibla."},Jalsa:{position:"Assise entre les deux prosternations.",geste:"Allahu Akbar, s'asseoir, Rabbi ghfir li x2.",homme:"Pied gauche a plat, assis dessus. Pied droit redresse.",femme:"Deux pieds du cote droit.",vigilance:"La jalsa est un pilier."},Tashahud:{position:"Assise pour la recitation du Tashahhud.",geste:"Main gauche sur cuisse, index droit leve lors de la shahada.",homme:"Derniere raka'at : position tawarruk.",femme:"Deux pieds du cote droit.",vigilance:"Ne lever qu'un seul doigt."},Taslim:{position:"Assise, position Tashahhud.",geste:"Tete a droite : As-salamu alaykum wa-rahmatu -llah, puis a gauche.",homme:"Geste identique.",femme:"Un seul salam suffit selon les malikites.",vigilance:"Le salam de droite est un pilier."}};
 
-function PostureIllustration({postureId}){
-  const [open,setOpen]=useState(false);const label=POSTURE_LABELS[postureId]||"";const geste=GESTES[postureId];
-  return(<div className="posture-wrap"><img src={"images/"+postureId+".png"} alt={label} className="posture-img" onError={e=>{e.target.style.opacity="0.15";}} /><span className="posture-lbl">{label}</span>{geste&&<><button className={"geste-btn"+(open?" open":"")} onClick={()=>setOpen(x=>!x)}><span className="geste-ico" style={{transform:open?"rotate(90deg)":"none"}}>{">"}</span><span className="geste-lbl">{open?"MASQUER":"VOIR LE GESTE"}</span></button>{open&&<div className="geste-panel"><div className="geste-section"><div className="geste-section-t">POSITION</div><div className="geste-txt">{geste.position}</div></div><div className="geste-section"><div className="geste-section-t">GESTE</div><div className="geste-txt">{geste.geste}</div></div><div className="geste-section"><div className="geste-section-t">HOMME / FEMME</div><div className="geste-diff"><div className="geste-diff-col"><div className="geste-diff-lbl">HOMME</div><div className="geste-diff-txt">{geste.homme}</div></div><div className="geste-diff-col"><div className="geste-diff-lbl">FEMME</div><div className="geste-diff-txt">{geste.femme}</div></div></div></div><div className="geste-section"><div className="geste-section-t">VIGILANCE</div><div className="geste-warn">{geste.vigilance}</div></div></div>}</>}</div>);
-}
+/* SOURATES COMPLETES */
+const SURAHS={
+  kafirun:{id:"kafirun",num:109,name:"Al-Kafirun",arabic:"الكافرون",ayat:6,
+    arabicText:"قُلۡ يَٰٓأَيُّهَا ٱلۡكَٰفِرُونَ ۝ لَآ أَعۡبُدُ مَا تَعۡبُدُونَ ۝ وَلَآ أَنتُمۡ عَٰبِدُونَ مَآ أَعۡبُدُ ۝ وَلَآ أَنَا۠ عَابِدٞ مَّا عَبَدتُّمۡ ۝ وَلَآ أَنتُمۡ عَٰبِدُونَ مَآ أَعۡبُدُ ۝ لَكُمۡ دِينُكُمۡ وَلِيَ دِينِ",
+    phonetic:"Qul ya ayyuha l-kafirun / La abudu ma tabudun / Wa-la antum abiduna ma abud / Wa-la ana abidun ma abadtum / Wa-la antum abiduna ma abud / Lakum dinukum wa-liya din",
+    translation:"Dis : O mecreants ! Je n'adore pas ce que vous adorez. Et vous n'etes pas adorateurs de ce que j'adore. Je ne suis pas adorateur de ce que vous avez adore. Et vous n'etes pas adorateurs de ce que j'adore. A vous votre religion et a moi la mienne.",
+    sources:{statut:"sunna",statutLabel:"Sunna muakkada",quran:[{ref:"Al-Kafirun 109:1-6",texte:"La sourate complete (6 versets)."}],hadith:[{ref:"Muslim n884",narrateur:"Abu Hurayra",texte:"Le Prophete recitait Al-Kafirun et Al-Ikhlas dans les deux rakaat du Fajr.",grade:"Sahih"}],geste:"Declaration de desengagement du polytheisme."}},
+  ikhlas:{id:"ikhlas",num:112,name:"Al-Ikhlas",arabic:"الإخلاص",ayat:4,
+    arabicText:"قُلۡ هُوَ ٱللَّهُ أَحَدٌ ۝ ٱللَّهُ ٱلصَّمَدُ ۝ لَمۡ يَلِدۡ وَلَمۡ يُولَدۡ ۝ وَلَمۡ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ",
+    phonetic:"Qul huwa -llahu ahad / Allahu s-samad / Lam yalid wa-lam yulad / Wa-lam yakun lahu kufuwan ahad",
+    translation:"Dis : Il est Allah l'Unique. Allah, l'Absolu. Il n'a pas engendre et n'a pas ete engendre. Et nul n'est egal a Lui.",
+    sources:{statut:"sunna",statutLabel:"Sunna muakkada",quran:[{ref:"Al-Ikhlas 112:1-4",texte:"La sourate complete (4 versets)."}],hadith:[{ref:"Bukhari n5013",narrateur:"Abu Said",texte:"Al-Ikhlas equivaut au tiers du Coran.",grade:"Sahih"}],geste:"Unicite ontologique absolue."}},
+  falaq:{id:"falaq",num:113,name:"Al-Falaq",arabic:"الفلق",ayat:5,
+    arabicText:"قُلۡ أَعُوذُ بِرَبِّ ٱلۡفَلَقِ ۝ مِن شَرِّ مَا خَلَقَ ۝ وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ ۝ وَمِن شَرِّ ٱلنَّفَّٰثَٰتِ فِي ٱلۡعُقَدِ ۝ وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ",
+    phonetic:"Qul audhu bi-rabbi l-falaq / Min sharri ma khalaq / Wa-min sharri ghasiqin idha waqab / Wa-min sharri n-naffathati fi l-uqad / Wa-min sharri hasidin idha hasad",
+    translation:"Dis : Je me refuge aupres du Seigneur de l'aube. Contre le mal de ce qu'Il a cree. Et contre le mal de l'obscurite quand elle s'etend. Et contre le mal de celles qui soufflent sur les noeuds. Et contre le mal de l'envieux quand il envia.",
+    sources:{statut:"sunna",statutLabel:"Sunna — Al-Muawwidhatayn",quran:[{ref:"Al-Falaq 113:1-5",texte:"La sourate complete (5 versets)."}],hadith:[{ref:"Abu Dawud n1462",narrateur:"Uqba ibn Amir",texte:"Recite les Muawwidhatayn — Al-Falaq et An-Nas.",grade:"Sahih"}],geste:"Acte de tawakkul — confiance totale en Allah."}},
+  nas:{id:"nas",num:114,name:"An-Nas",arabic:"الناس",ayat:6,
+    arabicText:"قُلۡ أَعُوذُ بِرَبِّ ٱلنَّاسِ ۝ مَلِكِ ٱلنَّاسِ ۝ إِلَٰهِ ٱلنَّاسِ ۝ مِن شَرِّ ٱلۡوَسۡوَاسِ ٱلۡخَنَّاسِ ۝ ٱلَّذِي يُوَسۡوِسُ فِي صُدُورِ ٱلنَّاسِ ۝ مِنَ ٱلۡجِنَّةِ وَٱلنَّاسِ",
+    phonetic:"Qul audhu bi-rabbi n-nas / Maliki n-nas / Ilahi n-nas / Min sharri l-waswasi l-khannas / Alladhi yuwaswisu fi suduri n-nas / Mina l-jinnati wa-n-nas",
+    translation:"Dis : Je me refuge aupres du Seigneur des hommes. Du Roi des hommes. Du Dieu des hommes. Contre le mal du tentateur furtif. Qui insuffle le mal dans les poitrines des hommes. Qu'il soit djinn ou homme.",
+    sources:{statut:"sunna",statutLabel:"Sunna — Al-Muawwidhatayn",quran:[{ref:"An-Nas 114:1-6",texte:"La sourate complete (6 versets)."}],hadith:[{ref:"Bukhari n5016",narrateur:"Aisha",texte:"Le Prophete recitait chaque nuit Al-Ikhlas Al-Falaq et An-Nas.",grade:"Sahih"}],geste:"Allah invoque sous trois attributs : Rabb, Malik, Ilah."}}
+};
 
-const SURAHS={kafirun:{id:"kafirun",num:109,name:"Al-Kafirun",arabic:"\u0627\u0644\u0643\u0627\u0641\u0631\u0648\u0646",ayat:6,arabicText:"\u0642\u064f\u0644\u0652 \u064a\u064e\u0627 \u0623\u064e\u064a\u064f\u0651\u0647\u064e\u0627 \u0627\u0644\u0652\u0643\u064e\u0627\u0641\u0650\u0631\u064f\u0648\u0646\u064e \u06dd \u0644\u064e\u0627 \u0623\u064e\u0639\u0652\u0628\u064f\u062f\u064f \u0645\u064e\u0627 \u062a\u064e\u0639\u0652\u0628\u064f\u062f\u064f\u0648\u0646\u064e \u06dd \u0644\u064e\u0643\u064f\u0645\u0652 \u062f\u0650\u064a\u0646\u064f\u0643\u064f\u0645\u0652 \u0648\u064e\u0644\u0650\u064a\u064e \u062f\u0650\u064a\u0646\u0650",phonetic:"Qul ya ayyuha l-kafirun / La abudu ma tabudun / Lakum dinukum wa-liya din",translation:"Dis : O mecreants ! Je n'adore pas ce que vous adorez. A vous votre religion et a moi la mienne.",sources:{statut:"sunna",statutLabel:"Sunna muakkada",quran:[{ref:"Al-Kafirun 109:1-6",texte:"La sourate elle-meme."}],hadith:[{ref:"Muslim n884",narrateur:"Abu Hurayra",texte:"Le Prophete recitait Al-Kafirun et Al-Ikhlas dans les deux rakaat du Fajr.",grade:"Sahih"}],geste:"Declaration de desengagement du polytheisme."}},ikhlas:{id:"ikhlas",num:112,name:"Al-Ikhlas",arabic:"\u0627\u0644\u0625\u062e\u0644\u0627\u0635",ayat:4,arabicText:"\u0642\u064f\u0644\u0652 \u0647\u064f\u0648\u064e \u0627\u0644\u0644\u0651\u0647\u064f \u0623\u064e\u062d\u064e\u062f\u064c \u06dd \u0627\u0644\u0644\u0651\u0647\u064f \u0627\u0644\u0635\u0651\u064e\u0645\u064e\u062f\u064f \u06dd \u0644\u064e\u0645\u0652 \u064a\u064e\u0644\u0650\u062f\u0652 \u0648\u064e\u0644\u064e\u0645\u0652 \u064a\u064f\u0648\u0644\u064e\u062f\u0652 \u06dd \u0648\u064e\u0644\u064e\u0645\u0652 \u064a\u064e\u0643\u064f\u0646 \u0644\u0651\u064e\u0647\u064f \u0643\u064f\u0641\u064f\u0648\u064b\u0627 \u0623\u064e\u062d\u064e\u062f\u064c",phonetic:"Qul huwa -llahu ahad / Allahu s-samad / Lam yalid wa-lam yulad / Wa-lam yakun lahu kufuwan ahad",translation:"Dis : Il est Allah l'Unique. Il n'a pas engendre et n'a pas ete engendre.",sources:{statut:"sunna",statutLabel:"Sunna muakkada",quran:[{ref:"Al-Ikhlas 112:1-4",texte:"La sourate elle-meme."}],hadith:[{ref:"Bukhari n5013",narrateur:"Abu Said",texte:"Al-Ikhlas equivaut au tiers du Coran.",grade:"Sahih"}],geste:"Unicite ontologique absolue."}},falaq:{id:"falaq",num:113,name:"Al-Falaq",arabic:"\u0627\u0644\u0641\u0644\u0642",ayat:5,arabicText:"\u0642\u064f\u0644\u0652 \u0623\u064e\u0639\u064f\u0648\u0630\u064f \u0628\u0650\u0631\u064e\u0628\u0651\u0650 \u0627\u0644\u0652\u0641\u064e\u0644\u064e\u0642\u0650 \u06dd \u0645\u0650\u0646 \u0634\u064e\u0631\u0651\u0650 \u0645\u064e\u0627 \u062e\u064e\u0644\u064e\u0642\u064e",phonetic:"Qul audhu bi-rabbi l-falaq / Min sharri ma khalaq",translation:"Dis : Je me refuge aupres du Seigneur de l'aube contre le mal de ce qu'Il a cree.",sources:{statut:"sunna",statutLabel:"Sunna - Al-Muawwidhatayn",quran:[{ref:"Al-Falaq 113:1-5",texte:"La sourate elle-meme."}],hadith:[{ref:"Abu Dawud n1462",narrateur:"Uqba",texte:"Recite les Muawwidhatayn.",grade:"Sahih"}],geste:"Acte de tawakkul."}},nas:{id:"nas",num:114,name:"An-Nas",arabic:"\u0627\u0644\u0646\u0627\u0633",ayat:6,arabicText:"\u0642\u064f\u0644\u0652 \u0623\u064e\u0639\u064f\u0648\u0630\u064f \u0628\u0650\u0631\u064e\u0628\u0651\u0650 \u0627\u0644\u0646\u0651\u064e\u0627\u0633\u0650 \u06dd \u0645\u064e\u0644\u0650\u0643\u0650 \u0627\u0644\u0646\u0651\u064e\u0627\u0633\u0650 \u06dd \u0625\u0650\u0644\u064e\u0670\u0647\u0650 \u0627\u0644\u0646\u0651\u064e\u0627\u0633\u0650",phonetic:"Qul audhu bi-rabbi n-nas / Maliki n-nas / Ilahi n-nas",translation:"Dis : Je me refuge aupres du Seigneur des hommes du Roi des hommes du Dieu des hommes.",sources:{statut:"sunna",statutLabel:"Sunna - Al-Muawwidhatayn",quran:[{ref:"An-Nas 114:1-6",texte:"La sourate elle-meme."}],hadith:[{ref:"Bukhari n5016",narrateur:"Aisha",texte:"Le Prophete recitait chaque nuit Al-Ikhlas Al-Falaq et An-Nas.",grade:"Sahih"}],geste:"Allah invoque sous trois attributs."}}};
 const DEFAULT_SURAH={1:"kafirun",2:"ikhlas"};
-const PRAYERS=[{id:"fajr",name:"Fajr",arabic:"\u0627\u0644\u0641\u062c\u0631",rakaat:2},{id:"dhuhr",name:"Dhuhr",arabic:"\u0627\u0644\u0638\u0647\u0631",rakaat:4},{id:"asr",name:"Asr",arabic:"\u0627\u0644\u0639\u0635\u0631",rakaat:4},{id:"maghrib",name:"Maghrib",arabic:"\u0627\u0644\u0645\u063a\u0631\u0628",rakaat:3},{id:"isha",name:"Isha",arabic:"\u0627\u0644\u0639\u0634\u0627\u0621",rakaat:4}];
+const PRAYERS=[{id:"fajr",name:"Fajr",arabic:"الفجر",rakaat:2},{id:"dhuhr",name:"Dhuhr",arabic:"الظهر",rakaat:4},{id:"asr",name:"Asr",arabic:"العصر",rakaat:4},{id:"maghrib",name:"Maghrib",arabic:"المغرب",rakaat:3},{id:"isha",name:"Isha",arabic:"العشاء",rakaat:4}];
 const VOCAL_RAKAAT={fajr:[1,2],dhuhr:[],asr:[],maghrib:[1,2],isha:[1,2]};
 const TASHAHHUD_INT={dhuhr:2,asr:2,isha:2};
 const SOURCES={niyya:{statut:"fard",statutLabel:"Fard",quran:[{ref:"Al-Bayyinah 98:5",texte:"Lui vouant un culte sincere."}],hadith:[{ref:"Bukhari n1",narrateur:"Umar",texte:"Les actes ne valent que par les intentions.",grade:"Sahih"}],geste:"Disposition du coeur."},takbir:{statut:"fard",statutLabel:"Fard - Rukn",quran:[{ref:"Al-Muddaththir 74:3",texte:"Et ton Seigneur magnifie-Le."}],hadith:[{ref:"Bukhari n723",narrateur:"Abu Hurayra",texte:"Lorsque vous vous levez pour prier faites le takbir.",grade:"Sahih"}],geste:"Entree dans l'etat de sacralite."},qiyam:{statut:"fard",statutLabel:"Fard - Rukn",quran:[{ref:"Al-Fatihah 1:1-7",texte:"La sourate elle-meme."}],hadith:[{ref:"Bukhari n756",narrateur:"Ubada",texte:"Pas de priere valide sans Al-Fatihah.",grade:"Sahih"}],geste:"Conversation avec Allah."},ruku:{statut:"fard",statutLabel:"Fard - Rukn",quran:[{ref:"Al-Hajj 22:77",texte:"Inclinez-vous prosternez-vous."}],hadith:[{ref:"Muslim n772",narrateur:"Uqba",texte:"Mettez-la dans votre ruku.",grade:"Sahih"}],geste:"Egalisation devant Allah."},itidal:{statut:"fard",statutLabel:"Fard - Rukn",quran:[],hadith:[{ref:"Bukhari n789",narrateur:"Abu Hurayra",texte:"Sami'a -llahu li-man hamidah.",grade:"Sahih"}],geste:"Instant de reception."},sujud1:{statut:"fard",statutLabel:"Fard - Rukn",quran:[{ref:"Al-Alaq 96:19",texte:"Prosterne-toi et rapproche-toi."}],hadith:[{ref:"Muslim n482",narrateur:"Abu Hurayra",texte:"Le serviteur est le plus proche en prosternation.",grade:"Sahih"}],geste:"Sept points touchent la terre."},jalsa:{statut:"fard",statutLabel:"Fard - Rukn",quran:[],hadith:[{ref:"Abu Dawud n874",narrateur:"Ibn Abbas",texte:"Rabbi ghfir li wa-rahmani.",grade:"Sahih"}],geste:"Pardon au coeur de l'adoration."},sujud2:{statut:"fard",statutLabel:"Fard - Rukn",quran:[{ref:"Al-Hajj 22:77",texte:"Prosternez-vous."}],hadith:[{ref:"Muslim n482",narrateur:"Abu Hurayra",texte:"Le serviteur est le plus proche en prosternation.",grade:"Sahih"}],geste:"La descente etait volontaire."},tashahhud_int:{statut:"wajib",statutLabel:"Wajib",quran:[],hadith:[{ref:"Bukhari n831",narrateur:"Ibn Masud",texte:"At-tahiyyatu li-llahi...",grade:"Sahih"}],geste:"Temoignage."},tashahhud_final:{statut:"wajib",statutLabel:"Wajib / Fard",quran:[],hadith:[{ref:"Bukhari n831",narrateur:"Ibn Masud",texte:"At-tahiyyatu li-llahi wa-s-salawatu...",grade:"Sahih"}],geste:"Index leve lors de la shahada."},salat_ibr:{statut:"sunna",statutLabel:"Sunna muakkada",quran:[{ref:"Al-Ahzab 33:56",texte:"Allah et Ses anges prient sur le Prophete."}],hadith:[{ref:"Bukhari n3370",narrateur:"Kab ibn Ujra",texte:"Allahumma salli ala Muhammad...",grade:"Sahih"}],geste:"Heritage transmis."},salam:{statut:"fard",statutLabel:"Fard - Rukn",quran:[],hadith:[{ref:"Abu Dawud n730",narrateur:"Ali",texte:"La sortie de la priere est le salam.",grade:"Sahih"}],geste:"Tourne vers les autres."}};
-const STEPS_BASE=[{id:"niyya",label:"Niyyah",arabic:"\u0646\u0650\u064a\u0651\u064e\u0629\u064c",phonetic:"Niyyah",translation:"Intention en coeur avant le takbir",note:"1ere rakaat uniquement",noAudio:true},{id:"takbir",label:"Takbir al-Ihram",arabic:"\u0627\u0644\u0644\u0651\u0647\u064f \u0623\u064e\u0643\u0652\u0628\u064e\u0631\u064f",phonetic:"Allahu Akbar",translation:"Allah est le Plus Grand"},{id:"qiyam",label:"Qiyam - Al-Fatihah",arabic:"\u0628\u0650\u0633\u0652\u0645\u0650 \u0627\u0644\u0644\u0651\u0647\u0650 \u0627\u0644\u0631\u0651\u064e\u062d\u0652\u0645\u064e\u0670\u0646\u0650 \u0627\u0644\u0631\u0651\u064e\u062d\u0650\u064a\u0645\u0650 \u06dd \u0627\u0644\u062d\u064e\u0645\u0652\u062f\u064f \u0644\u0644\u0651\u0647\u0650 \u0631\u064e\u0628\u0651\u0650 \u0627\u0644\u0652\u0639\u064e\u0627\u0644\u064e\u0645\u0650\u064a\u0646\u064e \u06dd \u0627\u0644\u0631\u0651\u064e\u062d\u0652\u0645\u064e\u0670\u0646\u0650 \u0627\u0644\u0631\u0651\u064e\u062d\u0650\u064a\u0645\u0650 \u06dd \u0645\u064e\u0627\u0644\u0650\u0643\u0650 \u064a\u064e\u0648\u0652\u0645\u0650 \u0627\u0644\u062f\u0651\u0650\u064a\u0646\u0650 \u06dd \u0625\u064a\u0651\u064e\u0627\u0643\u064e \u0646\u064e\u0639\u0652\u0628\u064f\u062f\u064f \u0648\u064e\u0625\u064a\u0651\u064e\u0627\u0643\u064e \u0646\u064e\u0633\u0652\u062a\u064e\u0639\u0650\u064a\u0646\u064f \u06dd \u0627\u0647\u0652\u062f\u0650\u0646\u064e\u0627 \u0627\u0644\u0635\u0651\u0650\u0631\u064e\u0627\u0637\u064e \u0627\u0644\u0652\u0645\u064f\u0633\u0652\u062a\u064e\u0642\u0650\u064a\u0645\u064e \u06dd \u0635\u0650\u0631\u064e\u0627\u0637\u064e \u0627\u0644\u0651\u064e\u0630\u0650\u064a\u0646\u064e \u0623\u064e\u0646\u0652\u0639\u064e\u0645\u0652\u062a\u064e \u0639\u064e\u0644\u064e\u064a\u0652\u0647\u0650\u0645\u0652 \u063a\u064e\u064a\u0652\u0631\u0650 \u0627\u0644\u0652\u0645\u064e\u063a\u0652\u0636\u064f\u0648\u0628\u0650 \u0639\u064e\u0644\u064e\u064a\u0652\u0647\u0650\u0645\u0652 \u0648\u064e\u0644\u064e\u0627 \u0627\u0644\u0636\u0651\u064e\u0627\u0644\u0651\u0650\u064a\u0646\u064e",phonetic:"Bismi-llahi r-rahmani r-rahim / Al-hamdu li-llahi rabbi l-alamin / Maliki yawmi d-din / Iyyaka nabudu wa-iyyaka nastain / Ihdina s-sirata l-mustaqim",translation:"Au nom d'Allah. Toute louange est a Allah Seigneur des mondes. Maitre du Jour de la Retribution. C'est Toi Seul que nous adorons. Guide-nous dans le droit chemin.",audioNote:"Recitation verset par verset"},{id:"surah",label:"Sourate supplementaire",arabic:"",phonetic:"",translation:"",note:"1ere et 2eme rakaat uniquement"},{id:"ruku",label:"Ruku",arabic:"\u0633\u064f\u0628\u0652\u062d\u064e\u0627\u0646\u064e \u0631\u064e\u0628\u0651\u0650\u064a\u064e \u0627\u0644\u0652\u0639\u064e\u0638\u0650\u064a\u0645\u0650",phonetic:"Subhana Rabbiya l-Azim x3",translation:"Gloire a mon Seigneur le Tres Grand x3",noAudio:true},{id:"itidal",label:"Itidal",arabic:"\u0633\u064e\u0645\u0650\u0639\u064e \u0627\u0644\u0644\u0651\u0647\u064f \u0644\u0650\u0645\u064e\u0646\u0652 \u062d\u064e\u0645\u0650\u062f\u064e\u0647\u064f",phonetic:"Sami'a -llahu li-man hamidah / Rabbana wa-laka l-hamd",translation:"Allah entend celui qui Le loue / Notre Seigneur a Toi la louange",noAudio:true},{id:"sujud1",label:"1er Sujud",arabic:"\u0633\u064f\u0628\u0652\u062d\u064e\u0627\u0646\u064e \u0631\u064e\u0628\u0651\u0650\u064a\u064e \u0627\u0644\u0652\u0623\u064e\u0639\u0652\u0644\u064e\u0649",phonetic:"Subhana Rabbiya l-Ala x3",translation:"Gloire a mon Seigneur le Tres Haut x3",noAudio:true},{id:"jalsa",label:"Jalsa",arabic:"\u0631\u064e\u0628\u0651\u0650 \u0627\u063a\u0652\u0641\u0650\u0631\u0652 \u0644\u0650\u064a",phonetic:"Rabbi ghfir li x2",translation:"O mon Seigneur pardonne-moi x2",noAudio:true},{id:"sujud2",label:"2eme Sujud",arabic:"\u0633\u064f\u0628\u0652\u062d\u064e\u0627\u0646\u064e \u0631\u064e\u0628\u0651\u0650\u064a\u064e \u0627\u0644\u0652\u0623\u064e\u0639\u0652\u0644\u064e\u0649",phonetic:"Subhana Rabbiya l-Ala x3",translation:"Gloire a mon Seigneur le Tres Haut x3",noAudio:true}];
-const TD={id:"",label:"Tashahhud",arabic:"\u0627\u0644\u062a\u0651\u064e\u062d\u0650\u064a\u0651\u064e\u0627\u062a\u064f \u0644\u0644\u0651\u0647\u0650 \u0648\u064e\u0627\u0644\u0635\u0651\u064e\u0644\u064e\u0648\u064e\u0627\u062a\u064f \u0648\u064e\u0627\u0644\u0637\u0651\u064e\u064a\u0651\u0650\u0628\u064e\u0627\u062a\u064f \u06dd \u0627\u0644\u0633\u0651\u064e\u0644\u064e\u0627\u0645\u064f \u0639\u064e\u0644\u064e\u064a\u0652\u0643\u064e \u0623\u064e\u064a\u0651\u064f\u0647\u064e\u0627 \u0627\u0644\u0646\u0651\u064e\u0628\u0650\u064a\u0651\u064f \u06dd \u0627\u0644\u0633\u0651\u064e\u0644\u064e\u0627\u0645\u064f \u0639\u064e\u0644\u064e\u064a\u0652\u0646\u064e\u0627 \u06dd \u0623\u0634\u0652\u0647\u064e\u062f\u064f \u0623\u064e\u0646\u0652 \u0644\u064e\u0627 \u0625\u0650\u0644\u064e\u0670\u0647\u064e \u0625\u0650\u0644\u0651\u064e\u0627 \u0627\u0644\u0644\u0651\u0647\u064f",phonetic:"At-tahiyyatu li-llahi wa-s-salawatu / as-salamu alayka ayyuha n-nabiyyu / as-salamu alayna / ashhadu an la ilaha illa -llahu wa-ashhadu anna muhammadan abduhu wa-rasuluh",translation:"Les salutations appartiennent a Allah. Que la paix soit sur toi o Prophete. J'atteste qu'il n'y a de divinite qu'Allah et que Muhammad est Son messager.",noAudio:true};
-const SD={id:"salat_ibr",label:"Salat Ibrahimiyyah",arabic:"\u0627\u0644\u0644\u0651\u0647\u064f\u0645\u0651\u064e \u0635\u064e\u0644\u0651\u0650 \u0639\u064e\u0644\u064e\u0649 \u0645\u064f\u062d\u064e\u0645\u0651\u064e\u062f\u064d \u0648\u064e\u0639\u064e\u0644\u064e\u0649 \u0622\u0644\u0650 \u0645\u064f\u062d\u064e\u0645\u0651\u064e\u062f\u064d",phonetic:"Allahumma salli ala Muhammadin wa-ala ali Muhammad",translation:"O Allah repands Tes graces sur Muhammad et sa famille comme sur Ibrahim.",noAudio:true};
-const SLD={id:"salam",label:"Salam final",arabic:"\u0627\u0644\u0633\u0651\u064e\u0644\u064e\u0627\u0645\u064f \u0639\u064e\u0644\u064e\u064a\u0652\u0643\u064f\u0645\u0652 \u0648\u064e\u0631\u064e\u062d\u0652\u0645\u064e\u0629\u064f \u0627\u0644\u0644\u0651\u0647\u0650",phonetic:"As-salamu alaykum wa-rahmatu -llah x2",translation:"Que la paix et la misericorde d'Allah soient sur vous - droite puis gauche",noAudio:true};
 
-function buildSeq(pid){const p=PRAYERS.find(x=>x.id===pid);const voc=VOCAL_RAKAAT[pid]||[];const intAt=TASHAHHUD_INT[pid];const steps=[];for(let r=1;r<=p.rakaat;r++){const isVocal=voc.includes(r);for(const s of STEPS_BASE){if(s.id==="niyya"&&r!==1)continue;if(s.id==="surah"&&r>2)continue;steps.push({...s,rakaat:r,isVocal,stepKey:r+"-"+s.id});}if(intAt&&r===intAt&&r<p.rakaat){steps.push({...TD,id:"tashahhud_int",rakaat:r,isVocal:false,stepKey:r+"-ti",tashahudType:"intermediaire"});steps.push({id:"qiyam_resume",label:"Qiyam - Reprise",arabic:"\u0642\u0650\u064a\u064e\u0627\u0645",phonetic:"Qiyam",translation:"Se relever pour la rakaat suivante",rakaat:r,isVocal:false,stepKey:r+"-qr",noAudio:true});}}steps.push({...TD,id:"tashahhud_final",rakaat:p.rakaat,isVocal:false,stepKey:"f-tf",tashahudType:"final"});steps.push({...SD,id:"salat_ibr",rakaat:p.rakaat,isVocal:false,stepKey:"f-si"});steps.push({...SLD,id:"salam",rakaat:p.rakaat,isVocal:false,stepKey:"f-sl"});return steps;}
+const STEPS_BASE=[
+  {id:"niyya",label:"Niyyah",arabic:"نِيَّةٌ",phonetic:"Niyyah",translation:"Intention en coeur avant le takbir",note:"1ere rakaat uniquement",noAudio:true},
+  {id:"takbir",label:"Takbir al-Ihram",arabic:"اللَّهُ أَكْبَرُ",phonetic:"Allahu Akbar",translation:"Allah est le Plus Grand"},
+  {id:"qiyam",label:"Qiyam — Al-Fatihah",arabic:"بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ ۝ ٱلۡحَمۡدُ لِلَّهِ رَبِّ ٱلۡعَٰلَمِينَ ۝ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ ۝ مَٰلِكِ يَوۡمِ ٱلدِّينِ ۝ إِيَّاكَ نَعۡبُدُ وَإِيَّاكَ نَسۡتَعِينُ ۝ ٱهۡدِنَا ٱلصِّرَٰطَ ٱلۡمُسۡتَقِيمَ ۝ صِرَٰطَ ٱلَّذِينَ أَنۡعَمۡتَ عَلَيۡهِمۡ غَيۡرِ ٱلۡمَغۡضُوبِ عَلَيۡهِمۡ وَلَا ٱلضَّآلِّينَ",phonetic:"Bismi-llahi r-rahmani r-rahim / Al-hamdu li-llahi rabbi l-alamin / Ar-rahmani r-rahim / Maliki yawmi d-din / Iyyaka nabudu wa-iyyaka nastain / Ihdina s-sirata l-mustaqim / Sirata l-ladhina anamta alayhim, ghayri l-maghdubi alayhim wa-la d-dallin",translation:"Au nom d'Allah le Tout Misericordieux. Toute louange est a Allah Seigneur des mondes. Le Tout Misericordieux. Maitre du Jour de la Retribution. C'est Toi Seul que nous adorons et c'est Toi Seul dont nous implorons l'aide. Guide-nous dans le droit chemin. Le chemin de ceux que Tu as gracies, non de ceux qui ont encourru Ta colere ni des egares.",audioNote:"Recitation verset par verset"},
+  {id:"surah",label:"Sourate supplementaire",arabic:"",phonetic:"",translation:"",note:"1ere et 2eme rakaat uniquement"},
+  {id:"ruku",label:"Ruku",arabic:"سُبْحَانَ رَبِّيَ الْعَظِيمِ",phonetic:"Subhana Rabbiya l-Azim x3",translation:"Gloire a mon Seigneur le Tres Grand x3",noAudio:true},
+  {id:"itidal",label:"Itidal",arabic:"سَمِعَ اللَّهُ لِمَنۡ حَمِدَهُ — رَبَّنَا وَلَكَ الۡحَمۡدُ",phonetic:"Sami'a -llahu li-man hamidah — Rabbana wa-laka l-hamd",translation:"Allah entend celui qui Le loue — Notre Seigneur a Toi la louange",noAudio:true},
+  {id:"sujud1",label:"1er Sujud",arabic:"سُبۡحَانَ رَبِّيَ الۡأَعۡلَىٰ",phonetic:"Subhana Rabbiya l-Ala x3",translation:"Gloire a mon Seigneur le Tres Haut x3",noAudio:true},
+  {id:"jalsa",label:"Jalsa",arabic:"رَبِّ اغۡفِرۡ لِي",phonetic:"Rabbi ghfir li x2",translation:"O mon Seigneur pardonne-moi x2",noAudio:true},
+  {id:"sujud2",label:"2eme Sujud",arabic:"سُبۡحَانَ رَبِّيَ الۡأَعۡلَىٰ",phonetic:"Subhana Rabbiya l-Ala x3",translation:"Gloire a mon Seigneur le Tres Haut x3",noAudio:true}
+];
+const TD={id:"",label:"Tashahhud",arabic:"التَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ ۝ السَّلَامُ عَلَيۡكَ أَيُّهَا النَّبِيُّ وَرَحۡمَةُ اللَّهِ وَبَرَكَاتُهُ ۝ السَّلَامُ عَلَيۡنَا وَعَلَىٰ عِبَادِ اللَّهِ الصَّالِحِينَ ۝ أَشۡهَدُ أَن لَّا إِلَٰهَ إِلَّا اللَّهُ وَأَشۡهَدُ أَنَّ مُحَمَّدًا عَبۡدُهُ وَرَسُولُهُ",phonetic:"At-tahiyyatu li-llahi wa-s-salawatu wa-t-tayyibat / as-salamu alayka ayyuha n-nabiyyu wa-rahmatu -llahi wa-barakatuh / as-salamu alayna wa-ala ibadi -llahi s-salihin / ashhadu an la ilaha illa -llahu wa-ashhadu anna muhammadan abduhu wa-rasuluh",translation:"Les salutations d'hommage, les prieres et les bonnes oeuvres appartiennent a Allah. Que la paix soit sur toi o Prophete ainsi que la misericorde d'Allah et Ses benedictions. Que la paix soit sur nous et sur les serviteurs vertueux d'Allah. J'atteste qu'il n'y a de divinite qu'Allah et que Muhammad est Son serviteur et Son messager.",noAudio:true};
+const SD={id:"salat_ibr",label:"Salat Ibrahimiyyah",arabic:"اللَّهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ وَعَلَىٰ آلِ مُحَمَّدٍ كَمَا صَلَّيۡتَ عَلَىٰ إِبۡرَاهِيمَ وَعَلَىٰ آلِ إِبۡرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ ۝ اللَّهُمَّ بَارِكۡ عَلَىٰ مُحَمَّدٍ وَعَلَىٰ آلِ مُحَمَّدٍ كَمَا بَارَكۡتَ عَلَىٰ إِبۡرَاهِيمَ وَعَلَىٰ آلِ إِبۡرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ",phonetic:"Allahumma salli ala Muhammadin wa-ala ali Muhammad, kama sallayta ala Ibrahima wa-ala ali Ibrahim, innaka Hamidun Majid / Allahumma barik ala Muhammadin wa-ala ali Muhammad, kama barakta ala Ibrahima wa-ala ali Ibrahim, innaka Hamidun Majid",translation:"O Allah repands Tes graces sur Muhammad et sa famille comme Tu les as repandues sur Ibrahim et sa famille. Tu es Digne de louanges Glorieux. O Allah benis Muhammad et sa famille comme Tu as beni Ibrahim et sa famille. Tu es Digne de louanges Glorieux.",noAudio:true};
+const SLD={id:"salam",label:"Salam final",arabic:"السَّلَامُ عَلَيۡكُمۡ وَرَحۡمَةُ اللَّهِ",phonetic:"As-salamu alaykum wa-rahmatu -llah x2",translation:"Que la paix et la misericorde d'Allah soient sur vous — droite puis gauche",noAudio:true};
+
+function buildSeq(pid){const p=PRAYERS.find(x=>x.id===pid);const voc=VOCAL_RAKAAT[pid]||[];const intAt=TASHAHHUD_INT[pid];const steps=[];for(let r=1;r<=p.rakaat;r++){const isVocal=voc.includes(r);for(const s of STEPS_BASE){if(s.id==="niyya"&&r!==1)continue;if(s.id==="surah"&&r>2)continue;steps.push({...s,rakaat:r,isVocal,stepKey:r+"-"+s.id});}if(intAt&&r===intAt&&r<p.rakaat){steps.push({...TD,id:"tashahhud_int",rakaat:r,isVocal:false,stepKey:r+"-ti",tashahudType:"intermediaire"});steps.push({id:"qiyam_resume",label:"Qiyam — Reprise",arabic:"قِيَامٌ",phonetic:"Qiyam",translation:"Se relever pour la rakaat suivante",rakaat:r,isVocal:false,stepKey:r+"-qr",noAudio:true});}}steps.push({...TD,id:"tashahhud_final",rakaat:p.rakaat,isVocal:false,stepKey:"f-tf",tashahudType:"final"});steps.push({...SD,id:"salat_ibr",rakaat:p.rakaat,isVocal:false,stepKey:"f-si"});steps.push({...SLD,id:"salam",rakaat:p.rakaat,isVocal:false,stepKey:"f-sl"});return steps;}
 
 const RECITERS=[{id:"ar.alafasy",name:"Mishary Al-Afasy",server:"https://server8.mp3quran.net/afs/"},{id:"ar.abdulbasit",name:"Abdul Basit Murattal",server:"https://server7.mp3quran.net/basit/"},{id:"ar.husary",name:"Mahmoud Al-Husary",server:"https://server13.mp3quran.net/husr/"},{id:"ar.minshawi",name:"Mohamed Al-Minshawi",server:"https://server10.mp3quran.net/minsh/"},{id:"ar.maher",name:"Maher Al-Muaiqly",server:"https://server12.mp3quran.net/maher/"}];
 function getSurahUrl(rec,n){const r=RECITERS.find(x=>x.id===rec)||RECITERS[0];return r.server+String(n).padStart(3,"0")+".mp3";}
@@ -403,33 +524,75 @@ function getSurahUrl(rec,n){const r=RECITERS.find(x=>x.id===rec)||RECITERS[0];re
 function useAudio(){const [pid,setPid]=useState(null);const [rec,setRec]=useState("ar.alafasy");const aRef=useRef(null);const act=useRef(null);useEffect(()=>{const el=document.createElement("audio");el.preload="none";el.onended=()=>doStop();el.onerror=()=>doStop();aRef.current=el;return()=>{el.pause();el.src="";};},[]);function doStop(){if(aRef.current){aRef.current.pause();aRef.current.src="";}act.current=null;setPid(null);}const play=useCallback((url,id)=>{if(act.current===id){doStop();return;}doStop();act.current=id;setPid(id);aRef.current.src=url;aRef.current.load();aRef.current.play().catch(()=>doStop());},[]);return{play,stop:doStop,playingId:pid,reciterId:rec,setReciterId:setRec};}
 
 function sc(s){return s==="fard"?"st-fard":s==="wajib"?"st-wajib":"st-sunna";}
-function Src({src}){const [o,setO]=useState(false);return(<div style={{marginTop:10}}><button className={"src-toggle"+(o?" open":"")} onClick={()=>setO(x=>!x)}><span className="src-ico" style={{transform:o?"rotate(90deg)":"none"}}>{">"}</span><span className="src-lbl">SOURCES ET SENS</span><span className={"statut "+sc(src.statut)}>{src.statutLabel}</span></button>{o&&<div className="src-panel"><div className="src-block"><div className="src-block-t">REFERENCE CORANIQUE</div>{src.quran.length?src.quran.map((q,i)=><div key={i} className="qe"><div className="qe-ref">{q.ref}</div><div className="qe-ar">{q.texte}</div></div>):<p className="no-quran">Etabli par la Sunna.</p>}</div>{src.hadith.length>0&&<div className="src-block"><div className="src-block-t">HADITH</div>{src.hadith.map((h,i)=><div key={i} className="he"><div className="he-ref">{h.ref}</div>{h.narrateur&&<div className="he-narr">Rapporte par {h.narrateur}</div>}<div className="he-txt">{h.texte}</div><span className="he-gr">{h.grade}</span></div>)}</div>}{src.geste&&<div className="src-block"><div className="src-block-t">SENS</div><p className="ge-txt">{src.geste}</p></div>}</div>}</div>);}
-function ABtn({surahNum,id,p}){const pl=p.playingId===id;return(<button className={"aub"+(pl?" pl":"")} onClick={()=>p.play(getSurahUrl(p.reciterId,surahNum),id)}>{pl?<><span className="pulse-dot"/>ARRETER</>:<>{">"} ECOUTER</>}</button>);}
-function SS({rakaat,sel,onSel}){const cur=sel[rakaat]||"ikhlas";const note=rakaat===1&&cur==="kafirun"?"Al-Kafirun en 1ere rakaat (Muslim n884)":rakaat===2&&cur==="ikhlas"?"Al-Ikhlas en 2eme rakaat (Muslim n884)":"";return(<div className="ss-wrap"><div className="ss-title">SOURATE - RAKAAT {rakaat}</div><div className="ss-btns">{Object.values(SURAHS).map(s=><button key={s.id} className={"ss-btn"+(cur===s.id?" on":"")} onClick={()=>onSel(rakaat,s.id)}><span className="ss-btn-ar">{s.arabic}</span><span className="ss-btn-nm">{s.name}</span></button>)}</div>{note&&<div className="ss-note">{note}</div>}</div>);}
+function Src({src}){const [o,setO]=useState(false);return(<div style={{marginTop:12}}><button className={"src-toggle"+(o?" open":"")} onClick={()=>setO(x=>!x)}><span className="src-ico" style={{transform:o?"rotate(90deg)":"none"}}>{">"}</span><span className="src-lbl">SOURCES ET SENS</span><span className={"statut "+sc(src.statut)}>{src.statutLabel}</span></button>{o&&<div className="src-panel"><div className="src-block"><div className="src-block-t">REFERENCE CORANIQUE</div>{src.quran.length?src.quran.map((q,i)=><div key={i} className="qe"><div className="qe-ref">{q.ref}</div><div className="qe-ar">{q.texte}</div></div>):<p className="no-quran">Etabli par la Sunna.</p>}</div>{src.hadith.length>0&&<div className="src-block"><div className="src-block-t">HADITH</div>{src.hadith.map((h,i)=><div key={i} className="he"><div className="he-ref">{h.ref}</div>{h.narrateur&&<div className="he-narr">Rapporte par {h.narrateur}</div>}<div className="he-txt">{h.texte}</div><span className="he-gr">{h.grade}</span></div>)}</div>}{src.geste&&<div className="src-block"><div className="src-block-t">SENS</div><p className="ge-txt">{src.geste}</p></div>}</div>}</div>);}
+function ABtn({surahNum,id,p}){const pl=p.playingId===id;return(<button className={"aub"+(pl?" pl":"")} onClick={()=>p.play(getSurahUrl(p.reciterId,surahNum),id)}>{pl?<><span className="pulse-dot"/>ARRETER</>:<>{"▶"} ECOUTER</>}</button>);}
+function SS({rakaat,sel,onSel}){const cur=sel[rakaat]||"ikhlas";const note=rakaat===1&&cur==="kafirun"?"Al-Kafirun en 1ere rakaat (Muslim n884)":rakaat===2&&cur==="ikhlas"?"Al-Ikhlas en 2eme rakaat (Muslim n884)":"";return(<div className="ss-wrap"><div className="ss-title">SOURATE — RAKAAT {rakaat}</div><div className="ss-btns">{Object.values(SURAHS).map(s=><button key={s.id} className={"ss-btn"+(cur===s.id?" on":"")} onClick={()=>onSel(rakaat,s.id)}><span className="ss-btn-ar">{s.arabic}</span><span className="ss-btn-nm">{s.name}</span></button>)}</div>{note&&<div className="ss-note">{note}</div>}</div>);}
+
+function PostureIllustration({postureId}){
+  const [open,setOpen]=useState(false);const label=POSTURE_LABELS[postureId]||"";const geste=GESTES[postureId];
+  return(<div className="posture-wrap"><img src={"images/"+postureId+".png"} alt={label} className="posture-img" onError={e=>{e.target.style.opacity="0.15";}} /><span className="posture-lbl">{label}</span>{geste&&<><button className={"geste-btn"+(open?" open":"")} onClick={()=>setOpen(x=>!x)}><span className="geste-ico" style={{transform:open?"rotate(90deg)":"none"}}>{">"}</span><span className="geste-lbl">{open?"MASQUER":"VOIR LE GESTE"}</span></button>{open&&<div className="geste-panel"><div className="geste-section"><div className="geste-section-t">POSITION</div><div className="geste-txt">{geste.position}</div></div><div className="geste-section"><div className="geste-section-t">GESTE</div><div className="geste-txt">{geste.geste}</div></div><div className="geste-section"><div className="geste-section-t">HOMME / FEMME</div><div className="geste-diff"><div className="geste-diff-col"><div className="geste-diff-lbl">HOMME</div><div className="geste-diff-txt">{geste.homme}</div></div><div className="geste-diff-col"><div className="geste-diff-lbl">FEMME</div><div className="geste-diff-txt">{geste.femme}</div></div></div></div><div className="geste-section"><div className="geste-section-t">VIGILANCE</div><div className="geste-warn">{geste.vigilance}</div></div></div>}</>}</div>);
+}
 
 function Card({step,p,sel,onSel}){const pid=STEP_POSTURE[step.id]||"Quiyam";const srcId=step.id==="tashahhud_int"?"tashahhud_int":step.id==="tashahhud_final"?"tashahhud_final":step.id;const src=SOURCES[srcId];const hv=["qiyam","surah","takbir"].includes(step.id);if(step.id==="surah"){const sid=sel[step.rakaat]||"ikhlas";const s=SURAHS[sid];const aid="sh-"+step.rakaat+"-"+sid;return(<div className="sc"><div className="sc-hd"><div className="sc-hd-l"><span className="sc-lbl">Sourate supplementaire</span></div><ABtn surahNum={s.num} id={aid} p={p}/></div><PostureIllustration postureId="Quiyam"/><SS rakaat={step.rakaat} sel={sel} onSel={onSel}/><div className="sc-ar">{s.arabicText}</div><div className="sc-ph">{s.phonetic}</div><div className="sc-tr">{s.translation}</div><Src src={s.sources}/></div>);}return(<div className="sc"><div className="sc-hd"><div className="sc-hd-l"><span className="sc-lbl">{step.label}</span>{step.tashahudType==="intermediaire"&&<span className="th-i">Intermediaire</span>}{step.tashahudType==="final"&&<span className="th-f">Final</span>}{hv&&<span className={"vb "+(step.isVocal?"vh":"vl")}>{step.isVocal?"Voix haute":"Voix basse"}</span>}</div>{step.id==="qiyam"&&<ABtn surahNum={1} id={step.stepKey} p={p}/>}</div><PostureIllustration postureId={pid}/><div className="sc-ar">{step.arabic}</div><div className="sc-ph">{step.phonetic}</div><div className="sc-tr">{step.translation}</div>{step.note&&<div className="sc-nt">{step.note}</div>}{step.audioNote&&<div className="sc-nt">{step.audioNote}</div>}{src&&<Src src={src}/>}</div>);}
 
-function RefMode({pid,p,sel,onSel}){const prayer=PRAYERS.find(x=>x.id===pid);const seq=buildSeq(pid);const grp={};const fin=[];for(const s of seq){if(["tashahhud_final","salat_ibr","salam"].includes(s.id))fin.push(s);else{if(!grp[s.rakaat])grp[s.rakaat]=[];grp[s.rakaat].push(s);}}return(<div><div className="edit-warn"><strong>Note editoriale</strong> - References issues de Bukhari Muslim Abu Dawud Tirmidhi. A verifier par un erudit qualifie.</div>{Object.entries(grp).map(([r,steps])=>{const iv=VOCAL_RAKAAT[pid].includes(parseInt(r));return(<div key={r} style={{marginBottom:20}}><div className="section-title">Rakaat {r} / {prayer.rakaat}<span className={"vb "+(iv?"vh":"vl")}>{iv?"Voix haute":"Voix basse"}</span></div>{steps.map((s,i)=><Card key={i} step={s} p={p} sel={sel} onSel={onSel}/>)}</div>);})}{fin.length>0&&<div style={{marginBottom:20}}><div className="section-title">Cloture</div>{fin.map((s,i)=><Card key={i} step={s} p={p} sel={sel} onSel={onSel}/>)}</div>}</div>);}
+function RefMode({pid,p,sel,onSel}){const prayer=PRAYERS.find(x=>x.id===pid);const seq=buildSeq(pid);const grp={};const fin=[];for(const s of seq){if(["tashahhud_final","salat_ibr","salam"].includes(s.id))fin.push(s);else{if(!grp[s.rakaat])grp[s.rakaat]=[];grp[s.rakaat].push(s);}}return(<div><div className="edit-warn"><strong>Note editoriale</strong> — References issues de Bukhari Muslim Abu Dawud Tirmidhi. A verifier par un erudit qualifie.</div>{Object.entries(grp).map(([r,steps])=>{const iv=VOCAL_RAKAAT[pid].includes(parseInt(r));return(<div key={r} style={{marginBottom:20}}><div className="section-title">Rakaat {r} / {prayer.rakaat}<span className={"vb "+(iv?"vh":"vl")}>{iv?"Voix haute":"Voix basse"}</span></div>{steps.map((s,i)=><Card key={i} step={s} p={p} sel={sel} onSel={onSel}/>)}</div>);})}{fin.length>0&&<div style={{marginBottom:20}}><div className="section-title">Cloture</div>{fin.map((s,i)=><Card key={i} step={s} p={p} sel={sel} onSel={onSel}/>)}</div>}</div>);}
 
-function CompMode({pid,p,sel,onSel}){const prayer=PRAYERS.find(x=>x.id===pid);const seq=buildSeq(pid);const [idx,setIdx]=useState(0);const [done,setDone]=useState(false);useEffect(()=>{p.stop();},[idx]);const go=(n)=>{p.stop();n>=0&&n<seq.length?setIdx(n):setDone(true);};if(done)return(<div className="done"><div className="done-ar">{"\u0627\u0644\u062d\u0645\u062f \u0644\u0644\u0647"}</div><div className="done-t">Priere accomplie</div><div className="done-s">Qu'Allah accepte votre priere</div><div className="orn">* * *</div><button className="rb-btn" onClick={()=>{p.stop();setIdx(0);setDone(false);}}>RECOMMENCER</button></div>);const step=seq[idx];const prog=Math.round((idx/(seq.length-1))*100);const isLast=idx===seq.length-1;const hv=["qiyam","surah","takbir"].includes(step.id);const srcId=step.id==="tashahhud_int"?"tashahhud_int":step.id==="tashahhud_final"?"tashahhud_final":step.id;const src=SOURCES[srcId];const postId=STEP_POSTURE[step.id]||"Quiyam";const dots=Array.from({length:prayer.rakaat},(_,i)=>{const r=i+1;const dn=(step.rakaat||0)>r;const cr=step.rakaat===r&&!["tashahhud_final","salat_ibr","salam"].includes(step.id);return <div key={r} className={"dot"+(dn?" dn":"")+(cr?" cr":"")}/>;});let body;if(step.id==="surah"){const sid=sel[step.rakaat]||"ikhlas";const s=SURAHS[sid];const aid="sh-"+step.rakaat+"-"+sid;body=<><div className="cc-meta"><div className="cc-ml"><span className="cc-nm">Sourate supplementaire</span><span style={{fontSize:".6rem",color:"var(--tx3)"}}>Rakaat {step.rakaat}</span></div><ABtn surahNum={s.num} id={aid} p={p}/></div><PostureIllustration postureId="Quiyam"/><SS rakaat={step.rakaat} sel={sel} onSel={(r,id)=>{p.stop();onSel(r,id);}}/><div className="cc-ar">{s.arabicText}</div><div className="cc-ph">{s.phonetic}</div><div className="cc-tr">{s.translation}</div><Src src={s.sources}/></>;}else{body=<><div className="cc-meta"><div className="cc-ml"><span className="cc-nm">{step.label}</span>{step.tashahudType==="intermediaire"&&<span className="th-i">Intermediaire</span>}{step.tashahudType==="final"&&<span className="th-f">Final</span>}{step.rakaat&&!["tashahhud_final","salat_ibr","salam"].includes(step.id)&&<span style={{fontSize:".6rem",color:"var(--tx3)"}}>Rakaat {step.rakaat}</span>}</div>{step.id==="qiyam"&&<ABtn surahNum={1} id={step.stepKey} p={p}/>}</div><PostureIllustration postureId={postId}/>{hv&&<div className={"cv "+(step.isVocal?"hi":"lo")}><span className="d"/>{step.isVocal?"Recitation a voix haute":"Recitation silencieuse"}</div>}<div className="cc-ar">{step.arabic}</div><div className="cc-ph">{step.phonetic}</div><div className="cc-tr">{step.translation}</div>{step.note&&<div className="cc-nt">{step.note}</div>}{step.audioNote&&<div className="cc-nt">{step.audioNote}</div>}{src&&<Src src={src}/>}</>;}return(<div><div className="cp-prg"><div className="prg-w"><div className="prg-b" style={{width:prog+"%"}}/></div><div className="prg-l">{idx+1} / {seq.length}</div></div><div className="cp-dots">{dots}</div><div className="cc">{body}</div><div className="cn"><button className="nb" onClick={()=>go(idx-1)} disabled={idx===0}>{"<"} Retour</button>{isLast?<button className="nb dn2" onClick={()=>setDone(true)}>Terminer</button>:<button className="nb pr" onClick={()=>go(idx+1)}>Suivant {">"}</button>}</div></div>);}
+function CompMode({pid,p,sel,onSel}){const prayer=PRAYERS.find(x=>x.id===pid);const seq=buildSeq(pid);const [idx,setIdx]=useState(0);const [done,setDone]=useState(false);useEffect(()=>{p.stop();},[idx]);const go=(n)=>{p.stop();n>=0&&n<seq.length?setIdx(n):setDone(true);};if(done)return(<div className="done"><div className="done-ar">الحمد لله</div><div className="done-t">Priere accomplie</div><div className="done-s">Qu'Allah accepte votre priere</div><div className="orn">* * *</div><button className="rb-btn" onClick={()=>{p.stop();setIdx(0);setDone(false);}}>RECOMMENCER</button></div>);const step=seq[idx];const prog=Math.round((idx/(seq.length-1))*100);const isLast=idx===seq.length-1;const hv=["qiyam","surah","takbir"].includes(step.id);const srcId=step.id==="tashahhud_int"?"tashahhud_int":step.id==="tashahhud_final"?"tashahhud_final":step.id;const src=SOURCES[srcId];const postId=STEP_POSTURE[step.id]||"Quiyam";const dots=Array.from({length:prayer.rakaat},(_,i)=>{const r=i+1;const dn=(step.rakaat||0)>r;const cr=step.rakaat===r&&!["tashahhud_final","salat_ibr","salam"].includes(step.id);return <div key={r} className={"dot"+(dn?" dn":"")+(cr?" cr":"")}/>;});let body;if(step.id==="surah"){const sid=sel[step.rakaat]||"ikhlas";const s=SURAHS[sid];const aid="sh-"+step.rakaat+"-"+sid;body=<><div className="cc-meta"><div className="cc-ml"><span className="cc-nm">Sourate supplementaire</span><span style={{fontSize:".72rem",color:"var(--tx3)"}}>Rakaat {step.rakaat}</span></div><ABtn surahNum={s.num} id={aid} p={p}/></div><PostureIllustration postureId="Quiyam"/><SS rakaat={step.rakaat} sel={sel} onSel={(r,id)=>{p.stop();onSel(r,id);}}/><div className="cc-ar">{s.arabicText}</div><div className="cc-ph">{s.phonetic}</div><div className="cc-tr">{s.translation}</div><Src src={s.sources}/></>;}else{body=<><div className="cc-meta"><div className="cc-ml"><span className="cc-nm">{step.label}</span>{step.tashahudType==="intermediaire"&&<span className="th-i">Intermediaire</span>}{step.tashahudType==="final"&&<span className="th-f">Final</span>}{step.rakaat&&!["tashahhud_final","salat_ibr","salam"].includes(step.id)&&<span style={{fontSize:".72rem",color:"var(--tx3)"}}>Rakaat {step.rakaat}</span>}</div>{step.id==="qiyam"&&<ABtn surahNum={1} id={step.stepKey} p={p}/>}</div><PostureIllustration postureId={postId}/>{hv&&<div className={"cv "+(step.isVocal?"hi":"lo")}><span className="d"/>{step.isVocal?"Recitation a voix haute":"Recitation silencieuse"}</div>}<div className="cc-ar">{step.arabic}</div><div className="cc-ph">{step.phonetic}</div><div className="cc-tr">{step.translation}</div>{step.note&&<div className="cc-nt">{step.note}</div>}{step.audioNote&&<div className="cc-nt">{step.audioNote}</div>}{src&&<Src src={src}/>}</>;}return(<div><div className="cp-prg"><div className="prg-w"><div className="prg-b" style={{width:prog+"%"}}/></div><div className="prg-l">{idx+1} / {seq.length}</div></div><div className="cp-dots">{dots}</div><div className="cc">{body}</div><div className="cn"><button className="nb" onClick={()=>go(idx-1)} disabled={idx===0}>{"< Retour"}</button>{isLast?<button className="nb dn2" onClick={()=>setDone(true)}>Terminer</button>:<button className="nb pr" onClick={()=>go(idx+1)}>{"Suivant >"}</button>}</div></div>);}
 
-function AboutTab(){const sections=[{titre:"A PROPOS DE CETTE APPLICATION",contenu:"Cette application a ete concue pour accompagner le musulman dans sa pratique quotidienne de la salah. Elle couvre l'ensemble du cycle de la priere avec des references authentifiees."},{titre:"FONCTIONNALITES",contenu:"Boussole Qibla avec gyroscope\nHoraires de priere par geolocalisation\nNotifications de rappel\nGuide du Wudu\nGuide complet de la Salah\nIllustrations des postures\nRecitation audio par 5 recitateurs\nCompteur de Tasbih vocal\nVerset du jour\nMode jour / nuit"},{titre:"SOURCES ISLAMIQUES",contenu:"Sahih al-Bukhari\nSahih Muslim\nSunan Abu Dawud\nSunan al-Tirmidhi\n\nLes positions jurisprudentielles mentionnent les quatre madhabs. Cette application est un outil d'apprentissage et ne se substitue pas a l'avis d'un erudit qualifie."},{titre:"SOURCES AUDIO",contenu:"Les recitations sont fournies par mp3quran.net.\nMishary Rashid Al-Afasy\nAbdul Basit Murattal\nMahmoud Khalil Al-Husary\nMohamed Siddiq Al-Minshawi\nMaher Al-Muaiqly"},{titre:"CALCUL DE LA QIBLA",contenu:"La direction de la Qibla est calculee selon la formule du grand cercle. Coordonnees de la Kaba : 21.4225 N 39.8262 E. Horaires via API Aladhan methode MWL."},{titre:"CREDITS",contenu:"Conception et developpement : Jerome Bordier (ArtByJay)\nIllustrations des postures : creations originales\nPolices : Amiri Cinzel Decorative Crimson Pro\n\nQu'Allah accepte ce travail et le rende benefique."}];return(<div style={{display:"flex",flexDirection:"column",gap:12,padding:"4px 0"}}><div style={{background:"var(--sf)",border:"1px solid var(--bo)",borderRadius:"var(--r)",padding:"20px 16px",textAlign:"center"}}><div style={{fontFamily:"'Amiri',serif",fontSize:"2rem",color:"var(--gold-l)",marginBottom:8}}>{"\u0628\u0650\u0633\u0652\u0645\u0650 \u0627\u0644\u0644\u0651\u0647\u0650 \u0627\u0644\u0631\u0651\u064e\u062d\u0652\u0645\u064e\u0670\u0646\u0650 \u0627\u0644\u0631\u0651\u064e\u062d\u0650\u064a\u0645\u0650"}</div><div style={{fontFamily:"'Cinzel Decorative',serif",fontSize:".75rem",letterSpacing:".2em",color:"var(--gold)",marginBottom:6}}>GUIDE DE PRIERE - SALAH</div><div style={{fontSize:".75rem",color:"var(--tx3)"}}>Version 6.0 - 2025</div></div>{sections.map((s,i)=><div key={i} style={{background:"var(--sf)",border:"1px solid var(--bo)",borderRadius:"var(--r)",padding:"14px 16px"}}><div style={{fontFamily:"'Cinzel Decorative',serif",fontSize:".55rem",letterSpacing:".12em",color:"var(--gold-d)",marginBottom:10}}>{s.titre}</div><div style={{fontSize:".80rem",color:"var(--tx3)",lineHeight:1.75,whiteSpace:"pre-line"}}>{s.contenu}</div></div>)}<div style={{textAlign:"center",padding:"16px 0 8px"}}><div style={{fontFamily:"'Amiri',serif",fontSize:"1.1rem",color:"var(--gold-d)",marginBottom:4}}>{"\u0631\u064e\u0628\u0651\u064e\u0646\u064e\u0627 \u062a\u064e\u0642\u064e\u0628\u0651\u064e\u0644\u0652 \u0645\u0650\u0646\u0651\u064e\u0627"}</div><div style={{fontSize:".68rem",color:"var(--tx3)",fontStyle:"italic"}}>Rabbana taqabbal minna - Notre Seigneur accepte de nous.</div></div></div>);}
+function AboutTab({onDonate}){const sections=[{titre:"A PROPOS DE CETTE APPLICATION",contenu:"Cette application a ete concue pour accompagner le musulman dans sa pratique quotidienne de la salah. Elle couvre l'ensemble du cycle de la priere avec des references authentifiees."},{titre:"FONCTIONNALITES",contenu:"Boussole Qibla avec gyroscope\nHoraires de priere par geolocalisation\nNotifications de rappel\nGuide du Wudu\nGuide complet de la Salah\nIllustrations des postures\nRecitation audio par 5 recitateurs\nCompteur de Tasbih vocal\nVerset du jour\nMode jour / nuit"},{titre:"SOURCES ISLAMIQUES",contenu:"Sahih al-Bukhari\nSahih Muslim\nSunan Abu Dawud\nSunan al-Tirmidhi\n\nLes positions jurisprudentielles mentionnent les quatre madhabs. Cette application est un outil d'apprentissage et ne se substitue pas a l'avis d'un erudit qualifie."},{titre:"SOURCES AUDIO",contenu:"Les recitations sont fournies par mp3quran.net.\nMishary Rashid Al-Afasy\nAbdul Basit Murattal\nMahmoud Khalil Al-Husary\nMohamed Siddiq Al-Minshawi\nMaher Al-Muaiqly"},{titre:"CALCUL DE LA QIBLA",contenu:"La direction de la Qibla est calculee selon la formule du grand cercle. Coordonnees de la Kaba : 21.4225 N 39.8262 E. Horaires via API Aladhan methode MWL."},{titre:"CREDITS",contenu:"Conception et developpement : Jerome Bordier (ArtByJay)\nIllustrations des postures : creations originales\nPolices : Amiri Cinzel Decorative Crimson Pro\n\nQu'Allah accepte ce travail et le rende benefique."}];
+  return(<div style={{display:"flex",flexDirection:"column",gap:12,padding:"4px 0"}}>
+    <div style={{background:"var(--sf)",border:"1px solid var(--bo)",borderRadius:"var(--r)",padding:"20px 16px",textAlign:"center"}}>
+      <div style={{fontFamily:"'Amiri',serif",fontSize:"2.2rem",color:"var(--gold-l)",marginBottom:8}}>بِسۡمِ اللَّهِ الرَّحۡمَنِ الرَّحِيمِ</div>
+      <div style={{fontFamily:"'Cinzel Decorative',serif",fontSize:".82rem",letterSpacing:".2em",color:"var(--gold)",marginBottom:6}}>GUIDE DE PRIERE — SALAH</div>
+      <div style={{fontSize:".82rem",color:"var(--tx3)"}}>Version 7.0 — 2025</div>
+    </div>
+    <div style={{background:"var(--sf)",border:"1px solid var(--bo2)",borderRadius:"var(--r)",padding:"18px 16px",textAlign:"center"}}>
+      <div style={{fontFamily:"'Cinzel Decorative',serif",fontSize:".72rem",letterSpacing:".12em",color:"var(--gold)",marginBottom:8}}>SOUTENIR L'APPLICATION</div>
+      <div style={{fontSize:".88rem",color:"var(--tx3)",lineHeight:1.75,marginBottom:14}}>Cette application est entierement gratuite. Si elle vous est utile, vous pouvez soutenir son developpement.</div>
+      <div style={{display:"flex",gap:10,justifyContent:"center",flexWrap:"wrap"}}>
+        <button onClick={onDonate} style={{display:"flex",alignItems:"center",gap:8,padding:"12px 20px",border:"1px solid rgba(201,168,76,.4)",background:"rgba(201,168,76,.08)",color:"var(--gold-l)",fontFamily:"'Cinzel Decorative',serif",fontSize:".68rem",letterSpacing:".1em",cursor:"pointer",borderRadius:"var(--r)",minHeight:"48px"}}>FAIRE UN DON</button>
+      </div>
+    </div>
+    {sections.map((s,i)=><div key={i} style={{background:"var(--sf)",border:"1px solid var(--bo)",borderRadius:"var(--r)",padding:"16px 18px"}}><div style={{fontFamily:"'Cinzel Decorative',serif",fontSize:".68rem",letterSpacing:".12em",color:"var(--gold-d)",marginBottom:12}}>{s.titre}</div><div style={{fontSize:".90rem",color:"var(--tx3)",lineHeight:1.8,whiteSpace:"pre-line"}}>{s.contenu}</div></div>)}
+    <div style={{textAlign:"center",padding:"16px 0 8px"}}><div style={{fontFamily:"'Amiri',serif",fontSize:"1.2rem",color:"var(--gold-d)",marginBottom:5}}>رَبَّنَا تَقَبَّلۡ مِنَّا</div><div style={{fontSize:".78rem",color:"var(--tx3)",fontStyle:"italic"}}>Rabbana taqabbal minna — Notre Seigneur accepte de nous.</div></div>
+  </div>);}
 
+/* ===================== APP ROOT ===================== */
 function App(){
-  const [mainTab,setMainTab]=useState("qibla");const [pid,setPid]=useState("fajr");const [mode,setMode]=useState("reference");const [sel,setSel]=useState({...DEFAULT_SURAH});const [ck,setCk]=useState(0);const [dayMode,setDayMode]=useState(false);const p=useAudio();
+  const [mainTab,setMainTab]=useState("qibla");
+  const [pid,setPid]=useState("fajr");
+  const [mode,setMode]=useState("reference");
+  const [sel,setSel]=useState({...DEFAULT_SURAH});
+  const [ck,setCk]=useState(0);
+  const [dayMode,setDayMode]=useState(false);
+  const [showDonate,setShowDonate]=useState(false);
+  const p=useAudio();
   useEffect(()=>{document.body.classList.toggle("day-mode",dayMode);},[dayMode]);
   const share=async()=>{const data={title:"Guide de Priere - Salah",text:"Application complete de guide de priere islamique.",url:window.location.href};if(navigator.share){try{await navigator.share(data);}catch(e){}}else{navigator.clipboard.writeText(window.location.href);alert("Lien copie !");}};
-  const sw=(m)=>{p.stop();setMode(m);setCk(k=>k+1);};const sp=(id)=>{p.stop();setPid(id);setCk(k=>k+1);};const os=(r,id)=>{p.stop();setSel(prev=>({...prev,[r]:id}));};
+  const sw=(m)=>{p.stop();setMode(m);setCk(k=>k+1);};
+  const sp=(id)=>{p.stop();setPid(id);setCk(k=>k+1);};
+  const os=(r,id)=>{p.stop();setSel(prev=>({...prev,[r]:id}));};
   return(
     <div>
+      {showDonate&&<DonateModal onClose={()=>setShowDonate(false)}/>}
       <div className="hdr">
         <div className="hdr-actions">
           <button className="hdr-btn" onClick={()=>setDayMode(x=>!x)}>{dayMode?"NUIT":"JOUR"}</button>
           <button className="hdr-btn" onClick={share}>PARTAGER</button>
         </div>
-        <div className="hdr-b">{"\u0628\u0650\u0633\u0652\u0645\u0650 \u0627\u0644\u0644\u0651\u0647\u0650 \u0627\u0644\u0631\u0651\u064e\u062d\u0652\u0645\u064e\u0670\u0646\u0650 \u0627\u0644\u0631\u0651\u064e\u062d\u0650\u064a\u0645\u0650"}</div>
+        <div className="hdr-b">بِسۡمِ اللَّهِ الرَّحۡمَنِ الرَّحِيمِ</div>
         <div className="hdr-t">GUIDE DE PRIERE</div>
         <div className="hdr-s">Salah</div>
+      </div>
+
+      <div className="donate-bar">
+        <span className="donate-label">SOUTENIR :</span>
+        <button onClick={()=>setShowDonate(true)} className="donate-btn donate-paypal">
+          <span className="donate-icon">🅿</span> PayPal
+        </button>
+        <button onClick={()=>setShowDonate(true)} className="donate-btn donate-stripe">
+          <span className="donate-icon">⚡</span> Stripe
+        </button>
       </div>
 
       <VersetDuJour/>
@@ -445,7 +608,7 @@ function App(){
       {mainTab==="qibla"&&<QiblaHorairesTab/>}
       {mainTab==="wudu"&&<WuduTab/>}
       {mainTab==="tasbih"&&<TasbihTab/>}
-      {mainTab==="about"&&<AboutTab/>}
+      {mainTab==="about"&&<AboutTab onDonate={()=>setShowDonate(true)}/>}
       {mainTab==="salah"&&<>
         <div className="toolbar"><span className="ap-lbl">RECITATEUR</span><select className="ap-sel" value={p.reciterId} onChange={e=>{p.stop();p.setReciterId(e.target.value);}}>{RECITERS.map(r=><option key={r.id} value={r.id}>{r.name}</option>)}</select></div>
         <div className="pg">{PRAYERS.map(x=><button key={x.id} className={"pb"+(pid===x.id?" on":"")} onClick={()=>sp(x.id)}><span className="pb-ar">{x.arabic}</span><span className="pb-nm">{x.name}</span><span className="pb-rk">{x.rakaat} rakaat</span></button>)}</div>
